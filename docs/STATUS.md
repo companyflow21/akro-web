@@ -80,6 +80,40 @@
   Deployment, keine DNS-Änderung. Vier getrennte Deployments sind als Ziel
   vorgesehen, siehe `docs/DECISIONS.md`.
 
+## Planungsstand
+
+- **Bestandsaufnahme des Altbestands abgeschlossen.** Ergebnis in
+  `docs/LEGACY-INVENTORY.md` (sechs alte HTML-Seiten, `sendmail.php`, beide
+  Formulare, externe Abhängigkeiten, 64,12 MB Assets mit neun verifizierten
+  Duplikatpaaren, zwölf Migrationsrisiken, React-Bestand als nicht produktiv).
+- **Vorläufige URL-Migration dokumentiert** in `docs/URL-MIGRATION.md`. Jede
+  Zuordnung ist als „noch zu klären" markiert; Search-Console- und Logdaten
+  fehlen weiterhin.
+- **Seitenarchitektur AKRO Sicherheit V1 abgeschlossen und freigegeben.**
+  Ergebnis in `docs/SITE-ARCHITECTURE.md`, Entscheidungen in
+  `docs/DECISIONS.md` Punkte 11 bis 17.
+- **Für AKRO Fire & Safety und AKRO Service existiert noch keine
+  Seitenplanung** — beide sind bisher nur zur Abgrenzung dokumentiert.
+
+## Websitebau
+
+- **Noch nicht begonnen.** Es existieren weiterhin ausschließlich die vier
+  technischen Vorschauseiten mit `noindex, nofollow`. Es wurden keine
+  Inhalte, Assets oder URLs aus dem Altbestand übernommen und keine
+  Seitenvorlagen erstellt.
+
+## Nächste Phase
+
+1. **Designgrundlage** — echte Markenfarben, Typografie und Design-Tokens
+   festlegen und die `[TODO]`-Platzhalter in `packages/design-system`
+   ersetzen; lizenzrechtlich nutzbare, lokal hostbare Schriften beschaffen.
+2. **Inhaltsprüfung** — Referenzfreigaben, Originalzertifikate,
+   Unternehmensdaten für das Impressum sowie Rechtstexte klären; Inhaltsquelle
+   für die KRITIS-Leistungsseite bestimmen.
+3. **Abschließende URL- und SEO-Entscheidungen** — endgültige KRITIS-URL,
+   kanonische Domainvariante, Umgang mit lokalen Landingpages sowie die
+   belastbare Redirect-Liste auf Basis von Search-Console- und Logdaten.
+
 ## Bekannte Hinweise
 
 - Beim `npm install` meldet npm, dass das `postinstall`-Skript von
