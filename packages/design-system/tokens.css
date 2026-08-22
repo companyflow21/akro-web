@@ -1,0 +1,44 @@
+/*
+ * AKRO Design-Tokens — technische Basis.
+ *
+ * Enthaelt bewusst KEINE echten Markenfarben. Die Werte unten sind neutrale
+ * Platzhalter, damit die Struktur baubar und pruefbar ist.
+ *
+ * [TODO: echte AKRO-Farbwerte je Marke festlegen und hier eintragen.]
+ * [TODO: Typo-, Radius- und Schatten-Skala festlegen, sobald das Design steht.]
+ */
+
+:root {
+  /* Neutrale technische Basiswerte */
+  --akro-color-bg: #ffffff;
+  --akro-color-fg: #1a1a1a;
+  --akro-color-muted: #6b7280;
+  --akro-color-border: #e5e7eb;
+
+  /* Markenfarbe — wird je data-brand ueberschrieben */
+  --akro-color-brand: #4b5563;
+
+  /* Nur System-Fallbacks, keine eigenen Schriftdateien */
+  --akro-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+
+  --akro-radius: 0.5rem;
+  --akro-space: 1rem;
+}
+
+/* Markenschalter. Werte sind Platzhalter, siehe TODO oben. */
+[data-brand="sicherheit"] {
+  --akro-color-brand: #4b5563;
+}
+
+[data-brand="fire-safety"] {
+  --akro-color-brand: #4b5563;
+}
+
+[data-brand="service"] {
+  --akro-color-brand: #4b5563;
+}
+
+[data-brand="group"] {
+  --akro-color-brand: #4b5563;
+}

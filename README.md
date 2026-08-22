@@ -1,46 +1,43 @@
-# Astro Starter Kit: Basics
+# akro-web
 
-```sh
-npm create astro@latest -- --template basics
+npm-Workspace-Monorepo der AKRO-Webseiten. Verbindliche Regeln stehen in
+`CLAUDE.md`, der aktuelle Umsetzungsstand in `docs/STATUS.md`.
+
+## Struktur
+
+| Pfad | Workspace | Inhalt |
+| --- | --- | --- |
+| `apps/akro-sicherheit` | `@akro/sicherheit` | Astro-App |
+| `apps/akro-fire-safety` | `@akro/fire-safety` | Astro-App |
+| `apps/akro-service` | `@akro/service` | Astro-App |
+| `apps/akro-group` | `@akro/group` | Astro-App |
+| `packages/design-system` | `@akro/design-system` | gemeinsame CSS-Tokens und Basis-Styles |
+
+Alle Apps sind derzeit technische Vorschauseiten ohne Inhalte und auf
+`noindex, nofollow` gesetzt.
+
+## Befehle
+
+Abhaengigkeiten werden ausschliesslich vom Repository-Root installiert:
+
+```
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Einzelne App starten oder bauen:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```
+npm run dev -w @akro/sicherheit
+npm run build -w @akro/sicherheit
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Styling
 
-## 🧞 Commands
+Tailwind 4 wird lokal ueber `@tailwindcss/vite` eingebunden — kein CDN, kein
+`tailwind.config.*`. Jede App importiert in `src/styles/global.css` Tailwind
+sowie `tokens.css` und `base.css` aus `@akro/design-system`.
 
-All commands are run from the root of the project, from a terminal:
+## Hosting
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Vorgesehen sind vier getrennte Deployments, je eines pro App. Hosting, Domains
+und DNS sind in diesem Stand bewusst noch nicht eingerichtet.

@@ -1,0 +1,29 @@
+/*
+ * AKRO Basis-Styles — minimal und markenneutral.
+ *
+ * Bewusst nur das Noetigste, damit die technischen Vorschauseiten lesbar sind.
+ * Verlaeufe, Cards, Zertifikatsdarstellung und Bewegungen folgen erst mit dem
+ * eigentlichen Designschritt.
+ *
+ * [TODO: AKRO-Design-DNA ergaenzen, sobald das Design freigegeben ist.]
+ */
+
+body {
+  background-color: var(--akro-color-bg);
+  color: var(--akro-color-fg);
+  font-family: var(--akro-font-sans);
+  line-height: 1.5;
+}
+
+.akro-preview {
+  margin: 0 auto;
+  max-width: 42rem;
+  padding: calc(var(--akro-space) * 3) var(--akro-space);
+}
+
+.akro-preview__note {
+  color: var(--akro-color-muted);
+  border: 1px solid var(--akro-color-border);
+  border-radius: var(--akro-radius);
+  padding: var(--akro-space);
+}
