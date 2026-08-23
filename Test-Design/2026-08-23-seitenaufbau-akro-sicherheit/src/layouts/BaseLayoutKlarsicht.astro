@@ -1,0 +1,56 @@
+---
+/**
+ * Grundlayout der Designalternative "Klarsicht" — Mischung aus Vitrine
+ * (tragende Optik) und Nachtwache (Farbdisziplin, ein CTA-Akzent).
+ * Nutzt bewusst die bestehenden hellen Header.astro/Footer.astro
+ * (Variante A) weiter, damit nicht für einen dritten Entwurf ein viertes
+ * Kopf-/Fußbereich-Design entsteht. Betrifft ausschließlich Seiten unter
+ * /klarsicht, keine Wirkung auf BaseLayout.astro, BaseLayoutNachtwache.astro
+ * oder leistungen-vitrine.astro.
+ */
+import '../styles/global-klarsicht.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, noindex, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de" data-brand="sicherheit">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="/akro-logo.svg" />
+		<Seo
+			title={title}
+			description={description}
+			noindex={noindex}
+			jsonLd={jsonLd}
+		/>
+	</head>
+	<body class="overflow-x-hidden bg-white text-slate-900">
+		<a
+			href="#inhalt"
+			class="sr-only text-sm font-semibold focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-slate-900 focus:shadow-lg"
+		>
+			Zum Inhalt springen
+		</a>
+
+		<Header />
+
+		<main id="inhalt">
+			<slot />
+		</main>
+
+		<Footer />
+	</body>
+</html>

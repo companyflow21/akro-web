@@ -1,0 +1,93 @@
+---
+/**
+ * Impressum — ENTWURF, nicht veröffentlichungsreif.
+ *
+ * Mehrere Pflichtangaben fehlen und sind als [TODO] markiert. Ohne sie darf
+ * die Seite nicht live gehen. Der Text ist zudem vor Veröffentlichung
+ * rechtlich zu prüfen (CLAUDE.md §13).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { marke } from '../config';
+
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Impressum', href: '/impressum' },
+];
+---
+
+<BaseLayout
+	title="Impressum | AKRO Sicherheit"
+	description="Impressum und Anbieterkennzeichnung der AKRO GmbH."
+>
+	<Breadcrumb eintraege={pfad} />
+
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead eyebrow="Rechtliches" titel="Impressum" as="h1" />
+
+			<div
+				class="mt-8 max-w-2xl border-2 border-dashed border-line bg-surface p-5 text-sm text-muted"
+			>
+				<span class="todo">ENTWURF</span>
+				Diese Seite ist unvollständig und rechtlich noch nicht geprüft. Vor der
+				Veröffentlichung müssen alle mit TODO markierten Angaben ergänzt und
+				der gesamte Text anwaltlich geprüft werden.
+			</div>
+
+			<div class="prose mt-10">
+				<h2>Angaben gemäß § 5 DDG</h2>
+				<p>
+					{marke.traeger}<br />
+					{marke.strasse}<br />
+					{marke.plz} {marke.ort}
+				</p>
+
+				<h2>Vertreten durch</h2>
+				<p>Geschäftsführer: {marke.geschaeftsfuehrer}</p>
+
+				<h2>Kontakt</h2>
+				<p>
+					Telefon: <a href={marke.telefonHref}>{marke.telefon}</a><br />
+					E-Mail: <a href={`mailto:${marke.email}`}>{marke.email}</a>
+				</p>
+
+				<h2>Registereintrag</h2>
+				<p>
+					<span class="todo">TODO</span> Registergericht<br />
+					<span class="todo">TODO</span> Handelsregisternummer (HRB)
+				</p>
+
+				<h2>Umsatzsteuer-Identifikationsnummer</h2>
+				<p>
+					<span class="todo">TODO</span> USt-IdNr. gemäß § 27a UStG.
+					Die Angabe „auf Anfrage" aus dem Altbestand ist nicht zulässig.
+				</p>
+
+				<h2>Erlaubnis nach § 34a GewO</h2>
+				<p>
+					<span class="todo">TODO</span> Erteilende Behörde, Datum und
+					Aktenzeichen der Erlaubnis<br />
+					<span class="todo">TODO</span> Bewacherregister-Identifikationsnummer
+				</p>
+
+				<h2>Zuständige Aufsichtsbehörde</h2>
+				<p><span class="todo">TODO</span> Bezeichnung und Anschrift</p>
+
+				<h2>Berufshaftpflichtversicherung</h2>
+				<p>
+					<span class="todo">TODO</span> Versicherer, Anschrift und räumlicher
+					Geltungsbereich
+				</p>
+
+				<h2>Verbraucherstreitbeilegung</h2>
+				<p>
+					<span class="todo">TODO</span> Angabe zur Teilnahme oder
+					Nichtteilnahme an einem Streitbeilegungsverfahren vor einer
+					Verbraucherschlichtungsstelle
+				</p>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

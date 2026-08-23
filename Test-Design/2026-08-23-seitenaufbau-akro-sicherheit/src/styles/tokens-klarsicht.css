@@ -1,0 +1,44 @@
+/*
+ * AKRO Sicherheit — Designalternative "Klarsicht"
+ *
+ * Mischung aus "Vitrine" (helle Verlauf-/Glass-Ästhetik bleibt tragende
+ * Basis) und zwei Prinzipien aus "Nachtwache": kühlere, disziplinierte
+ * Farbgebung statt eines sehr gesättigten Verlaufs, und ein einziger,
+ * ausschließlich dem CTA vorbehaltener Akzent (Signal) statt eines
+ * durchgängig wiederverwendeten Blautons.
+ *
+ * Eigenständige Datei, betrifft weder tokens.css (Variante A) noch
+ * tokens-nachtwache.css noch die Arbiträrwerte in leistungen-vitrine.astro.
+ */
+
+@theme {
+  /* Verlauf-Hero — kühler und gedeckter als in Vitrine (dort #1a6caf →
+     #0056D2 → #007BFF, deutlich gesättigter). */
+  --color-grad-1: #123a6b;
+  --color-grad-2: #0b4fa8;
+  --color-grad-3: #1573c4;
+
+  /* Tiefe für Überschriften/Text, wo kein reines Slate passt */
+  --color-ink: #0b1c33;
+  --color-muted: #475569;
+
+  /* Dekoratives Blau/Cyan — Links, Icons, "Details"-Pfeile, NICHT für
+     Primär-CTAs reserviert. */
+  --color-brand: #0b4fa8;
+  --color-accent: #0ea5c4;
+  --color-on-accent: #04121f;
+
+  /* Signal — heller, gesättigter Cyan-Ton, ausschließlich für
+     Primär-CTA-Buttons (Anfrage stellen etc.). Kommt sonst nirgends im
+     Layout vor, damit der CTA nicht mit dekorativen Elementen
+     konkurriert (Rule of One). */
+  --color-signal: #00d1e6;
+  --color-on-signal: #052033;
+
+  --font-display:
+    "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-body:
+    "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+}

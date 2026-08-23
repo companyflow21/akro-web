@@ -1,0 +1,202 @@
+---
+/**
+ * Designalternative "Klarsicht" — Leistungsdetail Objekt- und Werkschutz.
+ * Nutzt denselben GradientPageHeader wie die Leistungen-Übersicht.
+ * Inhalt aus dem bestehenden, bereits freigegebenen Dateneintrag in
+ * src/data/leistungen.ts — keine neuen Texte. Statische Einzelseite,
+ * keine neue [slug]-Vorlage in dieser Runde. Nur zum Vergleich, noindex.
+ */
+import BaseLayoutKlarsicht from '../../../layouts/BaseLayoutKlarsicht.astro';
+import GradientPageHeader from '../../../components/klarsicht/GradientPageHeader.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { marke } from '../../../config';
+import { leistungen, verwandteLeistungen } from '../../../data/leistungen';
+import { dienstleistung, brotkrumen } from '../../../lib/jsonld';
+
+const leistung = leistungen.find((l) => l.slug === 'objekt-und-werkschutz')!;
+const verwandt = verwandteLeistungen(leistung.slug);
+
+const pfad = [
+  { label: 'Startseite', href: '/klarsicht' },
+  { label: 'Leistungen', href: '/klarsicht/leistungen' },
+  { label: leistung.titel, href: '/klarsicht/leistungen/objekt-und-werkschutz' },
+];
+
+const ablauf = [
+  {
+    nr: '01',
+    titel: 'Bedarfsermittlung',
+    text: 'Aufnahme der örtlichen Gegebenheiten und Ihrer spezifischen Sicherheitsanforderungen.',
+  },
+  {
+    nr: '02',
+    titel: 'Vertragsgestaltung',
+    text: 'Festlegung der konkreten Leistungsparameter im Dienstvertrag.',
+  },
+  {
+    nr: '03',
+    titel: 'Einsatzplanung',
+    text: 'Die AKRO GmbH übernimmt die eigenverantwortliche Disposition des eingesetzten Sicherheitspersonals.',
+  },
+  {
+    nr: '04',
+    titel: 'Ausführung',
+    text: 'Laufende Leistungserbringung gemäß der vereinbarten Sicherheitsvorgaben.',
+  },
+];
+---
+
+<BaseLayoutKlarsicht
+	title={leistung.seitentitel}
+	description={leistung.beschreibung}
+	noindex
+	jsonLd={[
+		dienstleistung(leistung.titel, leistung.beschreibung, '/leistungen/objekt-und-werkschutz'),
+		brotkrumen(pfad),
+	]}
+>
+	<Breadcrumb eintraege={pfad} />
+
+	<GradientPageHeader
+		eyebrow="Leistung"
+		titel={leistung.titel}
+		subline={leistung.einleitung ?? leistung.kurz}
+	/>
+
+	{/* Leistungsumfang · Einsatzbereiche */}
+	<section class="bg-white">
+		<div class="mx-auto grid max-w-6xl gap-6 px-5 py-16 md:grid-cols-2 md:px-8 md:py-24">
+			<div class="glass-card p-8">
+				<h2 class="text-xl font-semibold text-slate-900">Leistungsumfang</h2>
+				<ul class="mt-5 space-y-2.5">
+					{
+						leistung.umfang.map((punkt) => (
+							<li class="border-t border-blue-100 pt-2.5 text-[0.95rem] text-slate-700">
+								{punkt}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div class="glass-card p-8">
+				<h2 class="text-xl font-semibold text-slate-900">Einsatzbereiche</h2>
+				<ul class="mt-5 space-y-2.5">
+					{
+						leistung.einsatzbereiche.map((punkt) => (
+							<li class="border-t border-blue-100 pt-2.5 text-[0.95rem] text-slate-700">
+								{punkt}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	{/* Ablauf · Qualifikation */}
+	<section class="bg-slate-50">
+		<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+			<h2 class="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+				Vom Sicherheitskonzept bis zum Einsatz
+			</h2>
+
+			<div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+				{
+					ablauf.map((s) => (
+						<div class="glass-card relative p-7 pt-9">
+							<span class="step-badge absolute -left-3 -top-3 flex h-10 w-10 items-center justify-center rounded-full text-xs font-bold text-white shadow-md">
+								{s.nr}
+							</span>
+							<h3 class="text-base font-semibold text-slate-900">{s.titel}</h3>
+							<p class="mt-2 text-[0.9rem] leading-relaxed text-slate-600">
+								{s.text}
+							</p>
+						</div>
+					))
+				}
+			</div>
+
+			<div class="glass-card mt-10 p-8">
+				<h2 class="text-xl font-semibold text-slate-900">Qualifikation</h2>
+				<p class="mt-4 text-[0.95rem] leading-relaxed text-slate-600">
+					Die Bewachungsaufgaben werden ausschließlich durch Personal
+					erbracht, das die gesetzlichen Mindestanforderungen für das
+					Bewachungsgewerbe erfüllt. Die fachliche Eignung unseres
+					Sicherheitspersonals stellt die vertragsgemäße Umsetzung vor Ort
+					sicher.
+				</p>
+				<p class="mt-4 inline-flex items-center gap-2 text-sm text-slate-500">
+					<span class="rounded-full border border-dashed border-accent/50 bg-accent/10 px-2 py-0.5 text-[0.7rem] font-semibold text-accent">
+						TODO
+					</span>
+					Konkrete Qualifikationen, Unterrichtungs- und Sachkundenachweise
+					sowie Zertifizierungen ergänzen, sobald sie belegt und
+					freigegeben sind.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	{/* Abgrenzung */}
+	<section class="bg-white">
+		<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+			<div class="glass-card p-8">
+				<h2 class="text-xl font-semibold text-slate-900">Abgrenzung</h2>
+				<p class="mt-4 max-w-3xl text-[0.95rem] leading-relaxed text-slate-600">
+					{leistung.abgrenzung}
+				</p>
+			</div>
+		</div>
+	</section>
+
+	{/* Verwandte Leistungen */}
+	{
+		verwandt.length > 0 && (
+			<section class="bg-slate-50">
+				<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+					<h2 class="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+						Verwandte Leistungen
+					</h2>
+					<div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+						{verwandt.map((l) => (
+							<a href={`/leistungen/${l.slug}`} class="glass-card p-6">
+								<h3 class="font-semibold text-slate-900">{l.titel}</h3>
+								<p class="mt-2 text-sm text-slate-600">{l.kurz}</p>
+							</a>
+						))}
+					</div>
+				</div>
+			</section>
+		)
+	}
+
+	{/* Abschluss-CTA */}
+	<section class="bg-signal text-on-signal">
+		<div class="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-14 text-center md:px-8 md:py-16 lg:flex-row lg:items-center lg:justify-between lg:text-left">
+			<div class="max-w-2xl">
+				<h2 class="text-3xl font-bold tracking-tight md:text-4xl">
+					Sichern Sie Ihr Objekt
+				</h2>
+				<p class="mt-4 text-lg text-on-signal/85">
+					Lassen Sie uns den konkreten Sicherheitsbedarf für Ihre
+					Liegenschaft ermitteln.
+				</p>
+			</div>
+			<div class="flex shrink-0 flex-wrap justify-center gap-3">
+				<a
+					href="/anfrage"
+					class="rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white hover:bg-slate-900"
+				>
+					Anfrage stellen
+				</a>
+				<a
+					href={marke.telefonHref}
+					class="rounded-full border border-on-signal/40 px-6 py-3.5 text-sm font-semibold text-on-signal hover:border-on-signal/70"
+				>
+					{marke.telefon}
+				</a>
+			</div>
+		</div>
+	</section>
+</BaseLayoutKlarsicht>

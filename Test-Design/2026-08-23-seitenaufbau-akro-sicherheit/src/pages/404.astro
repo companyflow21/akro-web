@@ -1,0 +1,52 @@
+---
+/**
+ * Fehlerseite. Trägt noindex und erscheint nicht in der Sitemap
+ * (docs/DECISIONS.md Punkt 15).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { leistungen } from '../data/leistungen';
+---
+
+<BaseLayout
+	title="Seite nicht gefunden | AKRO Sicherheit"
+	description="Die aufgerufene Seite existiert nicht."
+	noindex
+>
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+			<SectionHead
+				eyebrow="Fehler 404"
+				titel="Diese Seite gibt es nicht."
+				as="h1"
+			>
+				<p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+					Möglicherweise hat sich die Adresse geändert. Über die folgenden
+					Wege kommen Sie weiter.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-3">
+					<a href="/" class="btn btn--primary">Zur Startseite</a>
+					<a href="/kontakt" class="btn btn--ghost text-ink">Kontakt</a>
+				</div>
+			</SectionHead>
+
+			<div class="mt-14">
+				<p class="tech text-muted">Unsere Leistungen</p>
+				<ul class="mt-4 grid max-w-3xl gap-x-8 sm:grid-cols-2">
+					{
+						leistungen.map((l) => (
+							<li class="border-t border-line py-2.5">
+								<a
+									href={`/leistungen/${l.slug}`}
+									class="text-[0.95rem] hover:text-brand"
+								>
+									{l.titel}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

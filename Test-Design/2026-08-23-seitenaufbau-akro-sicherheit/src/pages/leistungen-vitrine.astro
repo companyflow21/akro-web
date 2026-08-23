@@ -1,0 +1,403 @@
+---
+/**
+ * Designalternative "Vitrine" für /leistungen — Glassmorphism/3D-Verlauf-
+ * Ästhetik, wie im Auftrag für den alten Projektstand beschrieben.
+ * Eigenständige Vergleichsseite, noindex, nicht produktiv. Nutzt bewusst
+ * das bestehende helle Layout (BaseLayout/Header/Footer aus Variante A),
+ * damit nicht für eine einzelne Seite ein drittes Kopf-/Fußbereich-Design
+ * entsteht — nur der Seiteninhalt selbst ist neu gestaltet.
+ *
+ * Bekannte Spannung zu docs/DECISIONS.md bzw. der freigegebenen
+ * Designvorgabe "keine verspielten oder übertriebenen Animationen":
+ * siehe README im Testordner, Abschnitt "Vitrine".
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { marke } from '../config';
+import { brotkrumen } from '../lib/jsonld';
+
+interface Leistung {
+  kurz: string;
+  label: string;
+  slug: string;
+  titel: string;
+}
+
+const leistungen: Leistung[] = [
+  {
+    label: 'OBJEKT',
+    slug: 'objekt-und-werkschutz',
+    titel: 'Objekt- und Werkschutz',
+    kurz: 'Dauerhafte, präventive Bewachung von Werksgeländen, Logistikzentren und Gewerbeimmobilien.',
+  },
+  {
+    label: 'BAUSTELLE',
+    slug: 'baustellenbewachung',
+    titel: 'Baustellenbewachung',
+    kurz: 'Lückenloser Schutz von Bauprojekten und Materiallagern vor Diebstahl, Vandalismus und unbefugtem Betreten.',
+  },
+  {
+    label: 'REVIER',
+    slug: 'revier-und-kontrolldienst',
+    titel: 'Revier- und Kontrolldienst',
+    kurz: 'Flexible, mobile Intervallkontrollen, Schließdienste und sofortige Alarmverfolgung.',
+  },
+  {
+    label: 'PFORTE',
+    slug: 'empfangs-und-pfortendienst',
+    titel: 'Empfangs- und Pfortendienst',
+    kurz: 'Professionelles Besuchermanagement und restriktive Zutrittskontrollen an Ihren Unternehmenszugängen.',
+  },
+  {
+    label: 'EVENT',
+    slug: 'veranstaltungssicherheit',
+    titel: 'Veranstaltungssicherheit',
+    kurz: 'Strukturierte Absicherung von Messen, Hauptversammlungen und geschäftlichen Events (Crowd-Management & Einlass).',
+  },
+  {
+    label: 'PERSONEN',
+    slug: 'personenschutz',
+    titel: 'Personenschutz',
+    kurz: 'Diskrete und hochprofessionelle Schutzkonzepte für exponierte Personen aus Wirtschaft und des öffentlichen Lebens.',
+  },
+  {
+    label: 'KRITIS',
+    slug: 'kritis-schutz',
+    titel: 'KRITIS-Schutz',
+    kurz: 'Spezifische Sicherheitslösungen zur Aufrechterhaltung des Betriebs kritischer Infrastrukturen und versorgungsrelevanter Anlagen.',
+  },
+];
+
+// Satellitenpositionen berechnet statt von Hand geschätzt: 7 Punkte
+// gleichmäßig auf einem Kreis, Start oben (-90°), Prozentkoordinaten
+// innerhalb eines quadratischen Containers.
+const radiusProzent = 40;
+const satelliten = leistungen.map((l, i) => {
+  const winkelGrad = (360 / leistungen.length) * i - 90;
+  const winkelRad = (winkelGrad * Math.PI) / 180;
+  return {
+    ...l,
+    x: 50 + radiusProzent * Math.cos(winkelRad),
+    y: 50 + radiusProzent * Math.sin(winkelRad),
+  };
+});
+
+const prozess = [
+  {
+    nr: '01',
+    titel: 'Anfrage & Analyse',
+    text: 'Sie schildern Ihren Bedarf, Ort und Zeitraum. Wir analysieren Ihre spezifischen Gefährdungspotenziale im Detail.',
+  },
+  {
+    nr: '02',
+    titel: 'Sicherheitskonzept',
+    text: 'Wir erstellen ein maßgeschneidertes Dienstleistungsprofil inklusive Service Level Agreement (SLA), Personalprofil und Dokumentationsvorgaben.',
+  },
+  {
+    nr: '03',
+    titel: 'Operativer Einsatz',
+    text: 'Die AKRO-Einsatzleitung übernimmt die vollständige Disposition. Unsere qualifizierten Sicherheitskräfte setzen die Dienstanweisung vor Ort um.',
+  },
+  {
+    nr: '04',
+    titel: 'Laufende Betreuung',
+    text: 'Wir garantieren kontinuierliche Qualitätssicherung durch regelmäßige Audits, KPI-Reviews und eine direkte Ansprechbarkeit.',
+  },
+];
+
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Leistungen (Vitrine)', href: '/leistungen-vitrine' },
+];
+---
+
+<BaseLayout
+	title="Sicherheitsdienstleistungen für Industrie & Gewerbe | AKRO Sicherheit"
+	description="Übersicht unserer B2B-Sicherheitsdienste: Objektschutz, Baustellenbewachung, Revierdienst, Veranstaltungssicherheit und KRITIS-Schutz. Eigenverantwortlich und verlässlich."
+	noindex
+	jsonLd={brotkrumen(pfad)}
+>
+	{/* Hero mit 3D-Satellitennetzwerk */}
+	<section class="relative overflow-hidden bg-linear-to-br from-[#1a6caf] via-[#0056D2] to-[#007BFF] text-white">
+		<div class="akro-particles" aria-hidden="true"></div>
+
+		<div class="relative mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
+			<div class="mx-auto max-w-2xl text-center">
+				<h1 class="text-4xl font-bold tracking-tight md:text-5xl">
+					Unsere Sicherheitsleistungen
+				</h1>
+				<p class="mt-5 text-lg leading-relaxed text-white/90">
+					Umfassende Schutzkonzepte für Ihr Unternehmen. Von der
+					individuellen Gefährdungsanalyse bis zur operativen Umsetzung –
+					wir bieten eigenverantwortlich gesteuerte
+					Sicherheitsdienstleistungen auf höchstem Niveau.
+				</p>
+			</div>
+
+			<div class="akro-icon-container relative mx-auto mt-16 aspect-square w-full max-w-[420px]">
+				<svg
+					class="absolute inset-0 h-full w-full overflow-visible"
+					viewBox="0 0 100 100"
+					aria-hidden="true"
+				>
+					{
+						satelliten.map((s, i) => (
+							<line
+								x1="50"
+								y1="50"
+								x2={s.x}
+								y2={s.y}
+								class="akro-connection-line"
+								style={`animation-delay: ${i * 0.25}s`}
+							/>
+						))
+					}
+				</svg>
+
+				<div class="akro-center absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 backdrop-blur-md">
+					<svg viewBox="0 0 24 24" class="h-11 w-11 text-white" fill="none" aria-hidden="true">
+						<path
+							d="M12 2 4 5v6c0 5 3.4 8.9 8 10 4.6-1.1 8-5 8-10V5l-8-3Z"
+							stroke="currentColor"
+							stroke-width="1.6"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</div>
+
+				{
+					satelliten.map((s, i) => (
+						<a
+							href={`/leistungen/${s.slug}`}
+							class="akro-satellite-circle absolute flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white/15 text-center backdrop-blur-md hover:bg-white/25"
+							style={`top: ${s.y}%; left: ${s.x}%; animation-delay: ${i * 0.3}s`}
+							aria-label={s.titel}
+						>
+							<span class="text-[0.55rem] font-semibold tracking-wide text-white">
+								{s.label}
+							</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<svg
+			class="absolute inset-x-0 bottom-0 block h-12 w-full text-white md:h-16"
+			viewBox="0 0 1440 80"
+			preserveAspectRatio="none"
+			aria-hidden="true"
+		>
+			<path
+				fill="currentColor"
+				d="M0 40 C 240 90 480 0 720 20 C 960 40 1200 90 1440 30 L1440 80 L0 80 Z"
+			/>
+		</svg>
+	</section>
+
+	{/* Leistungsübersicht */}
+	<section class="bg-white">
+		<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+			<div class="mx-auto max-w-2xl text-center">
+				<h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+					Sicherheit präzise definiert
+				</h2>
+				<p class="mt-4 text-lg leading-relaxed text-slate-600">
+					Wählen Sie den Bereich, der Ihren Anforderungen entspricht. Wir
+					garantieren bei jedem Gewerk eine vertragskonforme, dokumentierte
+					Ausführung durch unsere eigene Einsatzleitung.
+				</p>
+			</div>
+
+			<div class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+				{
+					leistungen.map((l, i) => (
+						<a
+							href={`/leistungen/${l.slug}`}
+							class:list={[
+								'card-hover group rounded-3xl border border-blue-100 bg-white/90 p-7 shadow-sm backdrop-blur-md',
+								i === leistungen.length - 1 && 'lg:col-span-2',
+							]}
+						>
+							<h3 class="text-lg font-semibold text-slate-900">{l.titel}</h3>
+							<p class="mt-3 text-[0.95rem] leading-relaxed text-slate-600">
+								{l.kurz}
+							</p>
+							<span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#0056D2] group-hover:gap-2">
+								Details →
+							</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	{/* Prozess */}
+	<section class="bg-slate-50">
+		<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+			<div class="mx-auto max-w-2xl text-center">
+				<h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+					So arbeiten wir
+				</h2>
+				<p class="mt-4 text-lg leading-relaxed text-slate-600">
+					Klarer Ablauf. Verbindliche Umsetzung. Revisionssichere Nachweise.
+				</p>
+			</div>
+
+			<div class="relative mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-x-12 gap-y-14 lg:grid-cols-2">
+				<svg
+					class="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+					viewBox="0 0 400 300"
+					preserveAspectRatio="none"
+					aria-hidden="true"
+				>
+					<path
+						d="M180 40 H220 M380 150 V190 M180 260 H220"
+						fill="none"
+						stroke="#93c5fd"
+						stroke-width="2"
+						stroke-dasharray="6 6"
+						class="akro-flow-line"
+					/>
+				</svg>
+
+				{
+					prozess.map((p) => (
+						<div class="relative rounded-3xl border border-blue-100 bg-white/90 p-8 pt-10 shadow-sm backdrop-blur-md">
+							<span class="absolute -left-4 -top-4 flex h-12 w-12 items-center justify-center rounded-full bg-linear-to-r from-[#1a6caf] to-[#007BFF] text-sm font-bold text-white shadow-md">
+								{p.nr}
+							</span>
+							<h3 class="text-lg font-semibold text-slate-900">{p.titel}</h3>
+							<p class="mt-3 text-[0.95rem] leading-relaxed text-slate-600">
+								{p.text}
+							</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	{/* Abschluss-CTA */}
+	<section class="bg-linear-to-br from-[#1a6caf] via-[#0056D2] to-[#007BFF] text-white">
+		<div class="mx-auto max-w-2xl px-5 py-16 text-center md:px-8 md:py-20">
+			<h2 class="text-3xl font-bold tracking-tight md:text-4xl">
+				Bereit für ein verbindliches Angebot?
+			</h2>
+			<p class="mt-4 text-lg text-white/85">
+				Wir melden uns zeitnah – mit klaren Konzepten und umsetzbaren
+				Lösungen für Ihre Sicherheit.
+			</p>
+			<div class="mt-8 flex flex-wrap justify-center gap-3">
+				<a
+					href="/anfrage"
+					class="rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#0056D2] hover:bg-white/90"
+				>
+					Bewachung anfragen
+				</a>
+				<a
+					href="/kontakt"
+					class="rounded-full border border-white/50 px-6 py-3.5 text-sm font-semibold text-white hover:border-white"
+				>
+					Kontakt aufnehmen
+				</a>
+			</div>
+			<p class="mt-6 text-sm text-white/70">{marke.telefon}</p>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.akro-particles {
+		position: absolute;
+		inset: 0;
+		background-image:
+			radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.5), transparent),
+			radial-gradient(2px 2px at 65% 15%, rgba(255, 255, 255, 0.4), transparent),
+			radial-gradient(2px 2px at 85% 55%, rgba(255, 255, 255, 0.35), transparent),
+			radial-gradient(2px 2px at 35% 75%, rgba(255, 255, 255, 0.4), transparent),
+			radial-gradient(2px 2px at 55% 45%, rgba(255, 255, 255, 0.3), transparent);
+		background-repeat: no-repeat;
+		animation: akroPulse 6s ease-in-out infinite;
+	}
+
+	.akro-center {
+		animation: akroFloat 6s ease-in-out infinite;
+	}
+
+	.akro-satellite-circle {
+		animation: akroSatelliteFloat 4s ease-in-out infinite;
+		outline-offset: 3px;
+	}
+
+	.akro-connection-line {
+		stroke: rgba(255, 255, 255, 0.35);
+		stroke-width: 0.4;
+		stroke-dasharray: 2 2;
+		animation: akroPulse 3s ease-in-out infinite;
+	}
+
+	.card-hover {
+		transition:
+			transform 200ms ease,
+			box-shadow 200ms ease,
+			border-color 200ms ease;
+	}
+
+	.card-hover:hover,
+	.card-hover:focus-visible {
+		transform: translateY(-5px);
+		border-color: #bfdbfe;
+		box-shadow: 0 20px 40px -12px rgba(0, 86, 210, 0.35);
+	}
+
+	.akro-flow-line {
+		animation: akroFlow 12s linear infinite;
+	}
+
+	@keyframes akroFloat {
+		0%,
+		100% {
+			transform: translate(-50%, -50%) translateY(0);
+		}
+		50% {
+			transform: translate(-50%, -50%) translateY(-6px);
+		}
+	}
+
+	@keyframes akroSatelliteFloat {
+		0%,
+		100% {
+			transform: translate(-50%, -50%) translateY(0);
+		}
+		50% {
+			transform: translate(-50%, -50%) translateY(-5px);
+		}
+	}
+
+	@keyframes akroPulse {
+		0%,
+		100% {
+			opacity: 0.55;
+		}
+		50% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes akroFlow {
+		to {
+			stroke-dashoffset: -48;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.akro-particles,
+		.akro-center,
+		.akro-satellite-circle,
+		.akro-connection-line,
+		.akro-flow-line {
+			animation: none;
+		}
+	}
+</style>

@@ -1,0 +1,88 @@
+---
+/**
+ * Kopfbereich der Designalternative "Nachtwache". Gleiche Navigationsdaten
+ * wie Header.astro, dunkle Fläche statt heller — der Anfrage-Button ist
+ * hier der einzige Ort mit dem Signal-Akzent, damit er gegen den dunklen
+ * Grund maximal heraussticht.
+ */
+import { marke, hauptnavigation } from '../config';
+
+const pfad = Astro.url.pathname;
+const istAktiv = (href: string) =>
+  pfad === href || pfad.startsWith(href + '/');
+---
+
+<header class="sticky top-0 z-40 bg-ink text-slate">
+	<div class="mx-auto flex max-w-6xl items-center gap-4 px-5 py-4 md:px-8">
+		<a href="/nachtwache" class="shrink-0" aria-label={`${marke.name} — Startseite`}>
+			<span class="font-[family-name:var(--font-display)] text-xl font-bold tracking-[-0.01em] uppercase">
+				AKRO<span class="text-accent"> Sicherheit</span>
+			</span>
+		</a>
+
+		<nav aria-label="Hauptnavigation" class="ml-auto hidden lg:block">
+			<ul class="flex items-center gap-7">
+				{
+					hauptnavigation.map((eintrag) => (
+						<li>
+							<a
+								href={eintrag.href}
+								aria-current={istAktiv(eintrag.href) ? 'page' : undefined}
+								class="text-sm font-medium text-slate/75 hover:text-slate aria-[current=page]:text-accent"
+							>
+								{eintrag.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<a
+			href={marke.telefonHref}
+			class="tech ml-auto text-slate/75 hover:text-slate lg:ml-6"
+		>
+			{marke.telefon}
+		</a>
+
+		<a
+			href="/anfrage"
+			class="hidden items-center px-5 py-2.5 text-sm font-semibold text-on-signal bg-signal hover:bg-[color-mix(in_srgb,var(--color-signal)_85%,white)] sm:inline-flex"
+		>
+			Anfrage stellen
+		</a>
+	</div>
+
+	<details class="border-t border-ink-3 lg:hidden">
+		<summary class="tech cursor-pointer list-none px-5 py-3 text-slate/75 md:px-8">
+			Menü
+		</summary>
+		<nav aria-label="Hauptnavigation mobil" class="px-5 pb-4 md:px-8">
+			<ul class="grid gap-1">
+				{
+					hauptnavigation.map((eintrag) => (
+						<li>
+							<a
+								href={eintrag.href}
+								aria-current={istAktiv(eintrag.href) ? 'page' : undefined}
+								class="block border-t border-ink-3 py-2.5 text-[0.95rem] text-slate/85 aria-[current=page]:text-accent"
+							>
+								{eintrag.label}
+							</a>
+						</li>
+					))
+				}
+				<li>
+					<a
+						href="/anfrage"
+						class="mt-3 block w-full bg-signal px-5 py-2.5 text-center text-sm font-semibold text-on-signal sm:hidden"
+					>
+						Anfrage stellen
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</details>
+
+	<div class="stripe-divider"></div>
+</header>

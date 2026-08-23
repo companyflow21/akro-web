@@ -1,0 +1,32 @@
+---
+/**
+ * Ersatz für den Satelliten-Hero aus "Vitrine": ruhiges, statisches
+ * Glass-Chip-Raster der Leistungen statt schwebender, animierter Kreise.
+ * Bleibt in der Glass-Bildsprache (abgerundet, blur, Verlaufsgrund),
+ * aber ohne Orbit-Animation und ohne Bedeutungsverlust durch
+ * Ein-Wort-Abkürzungen — jeder Chip trägt den vollen Leistungsnamen.
+ */
+import type { Leistung } from '../../data/leistungen';
+
+interface Props {
+  leistungen: Leistung[];
+}
+
+const { leistungen } = Astro.props;
+---
+
+<ul class="mt-10 flex flex-wrap justify-center gap-3" aria-label="Unsere Leistungen">
+	{
+		leistungen.map((l) => (
+			<li>
+				<a
+					href={`/leistungen/${l.slug}`}
+					class="service-chip flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white"
+				>
+					<span class="text-xs font-semibold text-white/60">{l.kuerzel}</span>
+					{l.titel}
+				</a>
+			</li>
+		))
+	}
+</ul>

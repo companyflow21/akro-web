@@ -1,0 +1,99 @@
+---
+/**
+ * Datenschutzerklärung — ENTWURF, nicht veröffentlichungsreif.
+ *
+ * Der Text muss zur tatsächlich eingesetzten Technik passen. Solange
+ * Formularlösung und Hosting nicht entschieden sind, kann er nicht
+ * abschließend formuliert werden. Rechtliche Prüfung ist Pflicht.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { marke } from '../config';
+
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Datenschutz', href: '/datenschutz' },
+];
+---
+
+<BaseLayout
+	title="Datenschutzerklärung | AKRO Sicherheit"
+	description="Informationen zur Verarbeitung personenbezogener Daten auf akro-sicherheit.de."
+>
+	<Breadcrumb eintraege={pfad} />
+
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead eyebrow="Rechtliches" titel="Datenschutzerklärung" as="h1" />
+
+			<div
+				class="mt-8 max-w-2xl border-2 border-dashed border-line bg-surface p-5 text-sm text-muted"
+			>
+				<span class="todo">ENTWURF</span>
+				Diese Erklärung ist unvollständig und rechtlich noch nicht geprüft. Sie
+				kann erst abschließend formuliert werden, wenn Hosting und
+				Formularlösung feststehen — denn beide bestimmen, welche Daten
+				tatsächlich verarbeitet werden.
+			</div>
+
+			<div class="prose mt-10">
+				<h2>Verantwortlicher</h2>
+				<p>
+					{marke.traeger}<br />
+					{marke.strasse}<br />
+					{marke.plz} {marke.ort}<br />
+					Telefon: {marke.telefon}<br />
+					E-Mail: {marke.email}
+				</p>
+
+				<h2>Datenschutzbeauftragter</h2>
+				<p>
+					<span class="todo">TODO</span> Prüfen, ob eine Benennungspflicht
+					besteht, und gegebenenfalls Kontaktdaten ergänzen.
+				</p>
+
+				<h2>Aufruf der Website</h2>
+				<p>
+					<span class="todo">TODO</span> Beschreibung der Server-Logdaten,
+					Speicherdauer und Rechtsgrundlage — abhängig vom gewählten Hosting.
+				</p>
+
+				<h2>Kontaktaufnahme und Anfragen</h2>
+				<p>
+					<span class="todo">TODO</span> Beschreibung der Formularverarbeitung,
+					sobald die Lösung feststeht. Ausdrücklich zu klären: Werden
+					IP-Adresse und Browserkennung gespeichert? Der Altbestand tat dies;
+					die Erklärung muss die künftige Praxis korrekt abbilden.
+				</p>
+
+				<h2>Bewerbungen</h2>
+				<p>
+					<span class="todo">TODO</span> Verarbeitung von Bewerberdaten,
+					Speicherdauer und Löschfristen.
+				</p>
+
+				<h2>Ihre Rechte</h2>
+				<p>
+					Sie haben das Recht auf Auskunft, Berichtigung, Löschung,
+					Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch
+					sowie das Recht, sich bei einer Aufsichtsbehörde zu beschweren.
+				</p>
+				<p>
+					<span class="todo">TODO</span> Zuständige Aufsichtsbehörde benennen.
+				</p>
+
+				<h2>Externe Dienste</h2>
+				<p>
+					Diese Website lädt keine Ressourcen von fremden Servern — keine
+					Schriftarten, Skripte oder Symbole von Drittanbietern.
+				</p>
+				<p>
+					<span class="todo">TODO</span> Ergänzen, sobald Analyse- oder
+					Werbedienste eingesetzt werden. Diese dürfen erst nach Einwilligung
+					geladen werden.
+				</p>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

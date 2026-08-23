@@ -1,0 +1,51 @@
+---
+/**
+ * Eine einzige Stelle für Title, Description, Canonical, Robots und
+ * strukturierte Daten. Jede Seite füllt sie individuell — kein Seitentitel
+ * und keine Description werden doppelt vergeben (CLAUDE.md §9).
+ */
+import { SITE_URL } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  /** true setzt noindex, nofollow — nur für /404 und Vorschauseiten */
+  noindex?: boolean;
+  /** Fertiges JSON-LD-Objekt, wird als script eingebettet */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, noindex = false, jsonLd } = Astro.props;
+
+// Selbstreferenzierender Canonical auf jeder indexierbaren Seite.
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+
+const jsonLdBloecke = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="AKRO Sicherheit" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{/* [TODO: og:image ergänzen, sobald Bildmaterial vorliegt.] */}
+
+{
+  jsonLdBloecke.map((block) => (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(block)}
+    />
+  ))
+}

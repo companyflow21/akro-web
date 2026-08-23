@@ -1,0 +1,52 @@
+---
+/**
+ * Grundlayout der Designalternative "Nachtwache" — eigenes Stylesheet,
+ * eigener Kopf-/Fußbereich. Betrifft ausschließlich Seiten unter
+ * /nachtwache, keine Wirkung auf BaseLayout.astro / Variante A.
+ */
+import '../styles/global-nachtwache.css';
+import Seo from '../components/Seo.astro';
+import HeaderNachtwache from '../components/HeaderNachtwache.astro';
+import FooterNachtwache from '../components/FooterNachtwache.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, noindex, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de" data-brand="sicherheit">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="/akro-logo.svg" />
+		<Seo
+			title={title}
+			description={description}
+			noindex={noindex}
+			jsonLd={jsonLd}
+		/>
+	</head>
+	<body class="overflow-x-hidden">
+		<a
+			href="#inhalt"
+			class="tech sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-sand"
+		>
+			Zum Inhalt springen
+		</a>
+
+		<HeaderNachtwache />
+
+		<main id="inhalt">
+			<slot />
+		</main>
+
+		<FooterNachtwache />
+	</body>
+</html>

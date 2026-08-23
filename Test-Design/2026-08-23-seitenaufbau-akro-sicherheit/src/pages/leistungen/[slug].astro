@@ -1,0 +1,203 @@
+---
+/**
+ * Eine Vorlage, sieben Inhalte. Struktur nach dem Seitenmuster in
+ * docs/SITE-ARCHITECTURE.md §6.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { marke } from '../../config';
+import {
+  leistungen,
+  verwandteLeistungen,
+  type Leistung,
+} from '../../data/leistungen';
+import { dienstleistung, brotkrumen } from '../../lib/jsonld';
+
+export function getStaticPaths() {
+  return leistungen.map((leistung) => ({
+    params: { slug: leistung.slug },
+    props: { leistung },
+  }));
+}
+
+interface Props {
+  leistung: Leistung;
+}
+
+const { leistung } = Astro.props;
+const verwandt = verwandteLeistungen(leistung.slug);
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Leistungen', href: '/leistungen' },
+  { label: leistung.titel, href: `/leistungen/${leistung.slug}` },
+];
+---
+
+<BaseLayout
+	title={leistung.seitentitel}
+	description={leistung.beschreibung}
+	jsonLd={[
+		dienstleistung(
+			leistung.titel,
+			leistung.beschreibung,
+			`/leistungen/${leistung.slug}`,
+		),
+		brotkrumen(pfad),
+	]}
+>
+	<Breadcrumb eintraege={pfad} />
+
+	{/* 1 · Einstieg */}
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead eyebrow="Leistung" titel={leistung.titel} as="h1">
+				<p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+					{leistung.einleitung ?? leistung.kurz}
+				</p>
+				<div class="mt-8 flex flex-wrap gap-3">
+					<a href="/anfrage" class="btn btn--primary">Anfrage stellen</a>
+					<a href={marke.telefonHref} class="btn btn--ghost text-ink">
+						{marke.telefon}
+					</a>
+				</div>
+			</SectionHead>
+		</div>
+	</section>
+
+	{/* 2 · Leistungsumfang · 3 · Einsatzbereiche */}
+	<section class="border-y border-line bg-sand-2">
+		<div
+			class="mx-auto grid max-w-6xl gap-12 px-5 py-14 md:px-8 md:py-16 lg:grid-cols-2 lg:gap-16"
+		>
+			<div>
+				<h2 class="text-2xl font-semibold tracking-[-0.015em]">
+					Leistungsumfang
+				</h2>
+				<ul class="mt-5 space-y-2.5">
+					{
+						leistung.umfang.map((punkt) => (
+							<li class="border-t border-line pt-2.5 text-[0.95rem] text-ink/85">
+								{punkt}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<h2 class="text-2xl font-semibold tracking-[-0.015em]">
+					Einsatzbereiche
+				</h2>
+				<ul class="mt-5 space-y-2.5">
+					{
+						leistung.einsatzbereiche.map((punkt) => (
+							<li class="border-t border-line pt-2.5 text-[0.95rem] text-ink/85">
+								{punkt}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	{/* 4 · Ablauf · 5 · Qualifikation */}
+	<section class="bg-sand">
+		<div
+			class="mx-auto grid max-w-6xl gap-12 px-5 py-14 md:px-8 md:py-16 lg:grid-cols-2 lg:gap-16"
+		>
+			<div>
+				<h2 class="text-2xl font-semibold tracking-[-0.015em]">
+					Vom Sicherheitskonzept bis zum Einsatz
+				</h2>
+				<ol class="mt-5 space-y-4">
+					<li>
+						<span class="tech text-brand">01 Bedarfsermittlung</span>
+						<p class="mt-1 text-[0.95rem] text-muted">
+							Aufnahme der örtlichen Gegebenheiten und Ihrer spezifischen
+							Sicherheitsanforderungen.
+						</p>
+					</li>
+					<li>
+						<span class="tech text-brand">02 Vertragsgestaltung</span>
+						<p class="mt-1 text-[0.95rem] text-muted">
+							Festlegung der konkreten Leistungsparameter im Dienstvertrag.
+						</p>
+					</li>
+					<li>
+						<span class="tech text-brand">03 Einsatzplanung</span>
+						<p class="mt-1 text-[0.95rem] text-muted">
+							Die AKRO GmbH übernimmt die eigenverantwortliche Disposition
+							des eingesetzten Sicherheitspersonals.
+						</p>
+					</li>
+					<li>
+						<span class="tech text-brand">04 Ausführung</span>
+						<p class="mt-1 text-[0.95rem] text-muted">
+							Laufende Leistungserbringung gemäß der vereinbarten
+							Sicherheitsvorgaben.
+						</p>
+					</li>
+				</ol>
+			</div>
+
+			<div>
+				<h2 class="text-2xl font-semibold tracking-[-0.015em]">
+					Qualifikation
+				</h2>
+				<p class="mt-5 text-[0.95rem] leading-relaxed text-muted">
+					Die Bewachungsaufgaben werden ausschließlich durch Personal
+					erbracht, das die gesetzlichen Mindestanforderungen für das
+					Bewachungsgewerbe erfüllt. Die fachliche Eignung unseres
+					Sicherheitspersonals stellt die vertragsgemäße Umsetzung vor Ort
+					sicher.
+				</p>
+				<p class="mt-4 text-sm text-muted">
+					<span class="todo">TODO</span>
+					Konkrete Qualifikationen, Unterrichtungs- und Sachkundenachweise
+					sowie Zertifizierungen ergänzen, sobald sie belegt und freigegeben
+					sind.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	{/* 6 · Abgrenzung */}
+	<section class="border-t border-line bg-sand-2">
+		<div class="mx-auto max-w-6xl px-5 py-12 md:px-8">
+			<h2 class="text-2xl font-semibold tracking-[-0.015em]">Abgrenzung</h2>
+			<p class="prose mt-4 text-[0.95rem] leading-relaxed text-muted">
+				{leistung.abgrenzung}
+			</p>
+		</div>
+	</section>
+
+	{/* 7 · Verwandte Leistungen */}
+	{
+		verwandt.length > 0 && (
+			<section class="bg-sand">
+				<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
+					<h2 class="text-2xl font-semibold tracking-[-0.015em]">
+						Verwandte Leistungen
+					</h2>
+					<div class="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+						{verwandt.map((l) => (
+							<ServiceCard leistung={l} />
+						))}
+					</div>
+					<p class="mt-6">
+						<a href="/leistungen" class="tech text-brand">
+							Alle Leistungen ansehen
+						</a>
+					</p>
+				</div>
+			</section>
+		)
+	}
+
+	{/* 8 · Abschluss */}
+	<CtaBand titel={`${leistung.titel} anfragen`} />
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+/**
+ * Brotkrumenpfad. Wird zusammen mit BreadcrumbList-JSON-LD verwendet —
+ * strukturierte Daten müssen zum sichtbaren Inhalt passen (CLAUDE.md §10).
+ */
+interface Eintrag {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  eintraege: Eintrag[];
+}
+
+const { eintraege } = Astro.props;
+---
+
+<nav aria-label="Brotkrumenpfad" class="mx-auto max-w-6xl px-5 pt-6 md:px-8">
+	<ol class="tech flex flex-wrap items-center gap-x-2 gap-y-1 text-muted">
+		{
+			eintraege.map((eintrag, i) => (
+				<li class="flex items-center gap-2">
+					{i > 0 && <span aria-hidden="true">/</span>}
+					{i === eintraege.length - 1 ? (
+						<span aria-current="page">{eintrag.label}</span>
+					) : (
+						<a href={eintrag.href} class="hover:text-brand">
+							{eintrag.label}
+						</a>
+					)}
+				</li>
+			))
+		}
+	</ol>
+</nav>

@@ -1,0 +1,40 @@
+---
+/**
+ * Abschluss-Aufforderung. Steht am Ende jeder Leistungsseite und auf der
+ * Startseite. Führt immer auf /anfrage — /kontakt bleibt der Weg für
+ * allgemeine Fragen und wird nicht damit vermischt.
+ */
+import { marke } from '../config';
+
+interface Props {
+  titel?: string;
+  text?: string;
+}
+
+const {
+  titel = 'Objekt, Zeitraum, Anforderungen — den Rest planen wir.',
+  text = 'Wir melden uns mit einem konkreten Vorschlag zu Besetzung und Ablauf zurück.',
+} = Astro.props;
+---
+
+<section class="bg-brand text-white">
+	<div
+		class="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-14 md:px-8 md:py-16 lg:flex-row lg:items-center lg:justify-between"
+	>
+		<div class="max-w-2xl">
+			<p class="tech text-accent">Anfrage</p>
+			<h2
+				class="mt-4 text-3xl font-bold tracking-[-0.02em] md:text-4xl"
+			>
+				{titel}
+			</h2>
+			<p class="mt-4 text-lg text-white/80">{text}</p>
+		</div>
+		<div class="flex shrink-0 flex-wrap gap-3">
+			<a href="/anfrage" class="btn btn--primary">Anfrage stellen</a>
+			<a href={marke.telefonHref} class="btn btn--ghost">
+				{marke.telefon}
+			</a>
+		</div>
+	</div>
+</section>

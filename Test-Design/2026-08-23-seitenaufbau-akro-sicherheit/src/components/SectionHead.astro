@@ -1,0 +1,34 @@
+---
+/**
+ * Abschnittskopf mit der Messleisten-Signatur.
+ * `eyebrow` benennt den Abschnitt, `titel` trägt die Überschrift.
+ */
+interface Props {
+  eyebrow: string;
+  titel: string;
+  /** Überschriftenebene — auf Unterseiten meist h2 */
+  as?: 'h1' | 'h2';
+  /** Akzentfarbe des Eyebrow: auf dunklem Grund heller */
+  invers?: boolean;
+}
+
+const { eyebrow, titel, as = 'h2', invers = false } = Astro.props;
+const Titel = as;
+---
+
+<div class="rail max-w-2xl">
+	<p class:list={['tech', invers ? 'text-accent' : 'text-brand']}>
+		{eyebrow}
+	</p>
+	<Titel
+		class:list={[
+			'mt-4 font-bold tracking-[-0.02em]',
+			as === 'h1'
+				? 'text-[2.4rem] leading-[1.05] md:text-5xl lg:text-[3.5rem]'
+				: 'text-3xl leading-[1.12] md:text-[2.6rem]',
+		]}
+	>
+		{titel}
+	</Titel>
+	<slot />
+</div>

@@ -1,0 +1,34 @@
+---
+/**
+ * Leistungskarte für die Übersicht und die verwandten Leistungen.
+ * Die Kurzkennung ist eine technische Kennzeichnung, keine Rangfolge —
+ * die sieben Leistungen sind keine Sequenz.
+ */
+import type { Leistung } from '../data/leistungen';
+
+interface Props {
+  leistung: Leistung;
+  /** Hebt die erste Karte im Raster hervor, damit kein gleichförmiges
+   *  Kachelfeld entsteht */
+  breit?: boolean;
+}
+
+const { leistung, breit = false } = Astro.props;
+---
+
+<a
+	href={`/leistungen/${leistung.slug}`}
+	class:list={['card', breit && 'lg:col-span-2']}
+>
+	<span class="card__id">{leistung.kuerzel}</span>
+	<h3
+		class:list={[
+			'font-[family-name:var(--font-display)] font-semibold tracking-[-0.01em]',
+			breit ? 'text-2xl md:text-[1.75rem]' : 'text-lg',
+		]}
+	>
+		{leistung.titel}
+	</h3>
+	<p class="text-[0.95rem] leading-relaxed text-muted">{leistung.kurz}</p>
+	<span class="tech mt-auto pt-2 text-brand">Zur Leistung</span>
+</a>

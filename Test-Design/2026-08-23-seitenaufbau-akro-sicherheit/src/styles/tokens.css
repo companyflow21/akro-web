@@ -1,0 +1,84 @@
+/*
+ * AKRO Design-Tokens
+ *
+ * Farbwerte sind aus dem Altbestand von akro-sicherheit.de abgeleitet
+ * (Navy, Logo-Blau, Cyan) und im Designexperiment als Variante A bestätigt.
+ *
+ * [TODO: Farbwerte durch die Geschäftsführung final bestätigen. Bis dahin
+ *  gelten sie als abgeleiteter Arbeitsstand, nicht als festgelegte
+ *  Markenfarben.]
+ *
+ * Gestaltungsrichtung: tiefes Navy als tragende Farbe, Logo-Blau und Cyan
+ * gezielt als Akzent, warme helle Neutralfarben statt kaltem Weiß.
+ *
+ * Die Marke wird über [data-brand] am <html>-Element geschaltet. Niemals
+ * eine zweite CSS-Datei je Marke anlegen.
+ */
+
+@theme {
+  /* Tragende Flächen */
+  --color-ink: #0b1626;
+  --color-ink-2: #16283f;
+  --color-ink-3: #24405f;
+
+  /* Warme helle Neutralfarben */
+  --color-sand: #f5f1ea;
+  --color-sand-2: #ebe4d9;
+  --color-surface: #fffdf9;
+  --color-line: #cfc6b6;
+
+  /* Text */
+  --color-fg: #0b1626;
+  --color-muted: #55616f;
+
+  /* Markenakzente — je Marke über [data-brand] überschrieben */
+  --color-brand: #0e62bf;
+  --color-accent: #00c9e0;
+  --color-on-accent: #0b1626;
+
+  /* Typografie — System-Stack, da keine lizenzierte Schriftdatei vorliegt.
+     [TODO: Schriftlizenz für Web und Druck klären, Dateien selbst hosten.
+      Keine Google Fonts, kein CDN.] */
+  --font-display:
+    "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-body:
+    "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-tech:
+    ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+}
+
+/* ---- Markenwelten ---------------------------------------------------
+ * AKRO Sicherheit ist der bestätigte Arbeitsstand. Die drei übrigen Marken
+ * sind vorläufig aus der jeweiligen Farbwelt abgeleitet und werden erst
+ * beim Aufbau der jeweiligen Website festgelegt.
+ */
+
+[data-brand="sicherheit"] {
+  --color-brand: #0e62bf;
+  --color-accent: #00c9e0;
+  --color-on-accent: #0b1626;
+}
+
+/* [TODO: Farbwelt Rot/Orange festlegen] */
+[data-brand="fire-safety"] {
+  --color-brand: #c2410c;
+  --color-accent: #f97316;
+  --color-on-accent: #0b1626;
+}
+
+/* [TODO: Farbwelt Grün festlegen] */
+[data-brand="service"] {
+  --color-brand: #15803d;
+  --color-accent: #4ade80;
+  --color-on-accent: #0b1626;
+}
+
+/* [TODO: AKRO-Blau der Dachmarke festlegen — identisch zu Sicherheit
+    oder eigener Ton?] */
+[data-brand="group"] {
+  --color-brand: #0e62bf;
+  --color-accent: #00c9e0;
+  --color-on-accent: #0b1626;
+}

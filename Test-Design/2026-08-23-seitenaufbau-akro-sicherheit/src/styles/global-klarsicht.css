@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Variante A zuerst: Header.astro/Footer.astro (bewusst weiterverwendet,
+   siehe BaseLayoutKlarsicht.astro) sind gegen deren Klassen gebaut
+   (.btn/.btn--primary, text-sand, bg-ink …). Ohne diesen Import bleiben
+   Button und Fußbereich unstyled. */
+@import "./tokens.css";
+@import "./base.css";
+
+/* Klarsicht danach: überschreibt gemeinsame Namen (--color-ink,
+   --color-brand, --color-accent, --color-muted) für den eigentlichen
+   Seiteninhalt und ergänzt die eigenen, eindeutigen Tokens
+   (--color-grad-*, --color-signal, --color-on-signal). */
+@import "./tokens-klarsicht.css";
+@import "./base-klarsicht.css";

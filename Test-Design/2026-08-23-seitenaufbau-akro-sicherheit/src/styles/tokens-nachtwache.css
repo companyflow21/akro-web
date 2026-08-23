@@ -1,0 +1,58 @@
+/*
+ * AKRO Sicherheit — Designalternative "Nachtwache"
+ *
+ * Gleiche Markenfamilie wie die bestätigten Tokens (tokens.css): Blau als
+ * tragende Farbe, Cyan als Akzent. Hier bewusst neu interpretiert —
+ * dunkler, kühler, mit einem zweiten Cyan-Ton (Signal) für den
+ * Anfrage-CTA, damit dieser nicht mit dem dekorativen Cyan (Accent)
+ * verwechselt wird (Rule of One über Sättigung/Helligkeit statt über
+ * einen fremden Farbton).
+ *
+ * Überarbeitung 24.08.2026: komplett auf die kühle Blau/Cyan-Familie
+ * vereinheitlicht (kein Amber mehr), Kontraste auf WCAG-taugliche
+ * Mindestwerte angehoben, Tokens an benannte Tailwind-Slate-Werte
+ * angelehnt. Details siehe README im Testordner.
+ *
+ * Leitbild bleibt: ein bewachtes Objekt bei Nacht — Suchscheinwerfer,
+ * Absperrband, Kontrollgang. Eigenständige Datei, betrifft nicht
+ * tokens.css / Variante A.
+ */
+
+@theme {
+  /* Nacht — dunkler und kühler als die Navy-Töne der ersten Variante */
+  --color-ink: #060b14;
+  --color-ink-2: #0e1930;
+  --color-ink-3: #1c2c4a;
+
+  /* Kühle Blaugrau-Flächen, an Tailwinds Slate-Palette angelehnt
+     (slate-100 / slate-200 / slate-300) statt der warmen Sandtöne aus
+     Variante A. */
+  --color-slate: #f1f5f9;
+  --color-slate-2: #e2e8f0;
+  --color-surface: #ffffff;
+  --color-line: #cbd5e1;
+
+  --color-fg: #0c1524;
+  --color-muted: #45536b;
+
+  /* Suchscheinwerfer-Cyan — kräftiger als Variante A */
+  --color-brand: #1450b8;
+  --color-accent: #2fd8ea;
+  --color-on-accent: #04121f;
+
+  /* Signallicht — Electric Cyan/Ice Blue, deutlich heller und
+     satter als das dekorative Accent-Cyan. Ausschließlich für den
+     Anfrage-CTA reserviert, kommt sonst nirgends im Layout vor. */
+  --color-signal: #00e5ff;
+  --color-on-signal: #04121f;
+
+  /* Bahnschrift: Windows-Systemschrift mit Beschilderungs-Charakter,
+     lizenzfrei und lokal vorhanden — kein Fontfile nötig. */
+  --font-display:
+    "Bahnschrift", "Arial Narrow", "Segoe UI", system-ui, sans-serif;
+  --font-body:
+    "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-tech:
+    ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+}

@@ -1,0 +1,182 @@
+---
+/**
+ * Kontaktseite für allgemeine Fragen. Die strukturierte Angebotsanfrage
+ * liegt getrennt auf /anfrage — beide werden nicht vermischt.
+ *
+ * Das Formular hat bewusst noch KEIN Versandziel: Die Formulararchitektur
+ * ist laut CLAUDE.md §14 offen. PHP-Mailversand und Formspree sind
+ * ausgeschlossen.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { marke } from '../config';
+import { brotkrumen } from '../lib/jsonld';
+
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+---
+
+<BaseLayout
+	title="Kontakt | AKRO Sicherheit"
+	description="Kontakt zur AKRO GmbH: Telefon, E-Mail und Anschrift. Für konkrete Einsätze nutzen Sie bitte die Angebotsanfrage."
+	jsonLd={brotkrumen(pfad)}
+>
+	<Breadcrumb eintraege={pfad} />
+
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead eyebrow="Kontakt" titel="Direkt und verbindlich." as="h1">
+				<p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+					Für allgemeine Fragen erreichen Sie uns telefonisch oder per E-Mail.
+					Geht es um einen konkreten Einsatz, kommen Sie über die
+					<a href="/anfrage" class="text-brand">Angebotsanfrage</a> schneller
+					zum Ziel.
+				</p>
+			</SectionHead>
+		</div>
+	</section>
+
+	<section class="border-y border-line bg-sand-2">
+		<div
+			class="mx-auto grid max-w-6xl gap-12 px-5 py-14 md:px-8 md:py-16 lg:grid-cols-[0.8fr_1fr] lg:gap-16"
+		>
+			<aside class="h-fit border border-line bg-surface p-7">
+				<p class="tech text-muted">Erreichbarkeit</p>
+				<dl class="mt-5 space-y-4 text-[0.95rem]">
+					<div>
+						<dt class="tech text-muted">Telefon</dt>
+						<dd class="mt-1">
+							<a href={marke.telefonHref} class="text-lg font-semibold hover:text-brand">
+								{marke.telefon}
+							</a>
+						</dd>
+					</div>
+					<div>
+						<dt class="tech text-muted">E-Mail</dt>
+						<dd class="mt-1">
+							<a href={`mailto:${marke.email}`} class="hover:text-brand">
+								{marke.email}
+							</a>
+						</dd>
+					</div>
+					<div>
+						<dt class="tech text-muted">Anschrift</dt>
+						<dd class="mt-1">
+							{marke.traeger}<br />
+							{marke.strasse}<br />
+							{marke.plz} {marke.ort}
+						</dd>
+					</div>
+					<div>
+						<dt class="tech text-muted">Niederlassung</dt>
+						<dd class="mt-1">{marke.niederlassung}</dd>
+					</div>
+				</dl>
+				<p class="mt-6 border-t border-line pt-4 text-sm text-muted">
+					<span class="todo">TODO</span>
+					Erreichbarkeitszeiten ergänzen, sobald sie verbindlich feststehen.
+				</p>
+			</aside>
+
+			<div>
+				<h2 class="text-2xl font-semibold tracking-[-0.015em]">
+					Nachricht senden
+				</h2>
+
+				<p class="mt-4 border border-dashed border-line bg-surface p-4 text-sm text-muted">
+					<span class="todo">TODO</span>
+					Das Formular ist gestaltet, aber noch nicht angebunden. Die
+					Versandlösung ist bewusst offen — PHP-Mailversand und
+					Drittanbieterformulare sind ausgeschlossen. Bis zur Anbindung nutzen
+					Sie bitte Telefon oder E-Mail.
+				</p>
+
+				<form class="mt-6 grid gap-5" aria-describedby="formular-hinweis">
+					<div class="grid gap-1.5">
+						<label for="name" class="tech text-muted">Name</label>
+						<input
+							id="name"
+							name="name"
+							type="text"
+							autocomplete="name"
+							required
+							class="border border-line bg-surface px-3 py-2.5 text-[0.95rem]"
+						/>
+					</div>
+
+					<div class="grid gap-1.5 sm:grid-cols-2 sm:gap-5">
+						<div class="grid gap-1.5">
+							<label for="email" class="tech text-muted">E-Mail</label>
+							<input
+								id="email"
+								name="email"
+								type="email"
+								autocomplete="email"
+								required
+								class="border border-line bg-surface px-3 py-2.5 text-[0.95rem]"
+							/>
+						</div>
+						<div class="grid gap-1.5">
+							<label for="telefon" class="tech text-muted">Telefon</label>
+							<input
+								id="telefon"
+								name="telefon"
+								type="tel"
+								autocomplete="tel"
+								class="border border-line bg-surface px-3 py-2.5 text-[0.95rem]"
+							/>
+						</div>
+					</div>
+
+					<div class="grid gap-1.5">
+						<label for="betreff" class="tech text-muted">Betreff</label>
+						<input
+							id="betreff"
+							name="betreff"
+							type="text"
+							class="border border-line bg-surface px-3 py-2.5 text-[0.95rem]"
+						/>
+					</div>
+
+					<div class="grid gap-1.5">
+						<label for="nachricht" class="tech text-muted">Nachricht</label>
+						<textarea
+							id="nachricht"
+							name="nachricht"
+							rows="6"
+							required
+							class="border border-line bg-surface px-3 py-2.5 text-[0.95rem]"
+						></textarea>
+					</div>
+
+					<div class="flex items-start gap-2.5">
+						<input
+							id="dsgvo"
+							name="dsgvo"
+							type="checkbox"
+							value="akzeptiert"
+							required
+							class="mt-1"
+						/>
+						<label for="dsgvo" class="text-sm text-muted">
+							Ich habe die <a href="/datenschutz" class="text-brand">Datenschutzerklärung</a>
+							gelesen und bin mit der Verarbeitung meiner Angaben zur
+							Bearbeitung der Anfrage einverstanden.
+						</label>
+					</div>
+
+					<p id="formular-hinweis" class="text-sm text-muted">
+						Der Versand ist noch nicht aktiv.
+					</p>
+
+					<button type="submit" class="btn btn--primary justify-self-start" disabled>
+						Nachricht senden
+					</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
