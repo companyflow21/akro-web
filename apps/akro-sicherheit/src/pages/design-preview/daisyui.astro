@@ -1,0 +1,296 @@
+---
+import DaisyPreviewLayout from '../../layouts/preview/DaisyPreviewLayout.astro';
+import {
+  marke,
+  hero,
+  leistungen,
+  kompetenzen,
+  kompetenzHinweis,
+  ablauf,
+  unternehmen,
+  cta,
+  footerSpalten,
+  navigation,
+} from '../../components/preview/content';
+---
+
+<DaisyPreviewLayout title="Variante B — daisyUI-Hybrid | Designexperiment AKRO Sicherheit">
+	<!-- 1 · Header — individuell aufgebaut, daisyUI nur für die Buttons -->
+	<header class="border-b border-pv-line bg-base-100">
+		<div class="mx-auto flex max-w-6xl items-center gap-4 px-5 py-4 md:px-8">
+			<a href="#top" class="shrink-0" aria-label={`${marke.name} — Startseite`}>
+				<img
+					src="/design-preview/akro-logo.svg"
+					alt={marke.name}
+					width="150"
+					height="42"
+					class="h-9 w-auto md:h-10"
+				/>
+			</a>
+
+			<nav aria-label="Hauptnavigation" class="ml-auto hidden lg:block">
+				<ul class="flex items-center gap-7">
+					{
+						navigation.map((eintrag) => (
+							<li>
+								<a
+									href="#leistungen"
+									class="text-sm font-medium hover:text-primary"
+								>
+									{eintrag}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<a
+				href={marke.telefonHref}
+				class="pv-tech ml-auto text-pv-muted hover:text-base-content lg:ml-6"
+			>
+				{marke.telefon}
+			</a>
+
+			<a href="#anfrage" class="btn btn-accent hidden sm:inline-flex">
+				Anfrage stellen
+			</a>
+		</div>
+	</header>
+
+	<main id="top">
+		<!-- 2 · Hero — individuell, kein daisyUI-Hero-Baustein -->
+		<section class="bg-secondary text-secondary-content">
+			<div
+				class="mx-auto grid max-w-6xl gap-14 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1.15fr_1fr] lg:gap-20"
+			>
+				<div class="pv-rail">
+					<p class="pv-tech text-accent">{hero.eyebrow}</p>
+
+					<h1
+						class="mt-6 font-display text-[2.6rem] leading-[1.02] font-bold tracking-[-0.03em] text-balance md:text-6xl lg:text-[4.25rem]"
+					>
+						{hero.titel}
+					</h1>
+
+					<p class="mt-6 max-w-xl text-lg leading-relaxed opacity-75">
+						{hero.text}
+					</p>
+
+					<div class="mt-9 flex flex-wrap gap-3">
+						<a href="#anfrage" class="btn btn-accent btn-lg">
+							{hero.ctaPrimaer}
+						</a>
+						<a href={marke.telefonHref} class="btn btn-outline btn-lg">
+							{hero.ctaSekundaer}
+						</a>
+					</div>
+				</div>
+
+				<div class="lg:pt-3">
+					<p class="pv-tech opacity-50">Leistungsregister</p>
+					<ul class="mt-4">
+						{
+							leistungen.map((l) => (
+								<li class="pv-index__row">
+									<span class="pv-tech w-7 shrink-0 text-accent">
+										{l.kuerzel}
+									</span>
+									<span class="text-[0.95rem] opacity-85">{l.titel}</span>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3 · Kompetenzleiste — daisyUI badge als Kennzeichnung -->
+		<section class="border-b border-pv-line bg-base-200">
+			<div class="mx-auto max-w-6xl px-5 py-10 md:px-8">
+				<dl class="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+					{
+						kompetenzen.map((k) => (
+							<div>
+								<dt>
+									<span class="badge badge-primary badge-outline pv-tech">
+										{k.label}
+									</span>
+								</dt>
+								<dd class="mt-3 text-[0.95rem] opacity-80">{k.text}</dd>
+							</div>
+						))
+					}
+				</dl>
+				<p class="mt-8 border-t border-pv-line pt-4 text-sm text-pv-muted">
+					{kompetenzHinweis}
+				</p>
+			</div>
+		</section>
+
+		<!-- 4 · Leistungen — daisyUI card, aber entschärft und asymmetrisch -->
+		<section id="leistungen" class="bg-base-100">
+			<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+				<div class="pv-rail max-w-2xl">
+					<p class="pv-tech text-primary">Leistungen</p>
+					<h2
+						class="mt-4 font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-[2.75rem] md:leading-[1.1]"
+					>
+						Sieben Leistungen, ein Ansprechpartner.
+					</h2>
+				</div>
+
+				<div class="mt-12 grid gap-px bg-pv-line sm:grid-cols-2 lg:grid-cols-3">
+					{
+						leistungen.map((l, i) => (
+							<article
+								class:list={[
+									'card pv-daisy-card',
+									i === 0 && 'lg:col-span-2',
+								]}
+							>
+								<div class="card-body gap-3 p-6">
+									<span class="pv-tech text-primary">{l.kuerzel}</span>
+									<h3
+										class:list={[
+											'card-title font-display tracking-[-0.01em]',
+											i === 0 ? 'text-2xl md:text-[1.75rem]' : 'text-lg',
+										]}
+									>
+										{l.titel}
+									</h3>
+									<p class="text-[0.95rem] leading-relaxed text-pv-muted">
+										{l.text}
+									</p>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- 5 · Ablauf — daisyUI steps, echte Reihenfolge -->
+		<section class="bg-neutral text-neutral-content">
+			<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+				<div class="pv-rail">
+					<p class="pv-tech text-accent">Ablauf</p>
+					<h2
+						class="mt-4 max-w-xl font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-4xl"
+					>
+						Von der Anfrage bis zum Einsatz.
+					</h2>
+				</div>
+
+				<ul class="steps steps-vertical mt-12 w-full md:steps-horizontal">
+					{
+						ablauf.map((s) => (
+							<li class="step step-accent" data-content={s.nr}>
+								<div class="px-2 pt-3 text-left md:px-4">
+									<h3 class="font-display text-xl font-semibold">{s.titel}</h3>
+									<p class="mt-2 text-[0.95rem] leading-relaxed opacity-70">
+										{s.text}
+									</p>
+								</div>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
+
+		<!-- 6 · Unternehmen — daisyUI card für den Datenblock -->
+		<section class="bg-base-100">
+			<div
+				class="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1fr_0.85fr] lg:gap-20"
+			>
+				<div class="pv-rail">
+					<p class="pv-tech text-primary">{unternehmen.eyebrow}</p>
+					<h2
+						class="mt-4 font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-[2.5rem] md:leading-[1.12]"
+					>
+						{unternehmen.titel}
+					</h2>
+					<p class="mt-6 max-w-xl text-lg leading-relaxed text-pv-muted">
+						{unternehmen.text}
+					</p>
+					<p class="mt-6 text-sm text-pv-muted">{unternehmen.hinweis}</p>
+				</div>
+
+				<aside class="card pv-daisy-card">
+					<div class="card-body p-7">
+						<p class="pv-tech text-pv-muted">Rechtsträger</p>
+						<p class="font-display text-xl font-semibold">{marke.traeger}</p>
+						<dl class="mt-4 space-y-4 text-[0.95rem]">
+							<div>
+								<dt class="pv-tech text-pv-muted">Sitz</dt>
+								<dd class="mt-1">{marke.sitz}</dd>
+							</div>
+							<div>
+								<dt class="pv-tech text-pv-muted">Niederlassung</dt>
+								<dd class="mt-1">{marke.niederlassung}</dd>
+							</div>
+							<div>
+								<dt class="pv-tech text-pv-muted">Telefon</dt>
+								<dd class="mt-1">
+									<a href={marke.telefonHref} class="link link-hover">
+										{marke.telefon}
+									</a>
+								</dd>
+							</div>
+						</dl>
+					</div>
+				</aside>
+			</div>
+		</section>
+
+		<!-- 7 · Anfrage-CTA -->
+		<section id="anfrage" class="bg-primary text-primary-content">
+			<div
+				class="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-14 md:px-8 md:py-16 lg:flex-row lg:items-center lg:justify-between"
+			>
+				<div class="max-w-2xl">
+					<p class="pv-tech text-accent">{cta.eyebrow}</p>
+					<h2
+						class="mt-4 font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-4xl"
+					>
+						{cta.titel}
+					</h2>
+					<p class="mt-4 text-lg opacity-80">{cta.text}</p>
+				</div>
+				<a href="#anfrage" class="btn btn-accent btn-lg shrink-0 self-start">
+					{cta.button}
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<!-- 8 · Footer — daisyUI footer -->
+	<footer class="bg-secondary text-secondary-content">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8">
+			<div class="footer grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+				{
+					footerSpalten.map((spalte) => (
+						<nav>
+							<h2 class="footer-title pv-tech text-accent opacity-100">
+								{spalte.titel}
+							</h2>
+							{spalte.eintraege.map((eintrag) => (
+								<span class="text-[0.9rem] opacity-70">{eintrag}</span>
+							))}
+						</nav>
+					))
+				}
+			</div>
+
+			<div
+				class="mt-12 flex flex-col gap-3 border-t border-pv-ink-3 pt-6 sm:flex-row sm:items-center sm:justify-between"
+			>
+				<p class="pv-tech opacity-45">
+					{marke.traeger} · {marke.niederlassung}
+				</p>
+				<p class="pv-tech opacity-45">Variante B — daisyUI-Hybrid</p>
+			</div>
+		</div>
+	</footer>
+</DaisyPreviewLayout>

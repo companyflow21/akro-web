@@ -1,44 +1,154 @@
 /*
- * AKRO Design-Tokens — technische Basis.
+ * AKRO Design-Tokens
  *
- * Enthaelt bewusst KEINE echten Markenfarben. Die Werte unten sind neutrale
- * Platzhalter, damit die Struktur baubar und pruefbar ist.
+ * Farbwerte sind aus dem Altbestand von akro-sicherheit.de abgeleitet
+ * (Navy, Logo-Blau, Cyan) und im Designexperiment als Variante A bestätigt.
  *
- * [TODO: echte AKRO-Farbwerte je Marke festlegen und hier eintragen.]
- * [TODO: Typo-, Radius- und Schatten-Skala festlegen, sobald das Design steht.]
+ * [TODO: Farbwerte durch die Geschäftsführung final bestätigen. Bis dahin
+ *  gelten sie als abgeleiteter Arbeitsstand, nicht als festgelegte
+ *  Markenfarben.]
+ *
+ * Gestaltungsrichtung: warme helle Neutralfarben statt kaltem Weiß, dazu je
+ * Marke ein Paar aus tiefer Flächenfarbe und hellerem Akzent.
+ *
+ * Rollen der drei Markentoken — sie sind nicht austauschbar:
+ *   --color-deep    Große dunkle Flächen: Fußzeile, Herobereich, Bänder.
+ *                   Helle Schrift darauf. Trägt die Farbwelt der Marke.
+ *   --color-brand   Schrift- und Rahmenfarbe auf hellem Grund: Links,
+ *                   aktive Navigation, Rahmen. Braucht mindestens 4,5:1
+ *                   gegen --color-surface.
+ *   --color-accent  Fläche von Schaltflächen, dunkle Schrift darauf
+ *                   (--color-on-accent). Deshalb ein heller, kräftiger Ton.
+ *
+ * Die Marke wird über [data-brand] am <html>-Element geschaltet. Niemals
+ * eine zweite CSS-Datei je Marke anlegen.
  */
 
-:root {
-  /* Neutrale technische Basiswerte */
-  --akro-color-bg: #ffffff;
-  --akro-color-fg: #1a1a1a;
-  --akro-color-muted: #6b7280;
-  --akro-color-border: #e5e7eb;
+@theme {
+  /* Tragende Flächen */
+  --color-ink: #0b1626;
+  --color-ink-2: #16283f;
+  --color-ink-3: #24405f;
 
-  /* Markenfarbe — wird je data-brand ueberschrieben */
-  --akro-color-brand: #4b5563;
+  /* Warme helle Neutralfarben */
+  --color-sand: #f5f1ea;
+  --color-sand-2: #ebe4d9;
+  --color-surface: #fffdf9;
+  --color-line: #cfc6b6;
 
-  /* Nur System-Fallbacks, keine eigenen Schriftdateien */
-  --akro-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial,
-    sans-serif;
+  /* Text */
+  --color-fg: #0b1626;
+  --color-muted: #55616f;
 
-  --akro-radius: 0.5rem;
-  --akro-space: 1rem;
+  /* Markenfarben — je Marke über [data-brand] überschrieben.
+     Die Vorgabewerte entsprechen AKRO Sicherheit. */
+  --color-deep: #1a365d;
+  --color-brand: #1d5fa8;
+  --color-accent: #00c9e0;
+  --color-on-accent: #0b1626;
+
+  /* ---- Schriftgrößen ------------------------------------------------
+     Benannt nach ihrer Aufgabe, nicht nach ihrer Größe. Jede Stufe trägt
+     Zeilenhöhe und Laufweite gleich mit, damit in den Seiten nur noch
+     `text-titel` steht statt `text-4xl tracking-[-0.03em] leading-none`.
+     Neue freie Werte in eckigen Klammern sind ab jetzt ein Fehler. */
+
+  --text-hero: clamp(2.4rem, 5.5vw, 4rem);
+  --text-hero--line-height: 1.03;
+  --text-hero--letter-spacing: -0.03em;
+  --text-hero--font-weight: 700;
+
+  --text-titel: clamp(1.9rem, 3.6vw, 2.6rem);
+  --text-titel--line-height: 1.09;
+  --text-titel--letter-spacing: -0.025em;
+  --text-titel--font-weight: 700;
+
+  --text-abschnitt: clamp(1.35rem, 2.2vw, 1.75rem);
+  --text-abschnitt--line-height: 1.18;
+  --text-abschnitt--letter-spacing: -0.02em;
+  --text-abschnitt--font-weight: 600;
+
+  --text-karte: 1.125rem;
+  --text-karte--line-height: 1.3;
+  --text-karte--letter-spacing: -0.01em;
+  --text-karte--font-weight: 600;
+
+  --text-vorspann: 1.1875rem;
+  --text-vorspann--line-height: 1.55;
+
+  --text-fliess: 1rem;
+  --text-fliess--line-height: 1.62;
+
+  --text-klein: 0.9375rem;
+  --text-klein--line-height: 1.55;
+
+  --text-marginalie: 0.8125rem;
+  --text-marginalie--line-height: 1.5;
+
+  --text-etikett: 0.6875rem;
+  --text-etikett--line-height: 1.4;
+  --text-etikett--letter-spacing: 0.18em;
+
+  /* ---- Schriftfamilien ----------------------------------------------
+     System-Stack, da keine lizenzierte Schriftdatei vorliegt.
+     [TODO: Schriftlizenz für Web und Druck klären, Dateien selbst hosten
+      unter /assets/fonts/. Keine Google Fonts, kein CDN.] */
+  /* Archivo trägt die Überschriften und die technischen Etiketten:
+     eine industrielle Grotesk, kompakt und bestimmt.
+     Source Serif trägt den Fließtext und gibt den Seiten den Ton eines
+     Gutachtens statt einer Werbeseite.
+
+     Die Ersatzschriften sind so gewählt, dass die Seite auch ohne die
+     Dateien in der richtigen Gattung bleibt: Georgia ist eine Serife,
+     Helvetica und Segoe UI sind Grotesken. */
+  --font-display:
+    "Archivo", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --font-body:
+    "Source Serif 4", Georgia, "Times New Roman", Times, serif;
+  --font-tech:
+    "Archivo", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
 }
 
-/* Markenschalter. Werte sind Platzhalter, siehe TODO oben. */
+/* ---- Markenwelten ---------------------------------------------------
+ * Farbfamilien nach dem Spartenmodell: neutrales Graphit für die Dachmarke,
+ * Navy für Sicherheit, Ziegelrot für Fire & Safety, Petrol für Service.
+ * Übernommen aus dem externen Gestaltungsvorschlag vom 25.08.2026, dort
+ * jedoch nur als Flächenfarben brauchbar — die Akzentwerte sind daraus
+ * abgeleitet, damit Schrift und Schaltflächen auf hellem Grund lesbar
+ * bleiben. Jedes Paar ist gegen --color-surface und --color-on-accent
+ * geprüft, alle Werte erreichen mindestens 4,5:1.
+ *
+ * [TODO: Farbwerte durch die Geschäftsführung freigeben. Bis dahin
+ *  Arbeitsstand, keine festgelegten Markenfarben.]
+ */
+
 [data-brand="sicherheit"] {
-  --akro-color-brand: #4b5563;
+  --color-deep: #1a365d;
+  --color-brand: #1d5fa8;
+  --color-accent: #00c9e0;
+  --color-on-accent: #0b1626;
 }
 
 [data-brand="fire-safety"] {
-  --akro-color-brand: #4b5563;
+  --color-deep: #8c1d1d;
+  --color-brand: #b02525;
+  --color-accent: #f97316;
+  --color-on-accent: #0b1626;
 }
 
 [data-brand="service"] {
-  --akro-color-brand: #4b5563;
+  --color-deep: #065f46;
+  --color-brand: #0f766e;
+  --color-accent: #2dd4bf;
+  --color-on-accent: #0b1626;
 }
 
+/* Die Dachmarke bleibt bewusst unbunt, damit die drei Sparten die Farbe
+   tragen. Das beantwortet die offene Frage, ob group einen eigenen Ton
+   bekommt: ja, aber einen neutralen. */
 [data-brand="group"] {
-  --akro-color-brand: #4b5563;
+  --color-deep: #2f3538;
+  --color-brand: #455160;
+  --color-accent: #00c9e0;
+  --color-on-accent: #0b1626;
 }

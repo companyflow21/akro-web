@@ -1,0 +1,32 @@
+---
+// Variante A — isoliertes Layout für das Designexperiment.
+// Bindet ausschließlich preview-custom.css ein, damit die Vorschau die
+// echte Seite und das Designsystem nicht beeinflusst.
+import '../../styles/preview/preview-custom.css';
+import { prototypHinweis } from '../../components/preview/content';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de" data-brand="sicherheit">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>{title}</title>
+	</head>
+	<body class="overflow-x-hidden">
+		<p
+			class="pv-tech bg-pv-ink text-pv-sand px-4 py-2 text-center"
+			role="note"
+		>
+			{prototypHinweis}
+		</p>
+		<slot />
+	</body>
+</html>

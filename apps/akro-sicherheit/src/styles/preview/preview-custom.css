@@ -1,0 +1,223 @@
+/*
+ * Variante A — vollständig individuelles Design.
+ * ISOLIERTE Preview-Tokens. Bewusst NICHT aus packages/design-system, damit
+ * das Experiment die echten Tokens nicht vorwegnimmt oder verändert.
+ * Keine daisyUI-Klassen. Keine externen Ressourcen.
+ *
+ * Gestaltungsrichtung: "Warm Industrial Precision".
+ */
+
+@import "tailwindcss";
+
+@theme {
+  /* Tragende Farbe: tiefes Navy, leicht entsättigt statt blaustichig */
+  --color-pv-ink: #0b1626;
+  --color-pv-ink-2: #16283f;
+  --color-pv-ink-3: #24405f;
+
+  /* Akzente: Logo-Blau und Cyan aus dem Altbestand abgeleitet */
+  --color-pv-blue: #0e62bf;
+  --color-pv-cyan: #00c9e0;
+
+  /* Warme helle Neutralfarben statt kaltem Weiß */
+  --color-pv-sand: #f5f1ea;
+  --color-pv-sand-2: #ebe4d9;
+  --color-pv-line: #cfc6b6;
+  --color-pv-muted: #5d6a7a;
+
+  /* Keine Webfonts erlaubt — Charakter entsteht aus Skalenkontrast
+     und einer technischen Monospace-Hilfsschrift. */
+  --font-display: "Segoe UI Variable Display", "Segoe UI", system-ui,
+    -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-tech: ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo,
+    monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-pv-sand);
+    color: var(--color-pv-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Sichtbarer Tastaturfokus, markenkonform */
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-pv-cyan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---- Technische Hilfsschrift: Eyebrows und Labels ---------------- */
+  .pv-tech {
+    font-family: var(--font-tech);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Signatur: Messleiste ---------------------------------------
+     Eine Haarlinie mit Teilstrichen, wie auf einer technischen
+     Zeichnung. Trägt die Sektionskennung und gibt dem Layout eine
+     durchgehende vertikale Kante. */
+  .pv-rail {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .pv-rail::before {
+    content: "";
+    position: absolute;
+    inset-block: 0.35rem 0;
+    left: 0.75rem;
+    width: 1px;
+    background: currentColor;
+    opacity: 0.28;
+  }
+
+  .pv-rail::after {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    left: 0.75rem;
+    width: 0.75rem;
+    height: 2px;
+    background: var(--color-pv-cyan);
+  }
+
+  @media (min-width: 768px) {
+    .pv-rail {
+      padding-left: 3.5rem;
+    }
+    .pv-rail::before,
+    .pv-rail::after {
+      left: 1.25rem;
+    }
+  }
+
+  /* ---- Signatur: Eckwinkel statt runder Einheitskarten ------------- */
+  .pv-bracket {
+    position: relative;
+    background: transparent;
+  }
+
+  .pv-bracket::before,
+  .pv-bracket::after {
+    content: "";
+    position: absolute;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-color: var(--color-pv-blue);
+    border-style: solid;
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .pv-bracket::before {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+  }
+
+  .pv-bracket::after {
+    right: -1px;
+    bottom: -1px;
+    border-width: 0 2px 2px 0;
+  }
+
+  .pv-bracket:hover::before,
+  .pv-bracket:hover::after,
+  .pv-bracket:focus-within::before,
+  .pv-bracket:focus-within::after {
+    opacity: 1;
+  }
+
+  /* ---- Leistungskarte ---------------------------------------------- */
+  .pv-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: #fffdf9;
+    border: 1px solid var(--color-pv-line);
+    transition: border-color 180ms ease, transform 180ms ease;
+  }
+
+  .pv-card:hover {
+    border-color: var(--color-pv-ink-3);
+    transform: translateY(-2px);
+  }
+
+  /* Kürzel als technische Kennung — keine Rangfolge, nur Kennzeichnung */
+  .pv-card__id {
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--color-pv-blue);
+  }
+
+  /* ---- Buttons ------------------------------------------------------ */
+  .pv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    transition: background-color 160ms ease, color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .pv-btn--primary {
+    background: var(--color-pv-cyan);
+    color: var(--color-pv-ink);
+  }
+
+  .pv-btn--primary:hover {
+    background: #4ad9ea;
+  }
+
+  .pv-btn--ghost {
+    border-color: currentColor;
+    color: inherit;
+  }
+
+  .pv-btn--ghost:hover {
+    background: color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  /* ---- Hero-Index: die sieben Leistungen als Haarlinien-Register ---- */
+  .pv-index__row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  }
+
+  .pv-index__row:last-child {
+    border-bottom: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  }
+}

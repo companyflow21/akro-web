@@ -1,0 +1,191 @@
+---
+/**
+ * Eine Vorlage, sieben Inhalte. Struktur nach dem Seitenmuster in
+ * docs/SITE-ARCHITECTURE.md §6.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { marke } from '../../config';
+import {
+  leistungen,
+  verwandteLeistungen,
+  type Leistung,
+} from '../../data/leistungen';
+import { dienstleistung, brotkrumen } from '../../lib/jsonld';
+
+export function getStaticPaths() {
+  return leistungen.map((leistung) => ({
+    params: { slug: leistung.slug },
+    props: { leistung },
+  }));
+}
+
+interface Props {
+  leistung: Leistung;
+}
+
+const { leistung } = Astro.props;
+const verwandt = verwandteLeistungen(leistung.slug);
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Leistungen', href: '/leistungen' },
+  { label: leistung.titel, href: `/leistungen/${leistung.slug}` },
+];
+---
+
+<BaseLayout
+	title={leistung.seitentitel}
+	description={leistung.beschreibung}
+	jsonLd={[
+		dienstleistung(
+			leistung.titel,
+			leistung.beschreibung,
+			`/leistungen/${leistung.slug}`,
+		),
+		brotkrumen(pfad),
+	]}
+>
+	<Breadcrumb eintraege={pfad} />
+
+	{/* 1 · Einstieg */}
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead eyebrow="Leistung" titel={leistung.titel} as="h1">
+				<p class="mt-6 max-w-xl text-vorspann leading-relaxed text-muted">
+					{leistung.kurz}
+				</p>
+				<div class="mt-8 flex flex-wrap gap-3">
+					<a href="/anfrage" class="btn btn--primary">Einsatz anfragen</a>
+					<a href={marke.telefonHref} class="btn btn--ghost text-ink">
+						{marke.telefon}
+					</a>
+				</div>
+			</SectionHead>
+		</div>
+	</section>
+
+	{/* 2 · Leistungsumfang · 3 · Einsatzbereiche */}
+	<section class="border-y border-line bg-sand-2">
+		<div
+			class="mx-auto grid max-w-6xl gap-12 px-5 py-14 md:px-8 md:py-16 lg:grid-cols-2 lg:gap-16"
+		>
+			<div>
+				<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">
+					Leistungsumfang
+				</h2>
+				<ul class="mt-5 space-y-2.5">
+					{
+						leistung.umfang.map((punkt) => (
+							<li class="border-t border-line pt-2.5 text-klein text-ink/85">
+								{punkt}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">
+					Einsatzbereiche
+				</h2>
+				<ul class="mt-5 space-y-2.5">
+					{
+						leistung.einsatzbereiche.map((punkt) => (
+							<li class="border-t border-line pt-2.5 text-klein text-ink/85">
+								{punkt}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	{/* 4 · Ablauf · 5 · Qualifikation */}
+	<section class="bg-sand">
+		<div
+			class="mx-auto grid max-w-6xl gap-12 px-5 py-14 md:px-8 md:py-16 lg:grid-cols-2 lg:gap-16"
+		>
+			<div>
+				<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">Ablauf</h2>
+				<ol class="mt-5 space-y-4">
+					<li>
+						<span class="tech text-brand">01 Anfrage</span>
+						<p class="mt-1 text-klein text-muted">
+							Sie schildern Objekt, Zeitraum und Anforderungen.
+						</p>
+					</li>
+					<li>
+						<span class="tech text-brand">02 Abstimmung</span>
+						<p class="mt-1 text-klein text-muted">
+							Wir stimmen Leistungsverzeichnis, Besetzung und Ablauf ab.
+						</p>
+					</li>
+					<li>
+						<span class="tech text-brand">03 Einsatz</span>
+						<p class="mt-1 text-klein text-muted">
+							Wir planen die Besetzung, führen den Einsatz durch und
+							dokumentieren ihn.
+						</p>
+					</li>
+				</ol>
+			</div>
+
+			<div>
+				<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">
+					Qualifikation
+				</h2>
+				<p class="mt-5 text-klein leading-relaxed text-muted">
+					Vor jedem Einsatz prüfen wir, ob die eingesetzten Kräfte die für
+					diese Tätigkeit erforderlichen Nachweise besitzen. Fehlt ein
+					Nachweis oder ist er abgelaufen, erfolgt kein Einsatz.
+				</p>
+				<p class="mt-4 text-marginalie text-muted">
+					<span class="todo">TODO</span>
+					Konkrete Qualifikationen, Unterrichtungs- und Sachkundenachweise
+					sowie Zertifizierungen ergänzen, sobald sie belegt und freigegeben
+					sind.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	{/* 6 · Abgrenzung */}
+	<section class="border-t border-line bg-sand-2">
+		<div class="mx-auto max-w-6xl px-5 py-12 md:px-8">
+			<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">Abgrenzung</h2>
+			<p class="prose mt-4 text-klein leading-relaxed text-muted">
+				{leistung.abgrenzung}
+			</p>
+		</div>
+	</section>
+
+	{/* 7 · Verwandte Leistungen */}
+	{
+		verwandt.length > 0 && (
+			<section class="bg-sand">
+				<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
+					<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">
+						Verwandte Leistungen
+					</h2>
+					<div class="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+						{verwandt.map((l) => (
+							<ServiceCard leistung={l} />
+						))}
+					</div>
+					<p class="mt-6">
+						<a href="/leistungen" class="tech text-brand">
+							Alle Leistungen ansehen
+						</a>
+					</p>
+				</div>
+			</section>
+		)
+	}
+
+	{/* 8 · Abschluss */}
+	<CtaBand titel={`${leistung.titel} anfragen`} />
+</BaseLayout>

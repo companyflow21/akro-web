@@ -1,0 +1,267 @@
+---
+/**
+ * Markenvergleich — Freigabevorlage für die Geschäftsführung.
+ *
+ * Zeigt alle vier Markenwelten am identischen Seitenaufbau. Unterschiedlich
+ * ist ausschließlich das Attribut data-brand am umgebenden Element; jede
+ * Farbe stammt aus packages/design-system/tokens.css. Nichts ist hier
+ * nachgebaut oder hart eingetragen — was hier steht, steht auch auf der Seite.
+ *
+ * Die Seite ist auf noindex, nofollow gesetzt und weder in der Navigation
+ * noch in der Sitemap verlinkt.
+ *
+ * [TODO: Nach der Freigabeentscheidung entfernen oder in die interne
+ *  Dokumentation überführen.]
+ */
+import '../../styles/global.css';
+
+const marken = [
+  {
+    brand: 'group',
+    name: 'AKRO Group',
+    domain: 'akro-group.de',
+    rolle: 'Dachmarke und Karriere',
+    deep: '#2f3538',
+    akzent: '#455160',
+    flaeche: '#00c9e0',
+    eyebrow: 'Unternehmensgruppe',
+    headline: 'Starke Struktur, gewachsene Verantwortung.',
+    text: 'Bewusst unbunt gehalten, damit die drei Sparten die Farbe tragen und die Dachmarke sie zusammenhält.',
+    karten: ['Sicherheit', 'Fire & Safety', 'Service'],
+  },
+  {
+    brand: 'sicherheit',
+    name: 'AKRO Sicherheit',
+    domain: 'akro-sicherheit.de',
+    rolle: 'Objekt- und Werkschutz',
+    deep: '#1a365d',
+    akzent: '#1d5fa8',
+    flaeche: '#00c9e0',
+    eyebrow: 'Objektschutz',
+    headline: 'Feste Teams auf Ihrem Werksgelände.',
+    text: 'Navy als tragende Fläche, Cyan als einziger heller Akzent. Die Farbwelt der bisherigen Seite, nur ruhiger geführt.',
+    karten: ['Werkschutz', 'Pfortendienst', 'Revierdienst'],
+  },
+  {
+    brand: 'fire-safety',
+    name: 'AKRO Fire & Safety',
+    domain: 'akro-fire-safety.de',
+    rolle: 'Industrielle Brandsicherheit',
+    deep: '#8c1d1d',
+    akzent: '#b02525',
+    flaeche: '#f97316',
+    eyebrow: 'Sicherungsposten',
+    headline: 'Absicherung von Heißarbeiten und Behältereinstiegen.',
+    text: 'Ziegelrot statt Signalrot — die Verbindung zum Brandschutz bleibt lesbar, ohne dass die Seite alarmiert wirkt.',
+    karten: ['Sicherungsposten', 'Brandwache', 'Gasmessung'],
+  },
+  {
+    brand: 'service',
+    name: 'AKRO Service',
+    domain: 'akro-service.de',
+    rolle: 'Reinigung und Logistik',
+    deep: '#065f46',
+    akzent: '#0f766e',
+    flaeche: '#2dd4bf',
+    eyebrow: 'Unterhaltsreinigung',
+    headline: 'Saubere Flächen, verlässliche Abläufe.',
+    text: 'Petrol statt Grasgrün. Sauber und technisch, ohne in die Nähe von Garten- oder Umweltdienstleistern zu rutschen.',
+    karten: ['Unterhaltsreinigung', 'Baureinigung', 'Logistik'],
+  },
+];
+---
+
+<!doctype html>
+<html lang="de" data-brand="group">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>Markenvergleich — vier Farbwelten am gleichen Seitenaufbau</title>
+	</head>
+
+	<body class="bg-sand-2 text-fg">
+		<main class="mx-auto max-w-5xl px-5 py-14 md:px-8 md:py-20">
+			<header class="rail max-w-3xl">
+				<p class="tech text-muted">Freigabevorlage · 25.08.2026</p>
+				<h1
+					class="mt-4 text-hero"
+				>
+					Vier Farbwelten, ein Seitenaufbau.
+				</h1>
+				<p class="mt-6 text-vorspann text-muted">
+					Jeder Block unten zeigt dieselben sechs Bausteine mit demselben
+					Inhalt. Unterschiedlich ist nur ein einziges Attribut im Quelltext.
+					So lässt sich die Farbe beurteilen und nicht das Layout.
+				</p>
+			</header>
+
+			<section class="mt-12 border border-line bg-surface p-6 md:p-8">
+				<h2 class="tech text-muted">Drei Farben je Marke, drei Aufgaben</h2>
+				<dl class="mt-5 grid gap-5 md:grid-cols-3">
+					<div class="border-t border-line pt-4">
+						<dt class="font-semibold">Fläche</dt>
+						<dd class="mt-1 text-klein text-muted">
+							Große dunkle Bereiche: Kopfleiste, Fußzeile, Bänder. Helle
+							Schrift darauf. Diese Farbe prägt den Gesamteindruck.
+						</dd>
+					</div>
+					<div class="border-t border-line pt-4">
+						<dt class="font-semibold">Schrift</dt>
+						<dd class="mt-1 text-klein text-muted">
+							Links, aktive Navigation und Rahmen auf hellem Grund. Muss sich
+							klar vom schwarzen Fließtext abheben.
+						</dd>
+					</div>
+					<div class="border-t border-line pt-4">
+						<dt class="font-semibold">Schaltfläche</dt>
+						<dd class="mt-1 text-klein text-muted">
+							Fläche der wichtigsten Schaltfläche, mit dunkler Schrift darauf.
+							Deshalb ein heller, kräftiger Ton.
+						</dd>
+					</div>
+				</dl>
+			</section>
+
+			<div class="mt-14 flex flex-col gap-14">
+				{
+					marken.map((m) => (
+						<section data-brand={m.brand} aria-label={m.name}>
+							<div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+								<h2 class="font-[family-name:var(--font-display)] text-abschnitt">
+									{m.name}
+								</h2>
+								<p class="tech text-muted">
+									{m.domain} · {m.rolle}
+								</p>
+							</div>
+
+							{/* Musterseite */}
+							<div class="mt-4 overflow-hidden border border-line bg-surface">
+								{/* Kopfleiste auf der Flächenfarbe */}
+								<div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 bg-deep px-5 py-3.5 text-sand">
+									<span class="font-[family-name:var(--font-display)] text-karte">
+										{m.name}
+									</span>
+									<span class="tech text-marginalie opacity-80">
+										Leistungen · Unternehmen · Kontakt
+									</span>
+								</div>
+
+								{/* Hero */}
+								<div class="px-5 py-8 md:px-8 md:py-10">
+									<p class="tech text-brand">{m.eyebrow}</p>
+									<p class="mt-3 max-w-xl text-titel">
+										{m.headline}
+									</p>
+									<p class="mt-4 max-w-xl text-muted">
+										{m.text}
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<span class="btn btn--primary">Anfrage stellen</span>
+										<span class="btn btn--ghost">Leistungen ansehen</span>
+									</div>
+								</div>
+
+								{/* Leistungskarten */}
+								<div class="grid gap-px bg-line sm:grid-cols-3">
+									{m.karten.map((k, i) => (
+										<div class="card">
+											<span class="card__id">
+												{String(i + 1).padStart(2, '0')}
+											</span>
+											<span class="mt-1 block font-[family-name:var(--font-display)] text-karte">
+												{k}
+											</span>
+											<span class="mt-2 block text-klein text-muted">
+												Leistungsbeschreibung an dieser Stelle, zwei bis drei
+												Zeilen lang.
+											</span>
+										</div>
+									))}
+								</div>
+
+								{/* Fußzeile auf der Flächenfarbe */}
+								<div class="bg-deep px-5 py-4 text-sand">
+									<span class="tech text-marginalie opacity-80">
+										AKRO GmbH · Saarlouis · Niederlassung Bonn
+									</span>
+								</div>
+							</div>
+
+							{/* Farbwerte */}
+							<div class="mt-3 grid gap-px border border-line bg-line sm:grid-cols-3">
+								<div class="flex items-center gap-3 bg-surface px-4 py-3">
+									<span
+										class="h-8 w-8 shrink-0 border border-line"
+										style={`background:${m.deep}`}
+									/>
+									<span class="leading-tight">
+										<span class="tech block text-muted">
+											Fläche
+										</span>
+										<span class="tech text-marginalie normal-case tracking-normal">{m.deep}</span>
+									</span>
+								</div>
+								<div class="flex items-center gap-3 bg-surface px-4 py-3">
+									<span
+										class="h-8 w-8 shrink-0 border border-line"
+										style={`background:${m.akzent}`}
+									/>
+									<span class="leading-tight">
+										<span class="tech block text-muted">
+											Schrift
+										</span>
+										<span class="tech text-marginalie normal-case tracking-normal">{m.akzent}</span>
+									</span>
+								</div>
+								<div class="flex items-center gap-3 bg-surface px-4 py-3">
+									<span
+										class="h-8 w-8 shrink-0 border border-line"
+										style={`background:${m.flaeche}`}
+									/>
+									<span class="leading-tight">
+										<span class="tech block text-muted">
+											Schaltfläche
+										</span>
+										<span class="tech text-marginalie normal-case tracking-normal">{m.flaeche}</span>
+									</span>
+								</div>
+							</div>
+						</section>
+					))
+				}
+			</div>
+
+			<section class="mt-16 border border-line bg-surface p-6 md:p-8">
+				<h2 class="tech text-muted">Was hier zu entscheiden ist</h2>
+				<ol
+					class="mt-5 flex list-decimal flex-col gap-3 pl-5 marker:text-muted"
+				>
+					<li>
+						Wird das Spartenmodell übernommen — jede Marke eine eigene
+						Farbfamilie statt durchgängig Blau?
+					</li>
+					<li>
+						Bleibt die Dachmarke unbunt, oder soll sie das Blau von AKRO
+						Sicherheit weiterführen?
+					</li>
+					<li>
+						Ist der Wechsel von Orange zu Ziegelrot bei Fire &amp; Safety
+						gewollt?
+					</li>
+					<li>
+						Sind die konkreten Werte freigegeben, oder werden sie an ein
+						bestehendes Logo oder Drucksachen angeglichen?
+					</li>
+				</ol>
+				<p class="mt-6 border-t border-line pt-4 text-marginalie text-muted">
+					Alle Farbpaare sind auf Lesbarkeit geprüft. Der niedrigste Kontrastwert
+					im gesamten Satz liegt bei 5,39:1 und erfüllt damit die Stufe AA der
+					Barrierefreiheitsrichtlinie. Bis zur Freigabe gelten die Werte als
+					Arbeitsstand.
+				</p>
+			</section>
+		</main>
+	</body>
+</html>

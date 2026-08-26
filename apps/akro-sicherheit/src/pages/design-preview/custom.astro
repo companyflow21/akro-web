@@ -1,0 +1,298 @@
+---
+import CustomPreviewLayout from '../../layouts/preview/CustomPreviewLayout.astro';
+import {
+  marke,
+  hero,
+  leistungen,
+  kompetenzen,
+  kompetenzHinweis,
+  ablauf,
+  unternehmen,
+  cta,
+  footerSpalten,
+  navigation,
+} from '../../components/preview/content';
+---
+
+<CustomPreviewLayout title="Variante A — individuell | Designexperiment AKRO Sicherheit">
+	<!-- 1 · Header ------------------------------------------------------ -->
+	<header class="bg-pv-sand border-b border-pv-line">
+		<div
+			class="mx-auto flex max-w-6xl items-center gap-4 px-5 py-4 md:px-8"
+		>
+			<a href="#top" class="shrink-0" aria-label={`${marke.name} — Startseite`}>
+				<img
+					src="/design-preview/akro-logo.svg"
+					alt={marke.name}
+					width="150"
+					height="42"
+					class="h-9 w-auto md:h-10"
+				/>
+			</a>
+
+			<nav aria-label="Hauptnavigation" class="ml-auto hidden lg:block">
+				<ul class="flex items-center gap-7">
+					{
+						navigation.map((eintrag) => (
+							<li>
+								<a
+									href="#leistungen"
+									class="text-sm font-medium text-pv-ink hover:text-pv-blue"
+								>
+									{eintrag}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<a
+				href={marke.telefonHref}
+				class="pv-tech ml-auto text-pv-muted hover:text-pv-ink lg:ml-6"
+			>
+				{marke.telefon}
+			</a>
+
+			<a href="#anfrage" class="pv-btn pv-btn--primary hidden sm:inline-flex">
+				Anfrage stellen
+			</a>
+		</div>
+	</header>
+
+	<main id="top">
+		<!-- 2 · Hero ----------------------------------------------------- -->
+		<section class="bg-pv-ink text-pv-sand">
+			<div
+				class="mx-auto grid max-w-6xl gap-14 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1.15fr_1fr] lg:gap-20"
+			>
+				<div class="pv-rail">
+					<p class="pv-tech text-pv-cyan">{hero.eyebrow}</p>
+
+					<h1
+						class="mt-6 font-display text-[2.6rem] leading-[1.02] font-bold tracking-[-0.03em] text-balance md:text-6xl lg:text-[4.25rem]"
+					>
+						{hero.titel}
+					</h1>
+
+					<p class="mt-6 max-w-xl text-lg leading-relaxed text-pv-sand/75">
+						{hero.text}
+					</p>
+
+					<div class="mt-9 flex flex-wrap gap-3">
+						<a href="#anfrage" class="pv-btn pv-btn--primary">
+							{hero.ctaPrimaer}
+						</a>
+						<a href={marke.telefonHref} class="pv-btn pv-btn--ghost">
+							{hero.ctaSekundaer}
+						</a>
+					</div>
+				</div>
+
+				<!-- Register statt Kennzahlenblock: nennt echte Leistungen
+				     statt erfundener Zahlen. -->
+				<div class="lg:pt-3">
+					<p class="pv-tech text-pv-sand/50">Leistungsregister</p>
+					<ul class="mt-4">
+						{
+							leistungen.map((l) => (
+								<li class="pv-index__row">
+									<span class="pv-tech w-7 shrink-0 text-pv-cyan">
+										{l.kuerzel}
+									</span>
+									<span class="text-[0.95rem] text-pv-sand/85">{l.titel}</span>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3 · Kompetenzleiste ------------------------------------------ -->
+		<section class="border-b border-pv-line bg-pv-sand-2">
+			<div class="mx-auto max-w-6xl px-5 py-10 md:px-8">
+				<dl class="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+					{
+						kompetenzen.map((k) => (
+							<div>
+								<dt class="pv-tech text-pv-blue">{k.label}</dt>
+								<dd class="mt-2 text-[0.95rem] text-pv-ink/80">{k.text}</dd>
+							</div>
+						))
+					}
+				</dl>
+				<p class="mt-8 border-t border-pv-line pt-4 text-sm text-pv-muted">
+					{kompetenzHinweis}
+				</p>
+			</div>
+		</section>
+
+		<!-- 4 · Leistungen ----------------------------------------------- -->
+		<section id="leistungen" class="bg-pv-sand">
+			<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+				<div class="pv-rail max-w-2xl text-pv-ink">
+					<p class="pv-tech text-pv-blue">Leistungen</p>
+					<h2
+						class="mt-4 font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-[2.75rem] md:leading-[1.1]"
+					>
+						Sieben Leistungen, ein Ansprechpartner.
+					</h2>
+				</div>
+
+				<!-- Asymmetrisches Raster: die erste Karte trägt mehr Gewicht,
+				     damit keine Sammlung identischer Kacheln entsteht. -->
+				<div class="mt-12 grid gap-px bg-pv-line sm:grid-cols-2 lg:grid-cols-3">
+					{
+						leistungen.map((l, i) => (
+							<article
+								class:list={[
+									'pv-card pv-bracket',
+									i === 0 && 'lg:col-span-2',
+								]}
+							>
+								<span class="pv-card__id">{l.kuerzel}</span>
+								<h3
+									class:list={[
+										'font-display font-semibold tracking-[-0.01em]',
+										i === 0 ? 'text-2xl md:text-[1.75rem]' : 'text-lg',
+									]}
+								>
+									{l.titel}
+								</h3>
+								<p class="text-[0.95rem] leading-relaxed text-pv-muted">
+									{l.text}
+								</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- 5 · Ablauf --------------------------------------------------- -->
+		<section class="bg-pv-ink-2 text-pv-sand">
+			<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+				<div class="pv-rail">
+					<p class="pv-tech text-pv-cyan">Ablauf</p>
+					<h2
+						class="mt-4 max-w-xl font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-4xl"
+					>
+						Von der Anfrage bis zum Einsatz.
+					</h2>
+				</div>
+
+				<!-- Nummerierung hier bewusst: das ist eine echte Reihenfolge. -->
+				<ol class="mt-12 grid gap-px bg-pv-ink-3 md:grid-cols-3">
+					{
+						ablauf.map((s) => (
+							<li class="bg-pv-ink-2 p-7">
+								<span class="pv-tech text-pv-cyan">{s.nr}</span>
+								<h3 class="mt-3 font-display text-xl font-semibold">
+									{s.titel}
+								</h3>
+								<p class="mt-2 text-[0.95rem] leading-relaxed text-pv-sand/70">
+									{s.text}
+								</p>
+							</li>
+						))
+					}
+				</ol>
+			</div>
+		</section>
+
+		<!-- 6 · Unternehmen ---------------------------------------------- -->
+		<section class="bg-pv-sand">
+			<div
+				class="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1fr_0.85fr] lg:gap-20"
+			>
+				<div class="pv-rail text-pv-ink">
+					<p class="pv-tech text-pv-blue">{unternehmen.eyebrow}</p>
+					<h2
+						class="mt-4 font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-[2.5rem] md:leading-[1.12]"
+					>
+						{unternehmen.titel}
+					</h2>
+					<p class="mt-6 max-w-xl text-lg leading-relaxed text-pv-muted">
+						{unternehmen.text}
+					</p>
+					<p class="mt-6 text-sm text-pv-muted">{unternehmen.hinweis}</p>
+				</div>
+
+				<aside class="border border-pv-line bg-white/60 p-7">
+					<p class="pv-tech text-pv-muted">Rechtsträger</p>
+					<p class="mt-3 font-display text-xl font-semibold">
+						{marke.traeger}
+					</p>
+					<dl class="mt-6 space-y-4 text-[0.95rem]">
+						<div>
+							<dt class="pv-tech text-pv-muted">Sitz</dt>
+							<dd class="mt-1">{marke.sitz}</dd>
+						</div>
+						<div>
+							<dt class="pv-tech text-pv-muted">Niederlassung</dt>
+							<dd class="mt-1">{marke.niederlassung}</dd>
+						</div>
+						<div>
+							<dt class="pv-tech text-pv-muted">Telefon</dt>
+							<dd class="mt-1">
+								<a href={marke.telefonHref} class="hover:text-pv-blue">
+									{marke.telefon}
+								</a>
+							</dd>
+						</div>
+					</dl>
+				</aside>
+			</div>
+		</section>
+
+		<!-- 7 · Anfrage-CTA ---------------------------------------------- -->
+		<section id="anfrage" class="bg-pv-blue text-white">
+			<div
+				class="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-14 md:px-8 md:py-16 lg:flex-row lg:items-center lg:justify-between"
+			>
+				<div class="max-w-2xl">
+					<p class="pv-tech text-pv-cyan">{cta.eyebrow}</p>
+					<h2
+						class="mt-4 font-display text-3xl font-bold tracking-[-0.02em] text-balance md:text-4xl"
+					>
+						{cta.titel}
+					</h2>
+					<p class="mt-4 text-lg text-white/80">{cta.text}</p>
+				</div>
+				<a href="#anfrage" class="pv-btn pv-btn--primary shrink-0 self-start">
+					{cta.button}
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<!-- 8 · Footer -------------------------------------------------------- -->
+	<footer class="bg-pv-ink text-pv-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8">
+			<div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+				{
+					footerSpalten.map((spalte) => (
+						<div>
+							<p class="pv-tech text-pv-cyan">{spalte.titel}</p>
+							<ul class="mt-4 space-y-2.5">
+								{spalte.eintraege.map((eintrag) => (
+									<li class="text-[0.9rem] text-pv-sand/70">{eintrag}</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+
+			<div
+				class="mt-12 flex flex-col gap-3 border-t border-pv-ink-3 pt-6 sm:flex-row sm:items-center sm:justify-between"
+			>
+				<p class="pv-tech text-pv-sand/45">
+					{marke.traeger} · {marke.niederlassung}
+				</p>
+				<p class="pv-tech text-pv-sand/45">Variante A — individuell</p>
+			</div>
+		</div>
+	</footer>
+</CustomPreviewLayout>

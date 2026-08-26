@@ -67,6 +67,44 @@
     bestehenden PDF. Für V1 wird keine zusätzliche HTML-Seite `/agb`
     festgelegt.
 
+## Assetentscheidungen
+
+Grundlage ist die abgeschlossene Bestandsaufnahme in
+`docs/LEGACY-INVENTORY.md`. Sie ergab, dass der gesamte Rasterbestand des
+Altbestands auf Byte-Ebene zerstört ist und nur die SVG-Dateien nutzbar sind.
+
+18. **Der Altbestand bleibt unverändertes Archiv.** Der Ordner
+    `Technik\akro sicherheit webseite` wird nicht bereinigt, nicht umbenannt
+    und nicht gelöscht. Er dient ausschließlich als Nachweis des früheren
+    Zustands und als Fundort für Inhalte, alte URLs und intakte SVG-Dateien.
+19. **Beschädigte Dateien werden nicht übernommen.** Die zerstörten PNG-,
+    JPG- und PDF-Dateien werden nicht in das neue Projekt migriert — auch
+    nicht als Platzhalter. Ersatz wird beschafft oder neu produziert.
+20. **`akro-logo.svg` ist nur vorläufige Referenz.** Die Datei dient als
+    Web- und Designreferenz, ausdrücklich **nicht** als druckfähiger
+    Vektor-Master. Sie enthält eingebettete Bitmaps mit rund 1006 Pixel
+    Breite. Ein echter Vektor-Master bleibt zu beschaffen.
+21. **Keine Bild-KI für Logos, Zertifikate, Kundenlogos und offizielle
+    Zeichen.** Diese Assets werden ausschließlich aus Originalquellen
+    übernommen oder von einem Gestalter erstellt. Eine KI-Nachbildung wäre
+    eine Fälschung fremder Marken und Nachweise.
+22. **Bild-KI ist für fachliche Website-Fotografie zulässig.** Sie darf
+    später gezielt für Leistungs-, Stimmungs- und Hintergrundmotive
+    eingesetzt werden. Nicht zulässig bleibt sie für alles, was einen realen
+    Sachverhalt belegt — echte Mitarbeitende, echte Objekte, echte Einsätze,
+    echte Referenzen.
+23. **Vier getrennte Bildwelten.** AKRO Sicherheit, Fire & Safety, Service
+    und Group erhalten jeweils eine eigene Bildwelt. Motive werden nicht
+    zwischen den Marken geteilt; die Trennung entspricht der Markenabgrenzung
+    aus Punkt 11.
+24. **Gemeinsame Assets werden zentral verwaltet.** Unternehmens-,
+    Recruiting-, Zertifikats- und Referenzassets liegen einmalig an zentraler
+    Stelle und werden von allen Marken verwendet, nicht je App kopiert.
+25. **Zentraler Ablageort ist `packages/assets`.** Die Assets liegen als
+    eigener Workspace `@akro/assets` neben `@akro/design-system` und folgen
+    damit der bestehenden Monorepo-Architektur aus Punkt 1 und 2. Jede App
+    greift über den Paketnamen darauf zu; eine Kopie je App ist unzulässig.
+
 ## Offene beziehungsweise blockierte Entscheidungen
 
 Diese Punkte sind bewusst noch **nicht** entschieden und blockieren die

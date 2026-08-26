@@ -1,0 +1,83 @@
+---
+/**
+ * Karriereseite ohne JobPosting-Markup: Das gehört laut CLAUDE.md §10
+ * ausschließlich auf eine einzelne, tatsächlich offene Stellenanzeige.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { marke } from '../config';
+import { brotkrumen } from '../lib/jsonld';
+
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Karriere', href: '/karriere' },
+];
+
+const schritte = [
+  { nr: '01', titel: 'Bewerbung', text: 'Sie senden uns Ihre Unterlagen oder rufen an.' },
+  { nr: '02', titel: 'Gespräch', text: 'Wir klären Einsatzwunsch, Qualifikation und Verfügbarkeit.' },
+  { nr: '03', titel: 'Nachweise', text: 'Wir prüfen gemeinsam, welche Nachweise vorliegen und welche fehlen.' },
+  { nr: '04', titel: 'Einarbeitung', text: 'Sie werden am Einsatzobjekt eingewiesen, bevor Sie eigenständig arbeiten.' },
+];
+---
+
+<BaseLayout
+	title="Karriere | AKRO Sicherheit"
+	description="Arbeiten bei AKRO Sicherheit: Bewerbung, Gespräch, Nachweisprüfung und strukturierte Einarbeitung am Einsatzobjekt."
+	jsonLd={brotkrumen(pfad)}
+>
+	<Breadcrumb eintraege={pfad} />
+
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead eyebrow="Karriere" titel="Arbeiten bei AKRO Sicherheit." as="h1">
+				<p class="mt-6 max-w-xl text-vorspann leading-relaxed text-muted">
+					Wir suchen Menschen, die zuverlässig arbeiten und sich an
+					vereinbarte Abläufe halten. Quereinstieg ist möglich, wenn die
+					erforderlichen Nachweise vorliegen oder erworben werden.
+				</p>
+			</SectionHead>
+		</div>
+	</section>
+
+	<section class="border-y border-line bg-sand-2">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
+			<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">
+				So läuft die Bewerbung
+			</h2>
+			<ol class="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+				{
+					schritte.map((s) => (
+						<li class="bg-surface p-6">
+							<span class="tech text-brand">{s.nr}</span>
+							<h3 class="mt-2 text-vorspann font-semibold">{s.titel}</h3>
+							<p class="mt-2 text-klein leading-relaxed text-muted">
+								{s.text}
+							</p>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
+			<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">Offene Stellen</h2>
+			<p class="mt-4 max-w-2xl text-klein leading-relaxed text-muted">
+				Derzeit sind hier keine einzelnen Stellenanzeigen veröffentlicht.
+				Initiativbewerbungen sind jederzeit willkommen — telefonisch unter
+				<a href={marke.telefonHref} class="text-brand">{marke.telefon}</a>
+				oder per E-Mail an
+				<a href={`mailto:${marke.email}`} class="text-brand">{marke.email}</a>.
+			</p>
+			<p class="mt-6 max-w-2xl text-marginalie text-muted">
+				<span class="todo">TODO</span>
+				Konkrete Stellenanzeigen, Anforderungsprofile und Angaben zu Vergütung
+				und Arbeitszeitmodellen ergänzen. Erst dann JobPosting-Markup auf der
+				jeweiligen Einzelanzeige einsetzen.
+			</p>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+// Variante B — isoliertes Layout für das Designexperiment.
+// Bindet ausschließlich preview-daisyui.css ein. daisyUI ist damit auf
+// diese eine Route beschränkt und erreicht weder die echte Seite noch
+// packages/design-system.
+import '../../styles/preview/preview-daisyui.css';
+import { prototypHinweis } from '../../components/preview/content';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de" data-brand="sicherheit" data-theme="akropreview">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>{title}</title>
+	</head>
+	<body class="overflow-x-hidden bg-base-100 text-base-content">
+		<p
+			class="pv-tech bg-pv-ink text-pv-sand px-4 py-2 text-center"
+			role="note"
+		>
+			{prototypHinweis}
+		</p>
+		<slot />
+	</body>
+</html>

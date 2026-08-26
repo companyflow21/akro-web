@@ -1,0 +1,166 @@
+---
+/**
+ * Strukturierte Angebotsanfrage.
+ *
+ * Das Feldschema entspricht bewusst dem des Altbestands
+ * (docs/LEGACY-INVENTORY.md §3) — es ist fachlich erprobt und bildet
+ * zugleich die Spezifikation für die spätere Anbindung.
+ *
+ * Kein Versandziel: Die Formulararchitektur ist laut CLAUDE.md §14 offen.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { marke } from '../config';
+import { leistungen } from '../data/leistungen';
+import { brotkrumen } from '../lib/jsonld';
+
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Anfrage', href: '/anfrage' },
+];
+
+const feldKlasse = 'border border-line bg-surface px-3 py-2.5 text-klein';
+---
+
+<BaseLayout
+	title="Angebot anfragen | AKRO Sicherheit"
+	description="Fordern Sie ein Angebot für Objektschutz, Revierdienst, Veranstaltungssicherheit oder eine andere Sicherheitsleistung an."
+	jsonLd={brotkrumen(pfad)}
+>
+	<Breadcrumb eintraege={pfad} />
+
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead
+				eyebrow="Anfrage"
+				titel="Objekt, Zeitraum, Anforderungen — den Rest planen wir."
+				as="h1"
+			>
+				<p class="mt-6 max-w-xl text-vorspann leading-relaxed text-muted">
+					Je genauer Ihre Angaben, desto konkreter unser Vorschlag zu Besetzung
+					und Ablauf. Fehlende Angaben klären wir im Gespräch.
+				</p>
+			</SectionHead>
+		</div>
+	</section>
+
+	<section class="border-y border-line bg-sand-2">
+		<div class="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-16">
+			<p class="border border-dashed border-line bg-surface p-4 text-marginalie text-muted">
+				<span class="todo">TODO</span>
+				Das Formular ist gestaltet, aber noch nicht angebunden. Bis zur
+				Anbindung erreichen Sie uns unter
+				<a href={marke.telefonHref} class="text-brand">{marke.telefon}</a>.
+			</p>
+
+			<form class="mt-8 grid gap-6" aria-describedby="anfrage-hinweis">
+				<fieldset class="grid gap-5 border border-line bg-surface p-5">
+					<legend class="tech px-2 text-brand">Einsatz</legend>
+
+					<div class="grid gap-1.5">
+						<label for="service" class="tech text-muted">Leistung</label>
+						<select id="service" name="service" required class={feldKlasse}>
+							<option value="">Bitte wählen</option>
+							{
+								leistungen.map((l) => (
+									<option value={l.titel}>{l.titel}</option>
+								))
+							}
+							<option value="Sonstiges">Sonstiges</option>
+						</select>
+					</div>
+
+					<div class="grid gap-1.5">
+						<label for="description" class="tech text-muted">
+							Beschreibung des Bedarfs
+						</label>
+						<textarea
+							id="description"
+							name="description"
+							rows="5"
+							required
+							class={feldKlasse}></textarea>
+					</div>
+
+					<div class="grid gap-1.5">
+						<label for="location" class="tech text-muted">Einsatzort</label>
+						<input id="location" name="location" type="text" class={feldKlasse} />
+					</div>
+
+					<div class="grid gap-5 sm:grid-cols-2">
+						<div class="grid gap-1.5">
+							<label for="start_date" class="tech text-muted">Beginn</label>
+							<input id="start_date" name="start_date" type="date" class={feldKlasse} />
+						</div>
+						<div class="grid gap-1.5">
+							<label for="end_date" class="tech text-muted">Ende</label>
+							<input id="end_date" name="end_date" type="date" class={feldKlasse} />
+						</div>
+					</div>
+
+					<div class="grid gap-5 sm:grid-cols-2">
+						<div class="grid gap-1.5">
+							<label for="working_hours" class="tech text-muted">Einsatzzeiten</label>
+							<input id="working_hours" name="working_hours" type="text" class={feldKlasse} />
+						</div>
+						<div class="grid gap-1.5">
+							<label for="staff_count" class="tech text-muted">Personalbedarf</label>
+							<input id="staff_count" name="staff_count" type="text" class={feldKlasse} />
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset class="grid gap-5 border border-line bg-surface p-5">
+					<legend class="tech px-2 text-brand">Kontakt</legend>
+
+					<div class="grid gap-5 sm:grid-cols-2">
+						<div class="grid gap-1.5">
+							<label for="name" class="tech text-muted">Name</label>
+							<input id="name" name="name" type="text" autocomplete="name" required class={feldKlasse} />
+						</div>
+						<div class="grid gap-1.5">
+							<label for="company" class="tech text-muted">Unternehmen</label>
+							<input id="company" name="company" type="text" autocomplete="organization" class={feldKlasse} />
+						</div>
+					</div>
+
+					<div class="grid gap-5 sm:grid-cols-2">
+						<div class="grid gap-1.5">
+							<label for="email" class="tech text-muted">E-Mail</label>
+							<input id="email" name="email" type="email" autocomplete="email" required class={feldKlasse} />
+						</div>
+						<div class="grid gap-1.5">
+							<label for="phone" class="tech text-muted">Telefon</label>
+							<input id="phone" name="phone" type="tel" autocomplete="tel" class={feldKlasse} />
+						</div>
+					</div>
+
+					<div class="grid gap-1.5">
+						<label for="additional_info" class="tech text-muted">
+							Zusätzliche Informationen
+						</label>
+						<textarea id="additional_info" name="additional_info" rows="4" class={feldKlasse}></textarea>
+					</div>
+				</fieldset>
+
+				<div class="flex items-start gap-2.5">
+					<input id="dsgvo" name="dsgvo" type="checkbox" value="akzeptiert" required class="mt-1" />
+					<label for="dsgvo" class="text-marginalie text-muted">
+						Ich habe die <a href="/datenschutz" class="text-brand">Datenschutzerklärung</a>
+						gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung
+						der Anfrage einverstanden.
+					</label>
+				</div>
+
+				<p id="anfrage-hinweis" class="text-marginalie text-muted">
+					Der Versand ist noch nicht aktiv.
+				</p>
+
+				<button type="submit" class="btn btn--primary justify-self-start" disabled>
+					Anfrage senden
+				</button>
+			</form>
+		</div>
+	</section>
+</BaseLayout>

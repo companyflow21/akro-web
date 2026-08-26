@@ -1,0 +1,88 @@
+---
+import CustomPreviewLayout from '../../layouts/preview/CustomPreviewLayout.astro';
+
+const varianten = [
+  {
+    href: '/design-preview/custom',
+    kennung: 'A',
+    titel: 'Individuell',
+    stack: 'Astro · Tailwind CSS 4 · eigene Komponenten',
+    merkmale: [
+      'Keine Komponentenbibliothek, keine daisyUI-Klassen',
+      'Eigene Karten, Buttons und Raster',
+      'Volle Kontrolle über jedes Detail',
+    ],
+  },
+  {
+    href: '/design-preview/daisyui',
+    kennung: 'B',
+    titel: 'daisyUI-Hybrid',
+    stack: 'Astro · Tailwind CSS 4 · daisyUI 5.7.20',
+    merkmale: [
+      'Eigenes AKRO-Theme, kein eingebautes Standardtheme',
+      'daisyUI nur für Button, Card, Badge, Steps, Footer',
+      'Header, Hero und Leistungsraster individuell gestaltet',
+    ],
+  },
+];
+---
+
+<CustomPreviewLayout title="Designexperiment AKRO Sicherheit — Variantenvergleich">
+	<main class="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
+		<div class="pv-rail">
+			<p class="pv-tech text-pv-blue">Designexperiment</p>
+			<h1
+				class="mt-4 font-display text-4xl font-bold tracking-[-0.03em] text-balance md:text-5xl"
+			>
+				Zwei Wege zur Designgrundlage.
+			</h1>
+			<p class="mt-6 max-w-2xl text-lg leading-relaxed text-pv-muted">
+				Beide Varianten zeigen dieselben acht Bereiche mit demselben Inhalt und
+				derselben Gestaltungsrichtung. Unterschiedlich ist nur, wie die
+				Oberfläche technisch entsteht. So bleibt der Vergleich fair.
+			</p>
+		</div>
+
+		<div class="mt-14 grid gap-px bg-pv-line md:grid-cols-2">
+			{
+				varianten.map((v) => (
+					<a href={v.href} class="pv-card pv-bracket group">
+						<span class="pv-card__id">Variante {v.kennung}</span>
+						<h2 class="font-display text-2xl font-semibold tracking-[-0.01em] group-hover:text-pv-blue">
+							{v.titel}
+						</h2>
+						<p class="pv-tech text-pv-muted">{v.stack}</p>
+						<ul class="mt-2 space-y-2 text-[0.95rem] text-pv-muted">
+							{v.merkmale.map((m) => (
+								<li class="border-t border-pv-line pt-2">{m}</li>
+							))}
+						</ul>
+						<span class="mt-4 text-sm font-semibold text-pv-blue">
+							Variante ansehen →
+						</span>
+					</a>
+				))
+			}
+		</div>
+
+		<section class="mt-14 border border-pv-line bg-pv-sand-2 p-6">
+			<h2 class="pv-tech text-pv-blue">Was hier bewusst fehlt</h2>
+			<ul class="mt-4 space-y-2 text-[0.95rem] text-pv-muted">
+				<li>Kundennamen, Kundenlogos und Referenzen — keine Freigabe erteilt.</li>
+				<li>Zertifikate und Normen — Originalnachweise noch nicht geprüft.</li>
+				<li>
+					Kennzahlen zu Erfahrung, Reaktionszeit und Personal — nicht bestätigt.
+				</li>
+				<li>
+					Ein Hero-Bild — das vorhandene Motiv liegt bei 592 KB und lässt sich
+					ohne zusätzliches Bildwerkzeug nicht auf 300 KB bringen.
+				</li>
+			</ul>
+			<p class="mt-5 border-t border-pv-line pt-4 text-sm text-pv-muted">
+				Diese Seiten sind ein Experiment zur Designgrundlage. Sie sind auf
+				noindex, nofollow gesetzt, nicht in Navigation oder Sitemap verlinkt und
+				legen keine endgültigen Design-Tokens fest.
+			</p>
+		</section>
+	</main>
+</CustomPreviewLayout>

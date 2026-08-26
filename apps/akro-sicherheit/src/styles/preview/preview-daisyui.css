@@ -1,0 +1,184 @@
+/*
+ * Variante B — daisyUI-Hybrid.
+ * ISOLIERTE Preview-Styles. Wird ausschließlich von der Route
+ * /design-preview/daisyui eingebunden; die echte Seite und
+ * packages/design-system bleiben unberührt.
+ *
+ * Gleiche Gestaltungsrichtung wie Variante A: "Warm Industrial Precision".
+ * daisyUI liefert nur Grundkomponenten. Header, Hero, Leistungsraster und
+ * die großen Marketingflächen bleiben individuell gestaltet.
+ */
+
+@import "tailwindcss";
+
+/* Kein eingebautes Standardtheme laden — nur das eigene AKRO-Preview-Theme. */
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "akropreview";
+  default: true;
+  color-scheme: light;
+
+  /* Warme helle Neutralflächen statt kaltem Weiß */
+  --color-base-100: #f5f1ea;
+  --color-base-200: #ebe4d9;
+  --color-base-300: #ddd4c5;
+  --color-base-content: #0b1626;
+
+  /* Logo-Blau als Primärfarbe */
+  --color-primary: #0e62bf;
+  --color-primary-content: #ffffff;
+
+  /* Tiefes Navy als tragende Sekundärfläche */
+  --color-secondary: #0b1626;
+  --color-secondary-content: #f5f1ea;
+
+  /* Cyan gezielt als Akzent */
+  --color-accent: #00c9e0;
+  --color-accent-content: #0b1626;
+
+  --color-neutral: #16283f;
+  --color-neutral-content: #f5f1ea;
+
+  --color-info: #0e62bf;
+  --color-info-content: #ffffff;
+  --color-success: #1c7d5a;
+  --color-success-content: #ffffff;
+  --color-warning: #9a6b12;
+  --color-warning-content: #ffffff;
+  --color-error: #a32e2e;
+  --color-error-content: #ffffff;
+
+  /* Kanten bewusst technisch: fast keine Rundung, klare Linien */
+  --radius-selector: 0.125rem;
+  --radius-field: 0.125rem;
+  --radius-box: 0.125rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Gleiche Zusatztokens wie Variante A, damit der Vergleich fair bleibt. */
+@theme {
+  --color-pv-ink: #0b1626;
+  --color-pv-ink-2: #16283f;
+  --color-pv-ink-3: #24405f;
+  --color-pv-blue: #0e62bf;
+  --color-pv-cyan: #00c9e0;
+  --color-pv-sand: #f5f1ea;
+  --color-pv-sand-2: #ebe4d9;
+  --color-pv-line: #cfc6b6;
+  --color-pv-muted: #5d6a7a;
+
+  --font-display: "Segoe UI Variable Display", "Segoe UI", system-ui,
+    -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-tech: ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo,
+    monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-pv-cyan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .pv-tech {
+    font-family: var(--font-tech);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Signatur-Messleiste — identisch zu Variante A, damit der Unterschied
+     wirklich an der Komponentenschicht sichtbar wird, nicht am Konzept. */
+  .pv-rail {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .pv-rail::before {
+    content: "";
+    position: absolute;
+    inset-block: 0.35rem 0;
+    left: 0.75rem;
+    width: 1px;
+    background: currentColor;
+    opacity: 0.28;
+  }
+
+  .pv-rail::after {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    left: 0.75rem;
+    width: 0.75rem;
+    height: 2px;
+    background: var(--color-pv-cyan);
+  }
+
+  @media (min-width: 768px) {
+    .pv-rail {
+      padding-left: 3.5rem;
+    }
+    .pv-rail::before,
+    .pv-rail::after {
+      left: 1.25rem;
+    }
+  }
+
+  .pv-index__row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  }
+
+  .pv-index__row:last-child {
+    border-bottom: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  }
+
+  /* daisyUI-Card entschärfen: kein Schatten, technische Kante,
+     damit keine sichtbare Template-Optik entsteht. */
+  .pv-daisy-card {
+    background: #fffdf9;
+    border: 1px solid var(--color-pv-line);
+    box-shadow: none;
+    transition: border-color 180ms ease, transform 180ms ease;
+  }
+
+  .pv-daisy-card:hover {
+    border-color: var(--color-pv-ink-3);
+    transform: translateY(-2px);
+  }
+}

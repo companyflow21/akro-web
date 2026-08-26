@@ -1,0 +1,97 @@
+---
+/**
+ * Kopfbereich nach docs/SITE-ARCHITECTURE.md §5.
+ *
+ * Die Startseite wird ausschließlich über das Logo erreicht und hat keinen
+ * eigenen Navigationspunkt. Rechtstexte gehören nicht in die
+ * Hauptnavigation.
+ *
+ * Der Kopfbereich liegt bewusst auf hellem Grund: Das vorhandene Logo-SVG
+ * führt keine eigenen Farben und rendert schwarz.
+ * [TODO: Negativfassung des Logos beschaffen, dann ist auch ein dunkler
+ *  Kopfbereich möglich.]
+ */
+import { marke, hauptnavigation } from '../config';
+
+const pfad = Astro.url.pathname;
+const istAktiv = (href: string) =>
+  pfad === href || pfad.startsWith(href + '/');
+---
+
+<header class="border-b border-line bg-sand">
+	<div class="mx-auto flex max-w-6xl items-center gap-4 px-5 py-4 md:px-8">
+		<a href="/" class="shrink-0" aria-label={`${marke.name} — Startseite`}>
+			{/* [TODO: echtes Logo einsetzen, sobald der Assetbestand geklärt ist.
+			     Bis dahin eine reine Textmarke, damit keine defekte Grafik
+			     ausgeliefert wird.] */}
+			<span class="font-[family-name:var(--font-display)] text-karte font-bold tracking-[-0.03em] text-ink">
+				AKRO<span class="text-brand"> Sicherheit</span>
+			</span>
+		</a>
+
+		<nav aria-label="Hauptnavigation" class="ml-auto hidden lg:block">
+			<ul class="flex items-center gap-7">
+				{
+					hauptnavigation.map((eintrag) => (
+						<li>
+							<a
+								href={eintrag.href}
+								aria-current={istAktiv(eintrag.href) ? 'page' : undefined}
+								class="text-klein font-medium text-ink hover:text-brand aria-[current=page]:text-brand"
+							>
+								{eintrag.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<a
+			href={marke.telefonHref}
+			class="tech ml-auto text-muted hover:text-ink lg:ml-6"
+		>
+			{marke.telefon}
+		</a>
+
+		<a href="/anfrage" class="btn btn--primary hidden sm:inline-flex">
+			Anfrage stellen
+		</a>
+	</div>
+
+	{/* Mobile Navigation ohne JavaScript: details/summary.
+	    [TODO: Im Prototyp prüfen, ob Telefon und Anfrage dauerhaft sichtbar
+	     bleiben sollen — noch keine Architekturentscheidung.] */}
+	<details class="border-t border-line lg:hidden">
+		<summary
+			class="tech cursor-pointer list-none px-5 py-3 text-muted md:px-8"
+		>
+			Menü
+		</summary>
+		<nav aria-label="Hauptnavigation mobil" class="px-5 pb-4 md:px-8">
+			<ul class="grid gap-1">
+				{
+					hauptnavigation.map((eintrag) => (
+						<li>
+							<a
+								href={eintrag.href}
+								aria-current={istAktiv(eintrag.href) ? 'page' : undefined}
+								class="block border-t border-line py-2.5 text-klein text-ink aria-[current=page]:text-brand"
+							>
+								{eintrag.label}
+							</a>
+						</li>
+					))
+				}
+				<li>
+					<a
+						href="/anfrage"
+						class="btn btn--primary mt-3 w-full sm:hidden"
+					>
+						Anfrage stellen
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</details>
+</header>

@@ -1,0 +1,91 @@
+---
+/**
+ * Fußbereich nach docs/SITE-ARCHITECTURE.md §5.
+ * Impressum und Datenschutz sind eigenständige Seiten und ausschließlich
+ * hier verlinkt — auf jeder Seite.
+ */
+import { marke, rechtsnavigation } from '../config';
+import { leistungen } from '../data/leistungen';
+
+const jahr = new Date().getFullYear();
+---
+
+<footer class="bg-deep text-sand">
+	<div class="mx-auto max-w-6xl px-5 py-14 md:px-8">
+		<div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+			<nav aria-label="Leistungen">
+				<p class="tech text-accent">Leistungen</p>
+				<ul class="mt-4 space-y-2.5">
+					{
+						leistungen.map((l) => (
+							<li>
+								<a
+									href={`/leistungen/${l.slug}`}
+									class="text-marginalie text-sand/70 hover:text-sand"
+								>
+									{l.titel}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<nav aria-label="Unternehmen">
+				<p class="tech text-accent">Unternehmen</p>
+				<ul class="mt-4 space-y-2.5">
+					<li><a href="/unternehmen" class="text-marginalie text-sand/70 hover:text-sand">Unternehmen</a></li>
+					<li><a href="/referenzen" class="text-marginalie text-sand/70 hover:text-sand">Referenzen</a></li>
+					<li><a href="/karriere" class="text-marginalie text-sand/70 hover:text-sand">Karriere</a></li>
+				</ul>
+			</nav>
+
+			<div>
+				<p class="tech text-accent">Kontakt</p>
+				<address class="mt-4 space-y-2.5 text-marginalie not-italic text-sand/70">
+					<p>
+						{marke.traeger}<br />
+						{marke.strasse}<br />
+						{marke.plz} {marke.ort}
+					</p>
+					<p>
+						<a href={marke.telefonHref} class="hover:text-sand">{marke.telefon}</a><br />
+						<a href={`mailto:${marke.email}`} class="hover:text-sand">{marke.email}</a>
+					</p>
+				</address>
+				<ul class="mt-3 space-y-2.5">
+					<li><a href="/kontakt" class="text-marginalie text-sand/70 hover:text-sand">Kontakt</a></li>
+					<li><a href="/anfrage" class="text-marginalie text-sand/70 hover:text-sand">Anfrage stellen</a></li>
+				</ul>
+			</div>
+
+			<nav aria-label="Rechtliches">
+				<p class="tech text-accent">Rechtliches</p>
+				<ul class="mt-4 space-y-2.5">
+					{
+						rechtsnavigation.map((eintrag) => (
+							<li>
+								<a
+									href={eintrag.href}
+									class="text-marginalie text-sand/70 hover:text-sand"
+								>
+									{eintrag.label}
+								</a>
+							</li>
+						))
+					}
+					{/* [TODO: AGB als PDF verlinken, sobald eine unbeschädigte
+					     Fassung und der endgültige Pfad vorliegen.] */}
+				</ul>
+			</nav>
+		</div>
+
+		<div
+			class="mt-12 flex flex-col gap-3 border-t border-sand/20 pt-6 sm:flex-row sm:items-center sm:justify-between"
+		>
+			<p class="tech text-sand/45">
+				© {jahr} {marke.traeger} · Niederlassung {marke.niederlassung}
+			</p>
+		</div>
+	</div>
+</footer>

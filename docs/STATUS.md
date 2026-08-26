@@ -102,6 +102,25 @@
   Inhalte, Assets oder URLs aus dem Altbestand übernommen und keine
   Seitenvorlagen erstellt.
 
+## Assets
+
+- **Zentrale Assetstruktur angelegt** unter `packages/assets` als Workspace
+  `@akro/assets`, neben `@akro/design-system`. Aufbau: `brand/` (fünf
+  Markenordner), `shared/` (sieben Bereiche), sowie die vier Bildwelten
+  `security/`, `fire-safety/`, `service/`, `group/`.
+- **Alle Ordner sind inhaltlich leer.** Jeder Ordner enthält eine `README.md`,
+  die Bedarf, Bestand, Regeln und Blockaden beschreibt — auch damit Git die
+  Struktur überhaupt versioniert.
+- Es wurde **kein einziges Asset übernommen, kopiert oder erzeugt**. Die
+  Logokopie unter `apps/akro-sicherheit/public/design-preview/` gehört
+  ausschließlich zum Designexperiment.
+- `packages/assets/package.json` ist angelegt, weil `packages/*` als
+  npm-Workspace-Muster konfiguriert ist. **`npm install` wurde nicht
+  ausgeführt**, `package-lock.json` kennt den neuen Workspace daher noch
+  nicht.
+- Die zugehörigen Entscheidungen stehen in `docs/DECISIONS.md` Punkte 18
+  bis 25.
+
 ## Nächste Phase
 
 1. **Designgrundlage** — echte Markenfarben, Typografie und Design-Tokens

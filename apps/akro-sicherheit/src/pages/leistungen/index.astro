@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { leistungen } from '../../data/leistungen';
+import { brotkrumen } from '../../lib/jsonld';
+
+const pfad = [
+  { label: 'Startseite', href: '/' },
+  { label: 'Leistungen', href: '/leistungen' },
+];
+---
+
+<BaseLayout
+	title="Leistungen | AKRO Sicherheit"
+	description="Objekt- und Werkschutz, Revier- und Kontrolldienst, Veranstaltungssicherheit, Baustellenbewachung, Empfangs- und Pfortendienst, Personenschutz und KRITIS-Schutz."
+	jsonLd={brotkrumen(pfad)}
+>
+	<Breadcrumb eintraege={pfad} />
+
+	<section class="bg-sand">
+		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+			<SectionHead
+				eyebrow="Leistungen"
+				titel="Sieben Leistungen, ein Ansprechpartner."
+				as="h1"
+			>
+				<p class="mt-6 max-w-xl text-vorspann leading-relaxed text-muted">
+					Jede Leistung wird nach abgestimmtem Leistungsverzeichnis erbracht.
+					Einsatzplanung, Besetzung und Dokumentation liegen bei uns.
+				</p>
+			</SectionHead>
+
+			<div class="mt-12 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+				{
+					leistungen.map((l, i) => (
+						<ServiceCard leistung={l} breit={i === 0} />
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<CtaBand />
+</BaseLayout>
