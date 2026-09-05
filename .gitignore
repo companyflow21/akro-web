@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Uploadpaket wird aus den Quelldateien erzeugt, nicht versioniert
+platzhalter/akro-platzhalter.zip

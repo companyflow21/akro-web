@@ -1,0 +1,633 @@
+/*
+ * AKRO – Unternehmenspräsentation, 16:9
+ *
+ * Eine Folie ist exakt 1280 x 720 CSS-Pixel. Bei 96 dpi entspricht das
+ * 13,333 x 7,5 Zoll, also genau der Seitengröße im @page-Block. Dadurch
+ * landet jede Folie beim Druck als eigene PDF-Seite ohne Skalierung.
+ *
+ * Farben und Schriften stammen wörtlich aus
+ * 01-projekte/akro-web/packages/design-system/tokens.css.
+ */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url("./fonts/archivo-latin-var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url("./fonts/source-serif-4-latin-var.woff2") format("woff2");
+}
+
+:root {
+  --ink: #0b1626;
+  --deep: #2f3538;
+  --sand: #f5f1ea;
+  --sand-2: #ebe4d9;
+  --surface: #fffdf9;
+  --line: #cfc6b6;
+  --fg: #0b1626;
+  --muted: #55616f;
+  --accent: #00c9e0;
+
+  --sicherheit: #1d5fa8;
+  --sicherheit-tief: #1a365d;
+  --fire: #b02525;
+  --fire-tief: #8c1d1d;
+  --service: #0f766e;
+  --service-tief: #065f46;
+
+  --display: "Archivo", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", Times, serif;
+
+  --rand: 72px;
+}
+
+@page {
+  size: 13.333in 7.5in;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #6b7280;
+}
+
+body {
+  font-family: var(--body);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  margin: 0;
+  text-wrap: balance;
+}
+
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* ---- Folie ---------------------------------------------------------- */
+
+.folie {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  background: var(--sand);
+  padding: 56px var(--rand) 64px;
+  display: flex;
+  flex-direction: column;
+  /* Auf dem Bildschirm als Stapel mit Abstand, im Druck ohne. */
+  margin: 0 auto 24px;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+}
+
+.folie--dunkel {
+  background: var(--deep);
+  color: var(--surface);
+}
+
+.folie--tinte {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+
+  .folie {
+    margin: 0;
+    box-shadow: none;
+    break-after: page;
+  }
+
+  .folie:last-child {
+    break-after: auto;
+  }
+}
+
+/* ---- Kopfzeile der Folie -------------------------------------------- */
+
+.kopfzeile {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+  flex: none;
+}
+
+.folie--dunkel .kopfzeile,
+.folie--tinte .kopfzeile {
+  border-bottom-color: rgba(255, 253, 249, 0.24);
+}
+
+.etikett {
+  font-family: var(--display);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.folie--dunkel .etikett,
+.folie--tinte .etikett {
+  color: rgba(255, 253, 249, 0.6);
+}
+
+.etikett--akzent {
+  color: var(--sicherheit);
+}
+
+.folie--dunkel .etikett--akzent,
+.folie--tinte .etikett--akzent {
+  color: var(--accent);
+}
+
+.seitenzahl {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.folie--dunkel .seitenzahl,
+.folie--tinte .seitenzahl {
+  color: rgba(255, 253, 249, 0.5);
+}
+
+/* ---- Typografie ------------------------------------------------------ */
+
+.titel {
+  font-size: 44px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  max-width: 24ch;
+}
+
+.titel--gross {
+  font-size: 62px;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 18ch;
+}
+
+.vorspann {
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 76ch;
+  margin-top: 16px;
+}
+
+.folie--dunkel .vorspann,
+.folie--tinte .vorspann {
+  color: rgba(255, 253, 249, 0.78);
+}
+
+.inhalt {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inhalt--oben {
+  justify-content: flex-start;
+}
+
+/* ---- Raster ---------------------------------------------------------- */
+
+.raster {
+  display: grid;
+  gap: 28px;
+}
+
+.raster--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.raster--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.raster--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.raster--breit {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 56px;
+}
+
+/* ---- Karte ----------------------------------------------------------- */
+
+.karte {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--spartenfarbe, var(--sicherheit));
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.folie--dunkel .karte,
+.folie--tinte .karte {
+  background: rgba(255, 253, 249, 0.05);
+  border-color: rgba(255, 253, 249, 0.18);
+}
+
+.karte__kuerzel {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--spartenfarbe, var(--sicherheit));
+}
+
+.karte__titel {
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+.karte__text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.folie--dunkel .karte__text,
+.folie--tinte .karte__text {
+  color: rgba(255, 253, 249, 0.75);
+}
+
+/* ---- Listen ---------------------------------------------------------- */
+
+.liste li {
+  font-size: 15px;
+  line-height: 1.45;
+  padding: 7px 0 7px 18px;
+  border-top: 1px solid var(--sand-2);
+  position: relative;
+}
+
+.liste li:first-child {
+  border-top: none;
+  padding-top: 2px;
+}
+
+.liste li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 5px;
+  height: 5px;
+  background: var(--spartenfarbe, var(--sicherheit));
+}
+
+.liste li:first-child::before {
+  top: 10px;
+}
+
+.folie--dunkel .liste li,
+.folie--tinte .liste li {
+  border-top-color: rgba(255, 253, 249, 0.16);
+}
+
+.liste--eng li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+
+/* ---- Kennzahlen / Fakten -------------------------------------------- */
+
+.fakten {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 40px;
+}
+
+.fakten__zeile {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.folie--dunkel .fakten__zeile,
+.folie--tinte .fakten__zeile {
+  border-bottom-color: rgba(255, 253, 249, 0.2);
+}
+
+.fakten__name {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.folie--dunkel .fakten__name,
+.folie--tinte .fakten__name {
+  color: rgba(255, 253, 249, 0.55);
+}
+
+.fakten__wert {
+  font-size: 17px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Nummerierter Ablauf -------------------------------------------- */
+
+.ablauf {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+}
+
+.ablauf__schritt {
+  padding: 0 24px 0 0;
+  position: relative;
+}
+
+.ablauf__schritt + .ablauf__schritt {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.ablauf__nr {
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--sicherheit);
+  opacity: 0.35;
+  margin-bottom: 14px;
+}
+
+.ablauf__titel {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.ablauf__text {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ---- Zitat / Kernaussage -------------------------------------------- */
+
+.aussage {
+  border-left: 3px solid var(--accent);
+  padding: 4px 0 4px 28px;
+  font-size: 24px;
+  line-height: 1.35;
+  max-width: 44ch;
+}
+
+/* ---- Titelfolie ------------------------------------------------------ */
+
+.titelfolie {
+  justify-content: space-between;
+  padding: 64px var(--rand);
+}
+
+.titelfolie__marke {
+  width: 232px;
+  height: auto;
+  display: block;
+}
+
+.titelfolie__raster {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 88px 100%;
+  pointer-events: none;
+}
+
+.titelfolie > * {
+  position: relative;
+}
+
+.titelfolie__fuss {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 253, 249, 0.24);
+}
+
+/* ---- Referenzen ------------------------------------------------------ */
+
+.referenzen {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.referenz {
+  background: var(--surface);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 168px;
+  text-align: center;
+}
+
+.referenz img {
+  max-width: 132px;
+  max-height: 52px;
+  width: auto;
+  height: auto;
+}
+
+.referenz__name {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.referenz__rolle {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* ---- Bildplatz ------------------------------------------------------- */
+
+/* Wird durch ein echtes Foto ersetzt, sobald es vorliegt. Bis dahin eine
+   ruhige Fläche mit klarer Beschriftung – keine Stockfotos. */
+.bildplatz {
+  background: var(--sand-2);
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  min-height: 200px;
+}
+
+.bildplatz span {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 26ch;
+  line-height: 1.6;
+}
+
+.bildplatz img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Offene Angabe --------------------------------------------------- */
+
+.offen {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  background: #fde68a;
+  color: #6b4b04;
+  border: 1px dashed #b45309;
+  padding: 2px 7px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ---- Fußzeile der Folie --------------------------------------------- */
+
+.fusszeile {
+  flex: none;
+  margin-top: 28px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.folie--dunkel .fusszeile,
+.folie--tinte .fusszeile {
+  border-top-color: rgba(255, 253, 249, 0.2);
+  color: rgba(255, 253, 249, 0.6);
+}
+
+/* ---- Kontaktfolie ---------------------------------------------------- */
+
+.kontaktblock {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 44px;
+}
+
+.kontaktblock dt {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 253, 249, 0.55);
+  margin-bottom: 10px;
+}
+
+.kontaktblock dd {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+
+.kontaktblock dd small {
+  display: block;
+  font-size: 15px;
+  color: rgba(255, 253, 249, 0.6);
+  margin-top: 6px;
+}
+
+/* Wie .offen, aber fuer recherchierte Angaben, die nur bestaetigt werden
+   muessen statt erst beschafft. */
+.pruefen {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1e3a5f;
+  border: 1px dashed #1d5fa8;
+  padding: 2px 7px;
+  font-size: 15px;
+}

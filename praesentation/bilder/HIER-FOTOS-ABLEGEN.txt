@@ -1,0 +1,10 @@
+Fotos fuer die Unternehmenspraesentation bitte in diesen Ordner legen.
+
+Am wertvollsten:
+  1. Mitarbeiter in AKRO-Dienstkleidung im Einsatz
+  2. Bewachte Objekte, Werksgelaende, Pforte, Empfang
+  3. Eine Situation aus dem Wellnest-Einsatz, falls vorhanden
+
+Dateinamen klein, ohne Leerzeichen, ohne Umlaute:
+  richtig  werkschutz-pforte.jpg
+  falsch   Werkschutz Pforte (gross).JPG
