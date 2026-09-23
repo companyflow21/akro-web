@@ -165,6 +165,9 @@
   `docs/DECISIONS.md` Punkte 11 bis 17.
 - **Für AKRO Fire & Safety und AKRO Service existiert noch keine
   Seitenplanung** — beide sind bisher nur zur Abgrenzung dokumentiert.
+- **Bildbriefing erstellt (23.09.2026)** in `docs/BILDBRIEFING.md`: 23
+  Motive für Sicherheit, Fire & Safety, Service und Karriere mit Prompts,
+  Formaten, Dateinamen und Alt-Texten. Noch kein Bild erzeugt.
 
 ## Websitebau
 
