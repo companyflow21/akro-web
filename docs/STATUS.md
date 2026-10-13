@@ -222,8 +222,8 @@ Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
   bisherigen Live-Seite, eigene 404-Seite, Sitemap und robots.txt.
   Kanonische Domain `https://akro-group.de`, endungslose URLs mit
   Schrägstrich am Ende.
-  - Indexierung über `INDEXIERBAR` in `src/config.ts` abgeschaltet
-    (`noindex` wie beim Platzhalter), bis sie freigegeben ist.
+  - Indexierung freigegeben (`INDEXIERBAR = true` in `src/config.ts`):
+    kein `noindex` mehr außer auf der 404-Seite, Sitemap mit drei Adressen.
   - Die Sparten-Kacheln zeigen „Website folgt“ und verlinken erst, wenn
     `online: true` gesetzt ist — derzeit leiten akro-sicherheit.de und
     akro-service.de auf akro-group.de zurück, akro-fire-safety.de existiert
@@ -275,8 +275,8 @@ Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
 Stand 13.10.2026: Look 3, Farbwelten, Layouts je Marke und Zertifikate sind
 freigegeben (`docs/DECISIONS.md` Punkte 26 bis 33). AKRO Group ist gebaut.
 
-1. **AKRO Group veröffentlichen** — Upload in den Strato-Webspace, danach
-   über die Indexierung entscheiden.
+1. **AKRO Group veröffentlichen** — Upload in den Strato-Webspace;
+   anschließend optional Sitemap in der Google Search Console einreichen.
 2. **AKRO Sicherheit im Look 3 umbauen** — Layout „Leitstelle“ aus
    `Test-Design/2026-10-13-layouts-look3/sicherheit.html`.
 3. **Inhaltsprüfung** — Referenzfreigaben, Bewacherregister-ID,

@@ -11,10 +11,10 @@ export const SITE_URL = 'https://akro-group.de';
 
 /**
  * Schalter für die Suchmaschinen-Indexierung der ganzen Website.
- * false setzt auf jeder Seite noindex, nofollow — wie beim bisherigen
- * Platzhalter. Erst nach ausdrücklicher Freigabe auf true stellen.
+ * false setzt auf jeder Seite noindex, nofollow und leert die Sitemap.
+ * Am 13.10.2026 vom Auftraggeber freigegeben.
  */
-export const INDEXIERBAR = false;
+export const INDEXIERBAR = true;
 
 export const firma = {
   name: 'AKRO GmbH',
@@ -27,6 +27,7 @@ export const firma = {
   telefon: '0228 18456685',
   telefonHref: 'tel:+4922818456685',
   telefonSchema: '+4922818456685',
+  /** Empfang am 13.10.2026 vom Auftraggeber bestätigt */
   email: 'info@akro-group.de',
 } as const;
 
@@ -70,12 +71,13 @@ export const sparten: Sparte[] = [
 
 /**
  * Zertifizierungen — am 13.10.2026 vom Auftraggeber als gültig und mit den
- * Originalen abgeglichen bestätigt. Bezeichnungen unverändert vom Platzhalter.
+ * Originalen abgeglichen bestätigt, Bezeichnung von 45001 am selben Tag
+ * auf DIN EN ISO korrigiert.
  */
 export const zertifikate = [
   { norm: 'DIN', nummer: '77200-1', bereich: 'Sicherheitsdienstleistungen', text: 'Geprüfte Einsatz- und Objektorganisation.', symbol: 'schildGross' },
   { norm: 'Standard', nummer: 'SCC**', bereich: 'Sicherheit im Industrieeinsatz', text: 'Systematische Sicherheitsprozesse für anspruchsvolle Einsätze.', symbol: 'helm' },
   { norm: 'DIN EN ISO', nummer: '9001', bereich: 'Qualitätsmanagement', text: 'Klare Abläufe und nachvollziehbare Dokumentation.', symbol: 'dokument' },
-  { norm: 'DIN ISO', nummer: '45001', bereich: 'Arbeitsschutzmanagement', text: 'Arbeitsrisiken systematisch erkennen und reduzieren.', symbol: 'person' },
+  { norm: 'DIN EN ISO', nummer: '45001', bereich: 'Arbeitsschutzmanagement', text: 'Arbeitsrisiken systematisch erkennen und reduzieren.', symbol: 'person' },
   { norm: 'DIN EN ISO', nummer: '14001', bereich: 'Umweltmanagement', text: 'Umweltaspekte in der Leistungserbringung berücksichtigen.', symbol: 'blatt' },
 ] as const;

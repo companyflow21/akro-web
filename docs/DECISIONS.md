@@ -128,8 +128,8 @@ Vom Auftraggeber am 13.10.2026 freigegeben:
     Multiservice-Anbieter auf; die gemeinsame Seite entsteht vor den drei
     Sparten. Ersetzt die Reihenfolge in `CLAUDE.md` §4.
 31. **Zertifizierungen bestätigt.** DIN 77200-1, SCC**, DIN EN ISO 9001,
-    DIN ISO 45001 und DIN EN ISO 14001 sind laut Auftraggeber gültig und mit
-    den Originalen abgeglichen und dürfen öffentlich dargestellt werden.
+    DIN EN ISO 45001 und DIN EN ISO 14001 sind laut Auftraggeber gültig und
+    mit den Originalen abgeglichen und dürfen öffentlich dargestellt werden.
 32. **Mobile Kontaktleiste.** Auf dem Handy steht am unteren Rand dauerhaft
     eine Leiste mit „Anrufen“ und einer Anfrage- beziehungsweise
     E-Mail-Schaltfläche. Damit ist der offene Punkt zur mobilen Darstellung
@@ -137,6 +137,9 @@ Vom Auftraggeber am 13.10.2026 freigegeben:
 33. **Layout per Komponenten-CSS.** Die markenspezifischen Layouts werden mit
     Astro-Komponentenstilen gebaut; Tailwind bleibt eingebunden und liefert
     die Grundformatierung. Gemeinsames liegt in `marken.css`.
+34. **akro-group.de darf indexiert werden.** Freigegeben am 13.10.2026;
+    `info@akro-group.de` empfängt E-Mails und ist die Kontaktadresse der
+    Group-Seite.
 
 ## Offene beziehungsweise blockierte Entscheidungen
 
