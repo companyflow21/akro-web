@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AKRO Service – Layoutvorschau</title>
+<link rel="stylesheet" href="basis.css">
+<style>
+:root{--paper:#ebf3ee;--ink:#0f2219;--muted:#3d5a4b;--line:#c3d8cb;--brand:#11734b;--mid:#0c5f3e;--deep:#073d29;--mint:#d6efe0;--mint-2:#c4e8d3;--hell:#86efac;
+--a1:#b6f5cf;--a2:#4fd18b;--a3:#0a5236;--a4:#021a10;--glow:#34d399;--edge:#e3fff0;--aline:#9be8bf;
+--leiste:#0f2219;--leiste-text:#e8fbf0;--leiste-knopf:#86efac;--leiste-knopf-text:#0f2219}
+.kopf{display:flex;align-items:center;gap:24px;height:100px}
+.marke{display:flex;align-items:center;gap:16px}.marke img{width:132px}.marke span{padding-left:16px;border-left:1px solid var(--line);font-size:15px;font-weight:600;color:var(--brand)}
+.menue{display:flex;gap:4px;margin-left:auto;padding:5px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:500}
+.menue a{padding:9px 16px;border-radius:999px}.menue a:hover{background:var(--mint)}
+.kopf-knopf{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;background:var(--brand);color:#fff;font-size:14px;font-weight:600}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(200px,auto);gap:14px}
+.feld{position:relative;overflow:hidden;border-radius:28px;padding:30px}
+.feld.titel{grid-column:span 2;grid-row:span 2;background:#fff;border:1px solid var(--line);padding:44px 44px 40px;display:flex;flex-direction:column}
+.feld.titel .notiz{display:inline-flex;align-self:flex-start;gap:8px;align-items:center;padding:7px 13px;border-radius:999px;background:var(--mint);font-size:13px;font-weight:600;color:var(--brand)}
+.feld.titel h1{margin:26px 0 18px;font-size:clamp(50px,4.8vw,72px);line-height:1.02;letter-spacing:-.055em;font-weight:560}
+.feld.titel p{max-width:430px;font-size:17px;line-height:1.7;color:var(--muted)}
+.feld.titel .knopf{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:12px;padding:15px 22px;border-radius:999px;background:var(--brand);color:#fff;font-size:15px;font-weight:600}
+.feld.kunstfeld{grid-column:span 2;background:linear-gradient(135deg,#16834f,var(--mid) 50%,var(--deep));min-height:280px}
+.feld.kunstfeld .kunst{position:absolute;width:76%;height:150%;right:-6%;top:-18%}
+.feld.kunstfeld p{position:relative;z-index:1;max-width:240px;color:#e8fbf0;font-size:22px;line-height:1.25;letter-spacing:-.03em;font-weight:560}
+.feld.leistung{background:var(--mint);display:flex;flex-direction:column}
+.feld.leistung.b{background:var(--mint-2)}
+.feld.leistung .ico{width:48px;height:48px;padding:11px;border-radius:14px;background:#fff;color:var(--brand)}
+.feld.leistung h2{margin-top:auto;font-size:22px;letter-spacing:-.03em;font-weight:600}
+.feld.leistung p{font-size:14px;color:var(--muted);margin-top:4px}
+.feld.dunkel{background:var(--ink);color:#e8fbf0;display:flex;flex-direction:column}
+.feld.dunkel small{font-size:12px;color:#9fc4b1}
+.feld.dunkel a{margin-top:auto;font-size:26px;letter-spacing:-.03em}
+.feld.aussage{grid-column:span 2;background:#fff;border:1px solid var(--line);display:flex;align-items:center;gap:22px}
+.feld.aussage .ico{width:56px;height:56px;padding:13px;border-radius:50%;background:var(--hell);color:var(--deep)}
+.feld.aussage p{font-size:22px;line-height:1.3;letter-spacing:-.03em;font-weight:560;max-width:430px}
+.ablauf{padding:96px 0 88px}
+.ablauf h2{font-size:40px;letter-spacing:-.045em;line-height:1.12;font-weight:560;text-align:center;margin-bottom:40px}
+.pillen{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.pille{display:flex;align-items:center;gap:14px;padding:12px 22px 12px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:16px;font-weight:500}
+.pille b{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;font-size:14px}
+.kontakt{border-radius:32px;background:linear-gradient(120deg,var(--brand),var(--deep));color:#fff;padding:56px;display:flex;justify-content:space-between;align-items:center;gap:40px;margin-bottom:28px}
+.kontakt h2{font-size:40px;letter-spacing:-.045em;line-height:1.12;font-weight:550}
+.kontakt a{display:inline-flex;align-items:center;gap:14px;padding:18px 26px;border-radius:999px;background:var(--hell);color:var(--ink);font-size:22px;font-weight:600;letter-spacing:-.02em}
+.fuss{display:flex;justify-content:space-between;padding:20px 0 36px;font-size:13px;color:var(--muted)}.fuss nav{display:flex;gap:22px}
+@media(max-width:720px){
+ .kopf{height:74px;gap:12px}.marke img{width:100px}.marke span{padding-left:12px;font-size:13px}
+ .kopf-knopf{margin-left:auto;width:44px;height:44px;padding:0;justify-content:center}.kopf-knopf span{display:none}
+ .bento{grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:10px}
+ .feld{border-radius:22px;padding:18px}
+ .feld.titel{grid-column:span 2;grid-row:auto;padding:26px 22px 24px}
+ .feld.titel h1{font-size:clamp(40px,11.5vw,52px);margin:18px 0 12px}
+ .feld.titel p{font-size:15px}
+ .feld.titel .knopf{display:none}
+ .feld.kunstfeld{grid-column:span 2;min-height:170px}
+ .feld.kunstfeld .kunst{width:280px;height:290px;right:-118px;top:-50px}
+ .feld.kunstfeld p{font-size:18px;max-width:170px}
+ .feld.leistung{min-height:160px}
+ .feld.leistung .ico{width:42px;height:42px;padding:9px}
+ .feld.leistung h2{font-size:18px;margin-top:22px}.feld.leistung p{font-size:13px}
+ .feld.dunkel{min-height:160px}.feld.dunkel a{font-size:19px;margin-top:22px}
+ .feld.aussage{grid-column:span 2;gap:14px}.feld.aussage .ico{width:46px;height:46px;padding:11px;flex:none}.feld.aussage p{font-size:17px}
+ .ablauf{padding:56px 0 44px}.ablauf h2{font-size:28px;text-align:left;margin-bottom:22px}
+ .pillen{flex-direction:column;align-items:stretch}
+ .kontakt{flex-direction:column;align-items:flex-start;padding:30px 22px;border-radius:24px;gap:20px}
+ .kontakt h2{font-size:28px}.kontakt a{font-size:19px;width:100%;justify-content:center}
+ .fuss{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<p class="vorschau-hinweis">Layoutvorschau · Beispieltexte</p>
+<header class="kopf wrap">
+ <a class="marke" href="#"><img src="logos/akro-service.svg" width="1025" height="263" alt="AKRO"><span>Service</span></a>
+ <nav class="menue nur-desktop"><a href="#leistungen">Leistungen</a><a href="#ablauf">Ablauf</a><a href="#">Unternehmen</a><a href="#">Karriere</a></nav>
+ <a class="kopf-knopf" href="#kontakt" aria-label="Anfrage"><span>Anfrage</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+</header>
+<main>
+ <section class="wrap bento" id="leistungen" aria-labelledby="titel">
+  <div class="feld titel">
+   <p class="notiz">Reinigung · Logistik · Transport</p>
+   <h1 id="titel">Service, auf den Verlass ist.</h1>
+   <p>Wir übernehmen Reinigung, Logistik und Transport für Ihren Betrieb – eigenverantwortlich organisiert und durchgeführt.</p>
+   <a class="knopf" href="#kontakt">Anfrage stellen <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+  </div>
+  <div class="feld kunstfeld"><p>Alles aus einer Hand. Planbar und dokumentiert.</p><svg class="kunst" viewBox="0 0 640 660" fill="none" aria-hidden="true">
+<defs>
+<linearGradient id="ff-v" x1="188" y1="120" x2="508" y2="570" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a1)" stop-opacity=".78"/><stop offset=".5" style="stop-color:var(--a2)" stop-opacity=".26"/><stop offset="1" style="stop-color:var(--a3)" stop-opacity=".5"/></linearGradient>
+<linearGradient id="fs-v" x1="220" y1="280" x2="510" y2="440" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a2)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--a4)" stop-opacity=".7"/></linearGradient>
+<linearGradient id="ed-v" x1="120" y1="80" x2="600" y2="550" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--edge)" stop-opacity=".9"/><stop offset="1" style="stop-color:var(--a1)" stop-opacity=".12"/></linearGradient>
+<radialGradient id="gl-v"><stop style="stop-color:var(--glow)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--glow)" stop-opacity="0"/></radialGradient>
+<filter id="sh-v" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+<g id="po-v">
+<path d="M182 142 327 70 498 169 498 490 353 572 182 474Z" fill="url(#fs-v)"/>
+<path d="m182 142 171 99 0 331-171-98Zm34 63v248l103 60V265Z" fill="url(#ff-v)" fill-rule="evenodd" stroke="url(#ed-v)" stroke-width="1.3"/>
+<path d="m182 142 145-72 171 99-145 72Z" style="fill:var(--a1)" fill-opacity=".26" stroke="url(#ed-v)" stroke-width="1.2"/>
+<path d="m353 241 145-72v321l-145 82Z" style="fill:var(--a4)" fill-opacity=".36" stroke="url(#ed-v)" stroke-width="1.2"/>
+<path d="m216 205 103 60v248l-103-60Z" style="fill:var(--a3)" fill-opacity=".4" stroke="url(#ed-v)"/>
+<path d="m216 453 103-54V265M319 399l-64-37" style="stroke:var(--aline)" stroke-opacity=".4"/>
+<path d="m183 144 169 98v328" style="stroke:var(--edge)" stroke-opacity=".66" stroke-width="1.6"/>
+</g>
+</defs>
+<ellipse cx="362" cy="345" rx="300" ry="310" fill="url(#gl-v)"/>
+<g style="stroke:var(--aline)" stroke-opacity=".13" stroke-width=".7"><path d="m18 441 350 202 283-161M1 483l278 160 361-208M68 402l414 239M114 374l446 257M164 347l448 259M216 319l428 247M270 292l360 208M91 601l469-270M37 570l469-270M4 526l448-259"/></g>
+<ellipse cx="370" cy="557" rx="168" ry="36" style="fill:var(--a4)" fill-opacity=".6" filter="url(#sh-v)"/>
+<g transform="translate(176 12) scale(.73)" opacity=".65"><use href="#po-v"/></g>
+<g transform="translate(71 55) scale(.8)" opacity=".82"><use href="#po-v"/></g>
+<g transform="translate(-44 94) scale(.87)"><use href="#po-v"/></g>
+<g style="stroke:var(--edge)" stroke-opacity=".45"><path d="M493 118h57v57M96 498v42h43"/><path d="M546 287h10m-5-5v10M130 212h10m-5-5v10"/></g>
+</svg></div>
+  <article class="feld leistung"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12Z"/><path d="M31 27c.5 3 1.5 4 4 4.5-2.5.5-3.5 1.5-4 4.5-.5-3-1.5-4-4-4.5 2.5-.5 3.5-1.5 4-4.5Z"/></svg><h2>Reinigung</h2><p>Unterhalt und Sonderreinigung</p></article>
+  <article class="feld leistung b"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 5 14 8v15l-14 8-14-8V13Z"/><path d="m6 13 14 8 14-8M20 21v15M13 9l14 8v7"/></svg><h2>Logistik</h2><p>Lager und Warenfluss</p></article>
+  <article class="feld leistung b"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 10h20v17H4ZM24 16h7l5 6v5H24Z"/><circle cx="11" cy="30" r="3"/><circle cx="29" cy="30" r="3"/></svg><h2>Transport</h2><p>Planbare Fahrten</p></article>
+  <div class="feld dunkel"><small>Direkt anrufen</small><a href="tel:+4922818456685">0228 18456685</a></div>
+  <div class="feld aussage"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><path d="m9 21 7 7 15-16"/></svg><p>Eigenverantwortlich organisiert – Sie haben einen festen Ansprechpartner.</p></div>
+ </section>
+ <section class="wrap ablauf" id="ablauf" aria-labelledby="a-titel">
+  <h2 id="a-titel">So beginnt die Zusammenarbeit.</h2>
+  <div class="pillen"><span class="pille"><b>1</b>Bedarf schildern</span><span class="pille"><b>2</b>Termin vor Ort</span><span class="pille"><b>3</b>Angebot erhalten</span><span class="pille"><b>4</b>Start nach Plan</span></div>
+ </section>
+ <section class="wrap kontakt" id="kontakt" aria-labelledby="k-titel"><h2 id="k-titel">Was dürfen wir<br>für Sie übernehmen?</h2><a href="tel:+4922818456685"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> 0228 18456685</a></section>
+</main>
+<footer class="wrap fuss"><span>AKRO GmbH · AKRO Service</span><nav><a href="#">Impressum</a><a href="#">Datenschutz</a></nav></footer>
+<nav class="aktionsleiste" aria-label="Schnellkontakt"><a class="leise" href="tel:+4922818456685"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Anrufen</a><a class="laut" href="#kontakt"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg> Anfrage stellen</a></nav>
+</body>
+</html>

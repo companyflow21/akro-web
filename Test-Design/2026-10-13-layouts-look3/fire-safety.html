@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AKRO Fire & Safety – Layoutvorschau</title>
+<link rel="stylesheet" href="basis.css">
+<style>
+:root{--paper:#f6efea;--ink:#24140f;--muted:#5c4339;--line:#e2cfc4;--brand:#b3290e;--mid:#96220d;--deep:#5e1509;--glut:#ffb347;--band:#2b1712;
+--a1:#ffc59a;--a2:#ff7a45;--a3:#8f1f0b;--a4:#2e0802;--glow:#ff7b3a;--edge:#ffe7d4;--aline:#ffb894;
+--leiste:#2b1712;--leiste-text:#fff1e8;--leiste-knopf:#b3290e;--leiste-knopf-text:#fff}
+.signal{height:8px;background:repeating-linear-gradient(-45deg,var(--brand) 0 14px,var(--glut) 14px 28px)}
+.kopf{display:flex;align-items:center;gap:28px;height:96px}
+.marke{display:flex;align-items:center;gap:16px}.marke img{width:132px}.marke span{padding-left:16px;border-left:1px solid var(--line);font-size:15px;font-weight:700;color:var(--brand);letter-spacing:-.01em}
+.menue{display:flex;gap:30px;margin-left:auto;font-size:14px;font-weight:500}.menue a:hover{color:var(--brand)}
+.kopf-knopf{display:inline-flex;align-items:center;gap:12px;padding:12px 18px;background:var(--brand);color:#fff;font-size:14px;font-weight:600;clip-path:polygon(0 0,100% 0,100% 70%,90% 100%,0 100%)}
+.held{display:grid;grid-template-columns:1fr minmax(0,.9fr);min-height:620px}
+.held-text{padding:72px 64px 72px max(48px,calc((100vw - 1344px)/2))}
+.chip{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--brand)}
+.chip i{width:8px;height:8px;background:var(--glut);transform:rotate(45deg)}
+.held h1{margin:28px 0 26px;font-size:clamp(60px,6.6vw,104px);line-height:.96;letter-spacing:-.06em;font-weight:650}
+.held h1 em{font-style:normal;color:var(--brand)}
+.held p.lead{max-width:470px;font-size:18px;line-height:1.7;color:var(--muted)}
+.knoepfe{display:flex;gap:12px;margin-top:34px}
+.knopf{display:inline-flex;align-items:center;gap:12px;padding:16px 22px;font-size:15px;font-weight:600}
+.knopf.voll{background:var(--brand);color:#fff}.knopf.rand{border:1.5px solid var(--ink)}
+.held-flaeche{position:relative;overflow:hidden;background:linear-gradient(160deg,#c2410c 0%,var(--mid) 45%,var(--deep) 100%);color:#fff;border-bottom-left-radius:56px}
+.held-flaeche .kunst{position:absolute;width:118%;height:118%;left:-14%;top:-6%}
+.held-flaeche ul{position:absolute;left:40px;right:40px;bottom:36px;display:flex;flex-wrap:wrap;gap:8px}
+.held-flaeche li{padding:8px 12px;border:1px solid #ffffff4d;background:#00000026;font-size:13px;font-weight:500}
+.leistungen{padding:96px 0 80px}
+.kopfzeile{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:40px}
+.kopfzeile h2,.umfeld h2,.kontakt h2{font-size:44px;line-height:1.05;letter-spacing:-.05em;font-weight:650}
+.kopfzeile p{max-width:380px;color:var(--muted);font-size:15px}
+.kacheln{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:k}
+.kachel{counter-increment:k;position:relative;padding:26px 24px 28px;background:#fff;border-top:4px solid var(--brand);box-shadow:0 1px 0 var(--line)}
+.kachel:before{content:counter(k,decimal-leading-zero);position:absolute;top:18px;right:20px;font-size:44px;font-weight:700;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px #e2b9a8}
+.kachel .ico{width:44px;height:44px;padding:9px;background:#fbe0d3;color:var(--brand);margin-bottom:40px}
+.kachel h3{font-size:21px;letter-spacing:-.025em;font-weight:650;margin-bottom:8px}.kachel p{font-size:14px;line-height:1.7;color:var(--muted)}
+.umfeld{background:var(--band);color:#fff;padding:80px 0;position:relative;overflow:hidden}
+.umfeld:after{content:"";position:absolute;right:0;top:0;width:8px;height:100%;background:repeating-linear-gradient(-45deg,var(--brand) 0 14px,var(--glut) 14px 28px)}
+.umfeld .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center}
+.umfeld p.notiz{color:var(--glut);font-size:13px;font-weight:600;margin-bottom:14px}
+.umfeld ul{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.umfeld li{display:flex;align-items:center;gap:12px;padding:18px 18px;background:#3a211a;border:1px solid #5e3a2e;font-size:16px}
+.umfeld li:before{content:"";width:8px;height:8px;background:var(--glut);transform:rotate(45deg);flex:none}
+.kontakt{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;padding:84px 0}
+.kontakt .tel{display:inline-flex;align-items:center;gap:16px;padding:22px 28px;background:var(--brand);color:#fff;font-size:30px;letter-spacing:-.03em;font-weight:600}
+.fuss{display:flex;justify-content:space-between;padding:22px 0 36px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.fuss nav{display:flex;gap:22px}
+@media(max-width:720px){
+ .kopf{height:72px;gap:12px}.marke img{width:100px}.marke span{padding-left:12px;font-size:13px}
+ .kopf-knopf{margin-left:auto;width:44px;height:44px;padding:0;justify-content:center;clip-path:none}.kopf-knopf span{display:none}
+ .held{display:block;min-height:0}
+ .held-text{padding:28px 20px 30px}
+ .held h1{font-size:clamp(46px,13.5vw,60px);margin:20px 0 16px}
+ .held p.lead{font-size:16px}
+ .knoepfe{display:none}
+ .held-flaeche{height:250px;margin-left:20px;border-bottom-left-radius:36px}
+ .held-flaeche .kunst{width:330px;height:340px;left:auto;right:-40px;top:-50px}
+ .held-flaeche ul{left:16px;right:16px;bottom:16px;gap:6px}
+ .held-flaeche li{font-size:12px;padding:6px 9px}
+ .leistungen{padding:56px 0 48px}
+ .kopfzeile{display:block;margin-bottom:24px}.kopfzeile p{margin-top:12px}
+ .kopfzeile h2,.umfeld h2,.kontakt h2{font-size:32px}
+ .kacheln{grid-template-columns:1fr 1fr;gap:10px}
+ .kachel{padding:18px 16px 20px}
+ .kachel:before{font-size:30px;top:12px;right:12px}
+ .kachel .ico{width:40px;height:40px;margin-bottom:22px}
+ .kachel h3{font-size:17px}.kachel p{font-size:13px}
+ .umfeld{padding:52px 0}.umfeld .wrap{grid-template-columns:1fr;gap:26px}
+ .umfeld ul{grid-template-columns:1fr}
+ .kontakt{grid-template-columns:1fr;gap:20px;padding:52px 0}
+ .kontakt .tel{font-size:24px;padding:18px 20px;justify-content:center}
+ .fuss{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<p class="vorschau-hinweis">Layoutvorschau · Beispieltexte</p>
+<div class="signal" aria-hidden="true"></div>
+<header class="kopf wrap">
+ <a class="marke" href="#"><img src="logos/akro-fire-safety.svg" width="1025" height="263" alt="AKRO"><span>Fire &amp; Safety</span></a>
+ <nav class="menue nur-desktop"><a href="#leistungen">Leistungen</a><a href="#umfeld">Einsatzumfeld</a><a href="#">Unternehmen</a><a href="#">Karriere</a></nav>
+ <a class="kopf-knopf" href="#kontakt" aria-label="Einsatz anfragen"><span>Einsatz anfragen</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+</header>
+<main>
+ <section class="held" aria-labelledby="titel">
+  <div class="held-text">
+   <p class="chip"><i></i>Brandschutz und HSE im Industrieumfeld</p>
+   <h1 id="titel">Brandschutz, der <em>mitdenkt.</em></h1>
+   <p class="lead">Brandwachen, Sicherungsposten und Gasmessung für Industrieanlagen, Baustellen und Veranstaltungen – eigenverantwortlich organisiert.</p>
+   <div class="knoepfe"><a class="knopf voll" href="#kontakt">Einsatz anfragen <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a class="knopf rand" href="tel:+4922818456685"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> 0228 18456685</a></div>
+  </div>
+  <div class="held-flaeche"><svg class="kunst" viewBox="0 0 640 660" fill="none" aria-hidden="true">
+<defs>
+<linearGradient id="ff-f" x1="188" y1="120" x2="508" y2="570" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a1)" stop-opacity=".78"/><stop offset=".5" style="stop-color:var(--a2)" stop-opacity=".26"/><stop offset="1" style="stop-color:var(--a3)" stop-opacity=".5"/></linearGradient>
+<linearGradient id="fs-f" x1="220" y1="280" x2="510" y2="440" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a2)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--a4)" stop-opacity=".7"/></linearGradient>
+<linearGradient id="ed-f" x1="120" y1="80" x2="600" y2="550" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--edge)" stop-opacity=".9"/><stop offset="1" style="stop-color:var(--a1)" stop-opacity=".12"/></linearGradient>
+<radialGradient id="gl-f"><stop style="stop-color:var(--glow)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--glow)" stop-opacity="0"/></radialGradient>
+<filter id="sh-f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+<g id="po-f">
+<path d="M182 142 327 70 498 169 498 490 353 572 182 474Z" fill="url(#fs-f)"/>
+<path d="m182 142 171 99 0 331-171-98Zm34 63v248l103 60V265Z" fill="url(#ff-f)" fill-rule="evenodd" stroke="url(#ed-f)" stroke-width="1.3"/>
+<path d="m182 142 145-72 171 99-145 72Z" style="fill:var(--a1)" fill-opacity=".26" stroke="url(#ed-f)" stroke-width="1.2"/>
+<path d="m353 241 145-72v321l-145 82Z" style="fill:var(--a4)" fill-opacity=".36" stroke="url(#ed-f)" stroke-width="1.2"/>
+<path d="m216 205 103 60v248l-103-60Z" style="fill:var(--a3)" fill-opacity=".4" stroke="url(#ed-f)"/>
+<path d="m216 453 103-54V265M319 399l-64-37" style="stroke:var(--aline)" stroke-opacity=".4"/>
+<path d="m183 144 169 98v328" style="stroke:var(--edge)" stroke-opacity=".66" stroke-width="1.6"/>
+</g>
+</defs>
+<ellipse cx="362" cy="345" rx="300" ry="310" fill="url(#gl-f)"/>
+<g style="stroke:var(--aline)" stroke-opacity=".13" stroke-width=".7"><path d="m18 441 350 202 283-161M1 483l278 160 361-208M68 402l414 239M114 374l446 257M164 347l448 259M216 319l428 247M270 292l360 208M91 601l469-270M37 570l469-270M4 526l448-259"/></g>
+<ellipse cx="370" cy="557" rx="168" ry="36" style="fill:var(--a4)" fill-opacity=".6" filter="url(#sh-f)"/>
+<g transform="translate(176 12) scale(.73)" opacity=".65"><use href="#po-f"/></g>
+<g transform="translate(71 55) scale(.8)" opacity=".82"><use href="#po-f"/></g>
+<g transform="translate(-44 94) scale(.87)"><use href="#po-f"/></g>
+<g style="stroke:var(--edge)" stroke-opacity=".45"><path d="M493 118h57v57M96 498v42h43"/><path d="M546 287h10m-5-5v10M130 212h10m-5-5v10"/></g>
+</svg><ul><li>Brandwachen</li><li>Sicherungsposten</li><li>Gasmessung</li><li>PSAgA</li></ul></div>
+ </section>
+ <section class="leistungen wrap" id="leistungen" aria-labelledby="l-titel">
+  <div class="kopfzeile"><h2 id="l-titel">Vier Leistungen.<br>Ein Einsatzleiter.</h2><p>Jede Leistung einzeln buchbar – oder kombiniert für Revisionen und Stillstände.</p></div>
+  <div class="kacheln"><article class="kachel"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><path d="M21 4c2 8 10 11 10 20a11 11 0 0 1-22 0c0-5 3-10 7-14 0 6 2 8 4 9 3-4 3-9 1-15Z"/><path d="M20 24c-3 3-4 5-4 7a4 4 0 0 0 8 0c0-2-2-4-4-7Z"/></svg><h3>Brandwachen</h3><p>Brandsicherheitswache bei Heißarbeiten, Revisionen und Veranstaltungen.</p></article><article class="kachel"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 27v-3c0-7 5-12 11-13m4 0c6 1 11 6 11 13v3M17 18V8h6v10M5 27h30v5H5Z"/></svg><h3>Sicherungsposten</h3><p>Absicherung von Arbeiten in Anlagen und an Gleisbereichen.</p></article><article class="kachel"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="5" width="18" height="30" rx="3"/><path d="M15 11h10v7H15ZM16 25h2m4 0h2m-8 4h2m4 0h2"/></svg><h3>Gasmessung</h3><p>Freimessung und Überwachung vor und während der Arbeit.</p></article><article class="kachel"><svg class="ico" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="8" r="4"/><path d="M12 36V22l8-8 8 8v14M12 26h16M16 18l4 6 4-6"/></svg><h3>PSAgA</h3><p>Persönliche Schutzausrüstung gegen Absturz – Prüfung und Einsatz.</p></article></div>
+ </section>
+ <section class="umfeld" id="umfeld" aria-labelledby="u-titel">
+  <div class="wrap">
+   <div><p class="notiz">Einsatzumfeld</p><h2 id="u-titel">Dort, wo Arbeit Risiko bedeutet.</h2></div>
+   <ul><li>Industrieanlagen</li><li>Revisionen und Stillstände</li><li>Baustellen</li><li>Veranstaltungen</li></ul>
+  </div>
+ </section>
+ <section class="kontakt wrap" id="kontakt" aria-labelledby="k-titel"><h2 id="k-titel">Einsatz geplant?<br>Rufen Sie uns an.</h2><a class="tel" href="tel:+4922818456685"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> 0228 18456685</a></section>
+</main>
+<footer class="wrap fuss"><span>AKRO GmbH · AKRO Fire &amp; Safety</span><nav><a href="#">Impressum</a><a href="#">Datenschutz</a></nav></footer>
+<nav class="aktionsleiste" aria-label="Schnellkontakt"><a class="leise" href="tel:+4922818456685"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Anrufen</a><a class="laut" href="#kontakt"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg> Einsatz anfragen</a></nav>
+</body>
+</html>
