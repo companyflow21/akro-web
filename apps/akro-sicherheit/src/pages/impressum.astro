@@ -1,10 +1,9 @@
 ---
 /**
- * Impressum — ENTWURF, nicht veröffentlichungsreif.
- *
- * Mehrere Pflichtangaben fehlen und sind als [TODO] markiert. Ohne sie darf
- * die Seite nicht live gehen. Der Text ist zudem vor Veröffentlichung
- * rechtlich zu prüfen (CLAUDE.md §13).
+ * Impressum für akro-sicherheit.de, gleichlautend mit akro-group.de.
+ * Angaben vom Auftraggeber bestätigt (Impressum des Platzhalters, Stand
+ * 05.09.2026, und docs/DECISIONS.md). Vor Veröffentlichung rechtlich prüfen
+ * lassen (CLAUDE.md §13).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHead from '../components/SectionHead.astro';
@@ -19,7 +18,7 @@ const pfad = [
 
 <BaseLayout
 	title="Impressum | AKRO Sicherheit"
-	description="Impressum und Anbieterkennzeichnung der AKRO GmbH."
+	description="Impressum und Anbieterkennzeichnung der AKRO GmbH für AKRO Sicherheit."
 >
 	<Breadcrumb eintraege={pfad} />
 
@@ -27,66 +26,92 @@ const pfad = [
 		<div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
 			<SectionHead eyebrow="Rechtliches" titel="Impressum" as="h1" />
 
-			<div
-				class="mt-8 max-w-2xl border-2 border-dashed border-line bg-surface p-5 text-marginalie text-muted"
-			>
-				<span class="todo">ENTWURF</span>
-				Diese Seite ist unvollständig und rechtlich noch nicht geprüft. Vor der
-				Veröffentlichung müssen alle mit TODO markierten Angaben ergänzt und
-				der gesamte Text anwaltlich geprüft werden.
-			</div>
+			<div class="prose mt-10 max-w-2xl rounded-[16px] border border-line bg-surface p-6 md:p-10">
+			<h2>Angaben gemäß § 5 DDG</h2>
+			<p>
+			  AKRO GmbH<br />
+			  Saarwellinger Straße 25<br />
+			  66740 Saarlouis<br />
+			  Deutschland
+			</p>
+			<p>Niederlassung Bonn</p>
 
-			<div class="prose mt-10">
-				<h2>Angaben gemäß § 5 DDG</h2>
-				<p>
-					{marke.traeger}<br />
-					{marke.strasse}<br />
-					{marke.plz} {marke.ort}
-				</p>
+			<h2>Vertreten durch</h2>
+			<p>Geschäftsführer: Wagdee Al Muliki</p>
 
-				<h2>Vertreten durch</h2>
-				<p>Geschäftsführer: {marke.geschaeftsfuehrer}</p>
+			<h2>Kontakt</h2>
+			<p>
+			  Telefon: <a href="tel:+4922818456685">0228 18456685</a><br />
+			  E-Mail: <a href={`mailto:${marke.email}`}>{marke.email}</a>
+			</p>
 
-				<h2>Kontakt</h2>
-				<p>
-					Telefon: <a href={marke.telefonHref}>{marke.telefon}</a><br />
-					E-Mail: <a href={`mailto:${marke.email}`}>{marke.email}</a>
-				</p>
+			<h2>Registereintrag</h2>
+			<p>
+			  Eintragung im Handelsregister<br />
+			  Registergericht: Amtsgericht Saarbrücken<br />
+			  Registernummer: HRB 112267
+			</p>
 
-				<h2>Registereintrag</h2>
-				<p>
-					<span class="todo">TODO</span> Registergericht<br />
-					<span class="todo">TODO</span> Handelsregisternummer (HRB)
-				</p>
+			<h2>Umsatzsteuer-Identifikationsnummer</h2>
+			<p>
+			  Umsatzsteuer-Identifikationsnummer gemäß § 27 a
+			  Umsatzsteuergesetz:<br />
+			  DE463797867
+			</p>
 
-				<h2>Umsatzsteuer-Identifikationsnummer</h2>
-				<p>
-					<span class="todo">TODO</span> USt-IdNr. gemäß § 27a UStG.
-					Die Angabe „auf Anfrage" aus dem Altbestand ist nicht zulässig.
-				</p>
+			<h2>Erlaubnis nach § 34a Gewerbeordnung</h2>
+			<p>
+			  Die AKRO GmbH übt das Bewachungsgewerbe auf Grundlage der Erlaubnis
+			  nach § 34a Gewerbeordnung aus. Die Berufsbezeichnung
+			  „Bewachungsgewerbe“ wurde in der Bundesrepublik Deutschland
+			  verliehen.
+			</p>
+			<p>
+			  Erteilende und zuständige Aufsichtsbehörde:<br />
+			  Landkreis Saarlouis, Amt für öffentliche Sicherheit und Ordnung,
+			  Kaiser-Wilhelm-Straße 4, 66740 Saarlouis
+			</p>
+			<p>
+			  Maßgebliche berufsrechtliche Regelungen: § 34a Gewerbeordnung sowie
+			  die Bewachungsverordnung (BewachV), einsehbar unter <a href="https://www.gesetze-im-internet.de">gesetze-im-internet.de</a>.
+			</p>
 
-				<h2>Erlaubnis nach § 34a GewO</h2>
-				<p>
-					<span class="todo">TODO</span> Erteilende Behörde, Datum und
-					Aktenzeichen der Erlaubnis<br />
-					<span class="todo">TODO</span> Bewacherregister-Identifikationsnummer
-				</p>
+			<h2>Berufshaftpflichtversicherung</h2>
+			<p>Allianz Versicherungs-AG<br>Königinstraße 28<br>80802 München<br>Räumlicher Geltungsbereich: Deutschland</p>
 
-				<h2>Zuständige Aufsichtsbehörde</h2>
-				<p><span class="todo">TODO</span> Bezeichnung und Anschrift</p>
+			<h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+			<p>
+			  Wagdee Al Muliki<br />
+			  Saarwellinger Straße 25<br />
+			  66740 Saarlouis
+			</p>
 
-				<h2>Berufshaftpflichtversicherung</h2>
-				<p>
-					<span class="todo">TODO</span> Versicherer, Anschrift und räumlicher
-					Geltungsbereich
-				</p>
+			<h2>Streitbeilegung</h2>
+			<p>
+			  Wir sind nicht bereit und nicht verpflichtet, an
+			  Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+			  teilzunehmen.
+			</p>
 
-				<h2>Verbraucherstreitbeilegung</h2>
-				<p>
-					<span class="todo">TODO</span> Angabe zur Teilnahme oder
-					Nichtteilnahme an einem Streitbeilegungsverfahren vor einer
-					Verbraucherschlichtungsstelle
-				</p>
+			<h2>Haftung für Links</h2>
+			<p>
+			  Unser Angebot enthält Links zu externen Websites Dritter, auf deren
+			  Inhalte wir keinen Einfluss haben. Deshalb können wir für diese
+			  fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der
+			  verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+			  Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der
+			  Verlinkung auf mögliche Rechtsverstöße überprüft; rechtswidrige
+			  Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
+			</p>
+
+			<h2>Urheberrecht</h2>
+			<p>
+			  Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen
+			  Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
+			  Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der
+			  Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des
+			  jeweiligen Autors beziehungsweise Erstellers.
+			</p>
 			</div>
 		</div>
 	</section>

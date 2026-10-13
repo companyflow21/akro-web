@@ -1,0 +1,7 @@
+[
+  { "norm": "DIN", "nummer": "77200-1", "bereich": "Sicherheitsdienstleistungen", "text": "Geprüfte Einsatz- und Objektorganisation.", "symbol": "schildGross" },
+  { "norm": "Standard", "nummer": "SCC**", "bereich": "Sicherheit im Industrieeinsatz", "text": "Systematische Sicherheitsprozesse für anspruchsvolle Einsätze.", "symbol": "helm" },
+  { "norm": "DIN EN ISO", "nummer": "9001", "bereich": "Qualitätsmanagement", "text": "Klare Abläufe und nachvollziehbare Dokumentation.", "symbol": "dokument" },
+  { "norm": "DIN EN ISO", "nummer": "45001", "bereich": "Arbeitsschutzmanagement", "text": "Arbeitsrisiken systematisch erkennen und reduzieren.", "symbol": "person" },
+  { "norm": "DIN EN ISO", "nummer": "14001", "bereich": "Umweltmanagement", "text": "Umweltaspekte in der Leistungserbringung berücksichtigen.", "symbol": "blatt" }
+]

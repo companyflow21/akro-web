@@ -1,0 +1,73 @@
+---
+/**
+ * Zertifizierungen aus der gemeinsamen Quelle (docs/DECISIONS.md Punkt 31),
+ * im Stil „Leitstelle“: helle Karten mit Cyan-Symbol.
+ */
+import zertifikate from '@akro/assets/shared/certifications/zertifikate.json';
+
+const SYMBOLE: Record<string, string> = {
+  schildGross: '<path d="m32 15 14 6v12c0 9-6 15-14 20-8-5-14-11-14-20V21Z"/><path d="m25 33 5 5 10-12"/>',
+  helm: '<path d="M16 39v-5c0-8 5-14 12-16m8 0c7 2 12 8 12 16v5M27 29V17a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12M12 39h40v7H12ZM22 46v4h20v-4"/>',
+  dokument: '<rect x="15" y="14" width="34" height="38" rx="3"/><path d="m24 33 6 6 12-14"/>',
+  person: '<circle cx="32" cy="20" r="6"/><path d="M19 43v-4c0-7 6-12 13-12s13 5 13 12v4M25 35v9m14-9v9M13 35v6c0 8 9 13 19 16 10-3 19-8 19-16v-6"/>',
+  blatt: '<path d="M18 40C11 23 30 15 49 17c0 18-7 32-21 30-5 0-8-3-10-7ZM15 52l26-27M24 42V30m0 12h12"/>',
+};
+---
+
+<section id="zertifikate" class="bg-sand" aria-labelledby="zert-titel">
+	<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+		<div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+			<div class="rail max-w-2xl">
+				<p class="tech text-brand">Zertifizierungen</p>
+				<h2 id="zert-titel" class="mt-4 text-abschnitt">Geprüfte Standards für Ihren Auftrag.</h2>
+			</div>
+			<p class="max-w-sm text-klein text-muted">Zertifikate legen wir auf Anfrage vor.</p>
+		</div>
+
+		<ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+			{
+				zertifikate.map((z) => (
+					<li class="zert">
+						<svg class="zert-symbol" viewBox="0 0 64 64" aria-hidden="true" set:html={SYMBOLE[z.symbol]} />
+						<p class="tech text-muted">{z.norm}</p>
+						<p class="zert-nr">{z.nummer}</p>
+						<p class="text-klein font-semibold">{z.bereich}</p>
+						<p class="mt-1 text-marginalie text-muted">{z.text}</p>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.zert {
+		padding: 22px 20px 24px;
+		border: 1px solid var(--color-line);
+		border-radius: 14px;
+		background: var(--color-surface);
+	}
+
+	.zert-symbol {
+		width: 40px;
+		height: 40px;
+		margin-bottom: 16px;
+		padding: 7px;
+		border-radius: 10px;
+		background: #d6eef5;
+		fill: none;
+		stroke: #0b6e8a;
+		stroke-width: 2.6;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.zert-nr {
+		margin: 4px 0 10px;
+		font-family: var(--font-display);
+		font-size: 30px;
+		line-height: 1.1;
+		letter-spacing: -0.035em;
+		font-weight: 580;
+	}
+</style>

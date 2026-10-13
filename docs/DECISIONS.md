@@ -140,6 +140,14 @@ Vom Auftraggeber am 13.10.2026 freigegeben:
 34. **akro-group.de darf indexiert werden.** Freigegeben am 13.10.2026;
     `info@akro-group.de` empfängt E-Mails und ist die Kontaktadresse der
     Group-Seite.
+35. **Anfrage und Kontakt vorerst ohne Formular.** Bis die
+    Formulararchitektur nach `CLAUDE.md` §14 entschieden ist, führen Kontakt
+    und Anfrage zu Telefon und einer vorbereiteten E-Mail mit den Feldern des
+    bisherigen Anfrageformulars. So bleibt die Datenschutzerklärung („kein
+    Kontaktformular“) zutreffend.
+36. **Datenschutzerklärung setzt Hosting bei Strato voraus.** Wird eine
+    Website anderswo betrieben (etwa Vercel), muss Abschnitt „Hosting“ vor
+    dem Livegang angepasst werden.
 
 ## Offene beziehungsweise blockierte Entscheidungen
 

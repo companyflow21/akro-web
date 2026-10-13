@@ -27,3 +27,10 @@ nicht bildlich. Die Seite `/zertifizierungen` ist deshalb blockiert.
 
 Neutrale Textsiegel im AKRO-Design. Keine Logos der Zertifizierungsstelle,
 keine Zertifikatsnummern. Keine KI-Nachbildung.
+
+## Ergänzt am 13.10.2026
+
+- `zertifikate.json` – einzige Quelle für Bezeichnung, Bereich und Kurztext
+  der fünf Zertifizierungen. Vom Auftraggeber am 13.10.2026 als gültig und
+  mit den Originalen abgeglichen bestätigt (`docs/DECISIONS.md` Punkt 31).
+  `symbol` benennt das Liniensymbol, das jede App selbst zeichnet.

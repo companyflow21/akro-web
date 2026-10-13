@@ -1,3 +1,56 @@
 @import "tailwindcss";
 @import "@akro/design-system/tokens.css";
 @import "@akro/design-system/base.css";
+@import "@akro/design-system/marken.css";
+
+/*
+ * AKRO Sicherheit im Look 3, Layout „Leitstelle“ (docs/DECISIONS.md 26–28).
+ * Die Seiten verwenden die Tailwind-Namen aus tokens.css; hier bekommen sie
+ * die Werte der Farbwelt „Nachtblau und Cyan“ und Archivo als einzige
+ * Schrift. Alle Paare mindestens WCAG AA.
+ */
+@theme {
+  --color-ink: #061630;
+  --color-ink-2: #0a2448;
+  --color-ink-3: #1a3d66;
+  --color-sand: #edf1f5;
+  --color-sand-2: #e2e9f0;
+  --color-surface: #ffffff;
+  --color-line: #c4d0dc;
+  --color-fg: #0b1726;
+  --color-muted: #3a4a5c;
+  --color-deep: #071d3d;
+  --color-brand: #0d3b73;
+  --color-accent: #00c9e0;
+  --color-on-accent: #06162d;
+
+  --font-body: "Archivo", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+
+  --text-hero: clamp(2.6rem, 5.4vw, 5rem);
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.055em;
+  --text-hero--font-weight: 560;
+  --text-titel--letter-spacing: -0.045em;
+  --text-titel--font-weight: 560;
+  --text-abschnitt--letter-spacing: -0.035em;
+  --text-abschnitt--font-weight: 560;
+}
+
+@layer components {
+  .btn {
+    border-radius: 8px;
+  }
+
+  .card {
+    border-radius: 14px;
+  }
+
+  .card::before,
+  .card::after {
+    display: none;
+  }
+
+  .card:hover {
+    border-color: var(--color-brand);
+  }
+}

@@ -6,6 +6,9 @@
  * (platzhalter/LIESMICH.md, Stand 05.09.2026).
  */
 
+import zertifikateDaten from '@akro/assets/shared/certifications/zertifikate.json';
+import type { SymbolName } from './components/Icon.astro';
+
 /** Kanonische Domain: ohne www, wie der bisherige Platzhalter. */
 export const SITE_URL = 'https://akro-group.de';
 
@@ -70,14 +73,13 @@ export const sparten: Sparte[] = [
 ];
 
 /**
- * Zertifizierungen — am 13.10.2026 vom Auftraggeber als gültig und mit den
- * Originalen abgeglichen bestätigt, Bezeichnung von 45001 am selben Tag
- * auf DIN EN ISO korrigiert.
+ * Zertifizierungen aus der gemeinsamen Quelle in @akro/assets
+ * (docs/DECISIONS.md Punkt 31).
  */
-export const zertifikate = [
-  { norm: 'DIN', nummer: '77200-1', bereich: 'Sicherheitsdienstleistungen', text: 'Geprüfte Einsatz- und Objektorganisation.', symbol: 'schildGross' },
-  { norm: 'Standard', nummer: 'SCC**', bereich: 'Sicherheit im Industrieeinsatz', text: 'Systematische Sicherheitsprozesse für anspruchsvolle Einsätze.', symbol: 'helm' },
-  { norm: 'DIN EN ISO', nummer: '9001', bereich: 'Qualitätsmanagement', text: 'Klare Abläufe und nachvollziehbare Dokumentation.', symbol: 'dokument' },
-  { norm: 'DIN EN ISO', nummer: '45001', bereich: 'Arbeitsschutzmanagement', text: 'Arbeitsrisiken systematisch erkennen und reduzieren.', symbol: 'person' },
-  { norm: 'DIN EN ISO', nummer: '14001', bereich: 'Umweltmanagement', text: 'Umweltaspekte in der Leistungserbringung berücksichtigen.', symbol: 'blatt' },
-] as const;
+export const zertifikate = zertifikateDaten as ReadonlyArray<{
+  norm: string;
+  nummer: string;
+  bereich: string;
+  text: string;
+  symbol: SymbolName;
+}>;

@@ -2,7 +2,7 @@
  * Sitemap ohne zusätzliche Abhängigkeit.
  *
  * Enthält ausschließlich indexierbare Seiten. Bewusst NICHT enthalten:
- * /404 (noindex) und alle Routen unter /design-preview (Designexperiment).
+ * /404 (noindex).
  */
 import type { APIRoute } from 'astro';
 import { SITE_URL } from '../config';

@@ -46,7 +46,7 @@ const schritte = [
 			<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">
 				So läuft die Bewerbung
 			</h2>
-			<ol class="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+			<ol class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 				{
 					schritte.map((s) => (
 						<li class="bg-surface p-6">
@@ -71,12 +71,6 @@ const schritte = [
 				<a href={marke.telefonHref} class="text-brand">{marke.telefon}</a>
 				oder per E-Mail an
 				<a href={`mailto:${marke.email}`} class="text-brand">{marke.email}</a>.
-			</p>
-			<p class="mt-6 max-w-2xl text-marginalie text-muted">
-				<span class="todo">TODO</span>
-				Konkrete Stellenanzeigen, Anforderungsprofile und Angaben zu Vergütung
-				und Arbeitszeitmodellen ergänzen. Erst dann JobPosting-Markup auf der
-				jeweiligen Einzelanzeige einsetzen.
 			</p>
 		</div>
 	</section>

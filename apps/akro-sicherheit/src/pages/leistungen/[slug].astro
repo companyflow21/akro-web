@@ -143,11 +143,10 @@ const pfad = [
 					diese Tätigkeit erforderlichen Nachweise besitzen. Fehlt ein
 					Nachweis oder ist er abgelaufen, erfolgt kein Einsatz.
 				</p>
-				<p class="mt-4 text-marginalie text-muted">
-					<span class="todo">TODO</span>
-					Konkrete Qualifikationen, Unterrichtungs- und Sachkundenachweise
-					sowie Zertifizierungen ergänzen, sobald sie belegt und freigegeben
-					sind.
+				<p class="mt-4 text-klein leading-relaxed text-muted">
+					Die AKRO GmbH ist unter anderem nach DIN 77200-1 für
+					Sicherheitsdienstleistungen zertifiziert.
+					<a href="/#zertifikate" class="text-brand underline underline-offset-3">Alle Zertifizierungen</a>
 				</p>
 			</div>
 		</div>
@@ -171,7 +170,7 @@ const pfad = [
 					<h2 class="text-abschnitt font-semibold tracking-[-0.015em]">
 						Verwandte Leistungen
 					</h2>
-					<div class="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+					<div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 						{verwandt.map((l) => (
 							<ServiceCard leistung={l} />
 						))}

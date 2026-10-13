@@ -1,12 +1,11 @@
 ---
 /**
- * Strukturierte Angebotsanfrage.
+ * Angebotsanfrage per E-Mail.
  *
- * Das Feldschema entspricht bewusst dem des Altbestands
- * (docs/LEGACY-INVENTORY.md §3) — es ist fachlich erprobt und bildet
- * zugleich die Spezifikation für die spätere Anbindung.
- *
- * Kein Versandziel: Die Formulararchitektur ist laut CLAUDE.md §14 offen.
+ * Solange die Formulararchitektur offen ist (CLAUDE.md §14), öffnet die
+ * Anfrage eine vorbereitete E-Mail. Die Felder folgen dem erprobten Schema
+ * des Altbestands (docs/LEGACY-INVENTORY.md §3) und bleiben die
+ * Spezifikation für ein späteres Formular.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHead from '../components/SectionHead.astro';
@@ -20,7 +19,31 @@ const pfad = [
   { label: 'Anfrage', href: '/anfrage' },
 ];
 
-const feldKlasse = 'border border-line bg-surface px-3 py-2.5 text-klein';
+const angaben = [
+  { feld: 'Leistung', hinweis: `zum Beispiel ${leistungen[0].titel}` },
+  { feld: 'Einsatzort', hinweis: 'Anschrift oder Gelände' },
+  { feld: 'Zeitraum', hinweis: 'Beginn und, falls bekannt, Ende' },
+  { feld: 'Einsatzzeiten', hinweis: 'Tage und Uhrzeiten' },
+  { feld: 'Umfang', hinweis: 'zum Beispiel Anzahl der Posten oder Stunden' },
+  { feld: 'Kontakt', hinweis: 'Name, Unternehmen und Telefon für Rückfragen' },
+];
+
+const vorlage = [
+  'Leistung:',
+  'Einsatzort:',
+  'Beginn:',
+  'Ende:',
+  'Einsatzzeiten:',
+  'Umfang:',
+  '',
+  'Name:',
+  'Unternehmen:',
+  'Telefon:',
+].join('\n');
+
+const mailto = `mailto:${marke.email}?subject=${encodeURIComponent(
+  'Anfrage AKRO Sicherheit',
+)}&body=${encodeURIComponent(vorlage)}`;
 ---
 
 <BaseLayout
@@ -46,121 +69,74 @@ const feldKlasse = 'border border-line bg-surface px-3 py-2.5 text-klein';
 	</section>
 
 	<section class="border-y border-line bg-sand-2">
-		<div class="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-16">
-			<p class="border border-dashed border-line bg-surface p-4 text-marginalie text-muted">
-				<span class="todo">TODO</span>
-				Das Formular ist gestaltet, aber noch nicht angebunden. Bis zur
-				Anbindung erreichen Sie uns unter
-				<a href={marke.telefonHref} class="text-brand">{marke.telefon}</a>.
-			</p>
+		<div
+			class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:px-8 md:py-16 lg:grid-cols-[1fr_0.9fr] lg:gap-16"
+		>
+			<div>
+				<h2 class="text-abschnitt">Diese Angaben brauchen wir</h2>
+				<ul class="mt-6 grid gap-2.5">
+					{
+						angaben.map((a, i) => (
+							<li class="flex gap-4 rounded-[12px] border border-line bg-surface px-4 py-3.5">
+								<span class="tech mt-0.5 text-brand">{String(i + 1).padStart(2, '0')}</span>
+								<span class="text-klein">
+									<strong class="font-semibold">{a.feld}</strong>
+									<span class="text-muted"> – {a.hinweis}</span>
+								</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
 
-			<form class="mt-8 grid gap-6" aria-describedby="anfrage-hinweis">
-				<fieldset class="grid gap-5 border border-line bg-surface p-5">
-					<legend class="tech px-2 text-brand">Einsatz</legend>
-
-					<div class="grid gap-1.5">
-						<label for="service" class="tech text-muted">Leistung</label>
-						<select id="service" name="service" required class={feldKlasse}>
-							<option value="">Bitte wählen</option>
-							{
-								leistungen.map((l) => (
-									<option value={l.titel}>{l.titel}</option>
-								))
-							}
-							<option value="Sonstiges">Sonstiges</option>
-						</select>
-					</div>
-
-					<div class="grid gap-1.5">
-						<label for="description" class="tech text-muted">
-							Beschreibung des Bedarfs
-						</label>
-						<textarea
-							id="description"
-							name="description"
-							rows="5"
-							required
-							class={feldKlasse}></textarea>
-					</div>
-
-					<div class="grid gap-1.5">
-						<label for="location" class="tech text-muted">Einsatzort</label>
-						<input id="location" name="location" type="text" class={feldKlasse} />
-					</div>
-
-					<div class="grid gap-5 sm:grid-cols-2">
-						<div class="grid gap-1.5">
-							<label for="start_date" class="tech text-muted">Beginn</label>
-							<input id="start_date" name="start_date" type="date" class={feldKlasse} />
-						</div>
-						<div class="grid gap-1.5">
-							<label for="end_date" class="tech text-muted">Ende</label>
-							<input id="end_date" name="end_date" type="date" class={feldKlasse} />
-						</div>
-					</div>
-
-					<div class="grid gap-5 sm:grid-cols-2">
-						<div class="grid gap-1.5">
-							<label for="working_hours" class="tech text-muted">Einsatzzeiten</label>
-							<input id="working_hours" name="working_hours" type="text" class={feldKlasse} />
-						</div>
-						<div class="grid gap-1.5">
-							<label for="staff_count" class="tech text-muted">Personalbedarf</label>
-							<input id="staff_count" name="staff_count" type="text" class={feldKlasse} />
-						</div>
-					</div>
-				</fieldset>
-
-				<fieldset class="grid gap-5 border border-line bg-surface p-5">
-					<legend class="tech px-2 text-brand">Kontakt</legend>
-
-					<div class="grid gap-5 sm:grid-cols-2">
-						<div class="grid gap-1.5">
-							<label for="name" class="tech text-muted">Name</label>
-							<input id="name" name="name" type="text" autocomplete="name" required class={feldKlasse} />
-						</div>
-						<div class="grid gap-1.5">
-							<label for="company" class="tech text-muted">Unternehmen</label>
-							<input id="company" name="company" type="text" autocomplete="organization" class={feldKlasse} />
-						</div>
-					</div>
-
-					<div class="grid gap-5 sm:grid-cols-2">
-						<div class="grid gap-1.5">
-							<label for="email" class="tech text-muted">E-Mail</label>
-							<input id="email" name="email" type="email" autocomplete="email" required class={feldKlasse} />
-						</div>
-						<div class="grid gap-1.5">
-							<label for="phone" class="tech text-muted">Telefon</label>
-							<input id="phone" name="phone" type="tel" autocomplete="tel" class={feldKlasse} />
-						</div>
-					</div>
-
-					<div class="grid gap-1.5">
-						<label for="additional_info" class="tech text-muted">
-							Zusätzliche Informationen
-						</label>
-						<textarea id="additional_info" name="additional_info" rows="4" class={feldKlasse}></textarea>
-					</div>
-				</fieldset>
-
-				<div class="flex items-start gap-2.5">
-					<input id="dsgvo" name="dsgvo" type="checkbox" value="akzeptiert" required class="mt-1" />
-					<label for="dsgvo" class="text-marginalie text-muted">
-						Ich habe die <a href="/datenschutz" class="text-brand">Datenschutzerklärung</a>
-						gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung
-						der Anfrage einverstanden.
-					</label>
-				</div>
-
-				<p id="anfrage-hinweis" class="text-marginalie text-muted">
-					Der Versand ist noch nicht aktiv.
-				</p>
-
-				<button type="submit" class="btn btn--primary justify-self-start" disabled>
-					Anfrage senden
-				</button>
-			</form>
+			<div class="grid h-fit gap-3">
+				<a href={mailto} class="weg weg--voll">
+					<span class="tech">Anfrage per E-Mail</span>
+					<strong>{marke.email}</strong>
+					<span class="text-klein">Öffnet Ihr E-Mail-Programm mit vorbereiteten Feldern.</span>
+				</a>
+				<a href={marke.telefonHref} class="weg">
+					<span class="tech text-muted">Lieber anrufen</span>
+					<strong>{marke.telefon}</strong>
+					<span class="text-klein text-muted">Wir nehmen Ihre Angaben direkt auf.</span>
+				</a>
+			</div>
 		</div>
 	</section>
 </BaseLayout>
+
+<style>
+	.weg {
+		display: grid;
+		gap: 6px;
+		padding: 24px 24px 22px;
+		border: 1px solid var(--color-line);
+		border-radius: 16px;
+		background: var(--color-surface);
+		transition: border-color 0.18s, transform 0.18s;
+	}
+
+	.weg:hover {
+		border-color: var(--color-brand);
+		transform: translateY(-2px);
+	}
+
+	.weg strong {
+		font-family: var(--font-display);
+		font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+		line-height: 1.2;
+		letter-spacing: -0.03em;
+		font-weight: 560;
+		overflow-wrap: anywhere;
+	}
+
+	.weg--voll {
+		border-color: transparent;
+		background: var(--color-ink);
+		color: #e6eef7;
+	}
+
+	.weg--voll .tech {
+		color: var(--color-accent);
+	}
+</style>

@@ -84,8 +84,8 @@
   Überschriften beziehen ihre Stufe aus `base.css` und brauchen in den
   Seiten keine Utility-Klasse mehr.
 - In Seiten, Komponenten und `base.css` steht **kein einziger freier
-  Schriftgrößenwert** mehr. Ausgenommen sind die Seiten unter
-  `design-preview/`, die eine eigene, isolierte Vorschauwelt verwenden.
+  Schriftgrößenwert** mehr. Die Vorschauseiten unter `design-preview/` mit
+  eigener Vorschauwelt sind seit 13.10.2026 entfernt.
 
 ### Schriften
 
@@ -111,14 +111,12 @@
   Leistungsübersicht mit sieben Leistungsseiten aus `src/data/leistungen.ts`,
   Unternehmen, Referenzen, Karriere, Kontakt, Anfrage, Impressum,
   Datenschutz, 404 sowie `sitemap.xml` und `robots.txt`.
-- Impressum und Datenschutz tragen ein sichtbares **ENTWURF**-Banner; jede
-  fehlende Pflichtangabe ist einzeln als `TODO` im Seitentext markiert. Beide
-  sind rechtlich ungeprüft und so nicht veröffentlichungsfähig.
-- Unter `design-preview/` liegen vier Seiten mit `noindex, nofollow`, die
-  weder in der Navigation noch in der Sitemap auftauchen und zusätzlich über
-  `robots.txt` gesperrt sind. Darunter `design-preview/marken` als
-  Freigabevorlage, die alle vier Markenwelten am identischen Seitenaufbau
-  zeigt.
+- Seit 13.10.2026 **ohne sichtbare TODO- und ENTWURF-Hinweise.** Impressum
+  und Datenschutz tragen die bestätigten Angaben wie auf akro-group.de; die
+  Datenschutzerklärung ist um Bewerbungen per E-Mail ergänzt. Rechtliche
+  Prüfung steht für beide Websites weiter aus.
+- Die vier Vorschauseiten unter `design-preview/` (alter Entwurf) sind am
+  13.10.2026 entfernt; sie stehen in der Git-Historie.
 - **AKRO Group ist gebaut (13.10.2026)**, siehe Abschnitt Websitebau.
 - **Die Startseiten von Fire & Safety und Service sind unverändert**
   schlichte technische Vorschauseiten mit `noindex, nofollow`.
@@ -127,7 +125,7 @@
 
 - Am 13.10.2026 erneut geprüft: `npm ci` und `npm run build` für alle vier
   Workspaces laufen fehlerfrei durch, Ausgabe jeweils als statisches HTML in `apps/<app>/dist`.
-  `@akro/sicherheit` erzeugt 21 Seiten, `@akro/group` vier (Start,
+  `@akro/sicherheit` erzeugt 17 Seiten, `@akro/group` vier (Start,
   Impressum, Datenschutz, 404), die beiden übrigen je eine.
 - Im gebauten HTML steht **kein einziger externer Ladeverweis**. Im Browser
   gegengeprüft: null Netzwerkaufrufe an fremde Server.
@@ -237,8 +235,19 @@ Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
     Handy (390 px) kein seitliches Überlaufen. Gebaut rund 110 KB.
   - **Noch nicht veröffentlicht.** Der bisherige Live-Stand liegt als
     Rückfallebene unter `platzhalter/live-stand-2026-10-13/`.
-- **Für Fire & Safety und Service ist noch nichts gebaut;** AKRO Sicherheit
-  steht noch im alten, verworfenen Entwurf.
+- **AKRO Sicherheit im Look 3 „Leitstelle“ (13.10.2026):** neue Farbwerte und
+  Archivo als einzige Schrift über `src/styles/global.css`, dunkler Kopf mit
+  Logo in Weiß bis Cyan, Startseite mit Leistungsregister als Glasfläche und
+  Zertifikaten, Karten mit runden Ecken, mobile Kontaktleiste und
+  Menü ohne JavaScript.
+  - Kontakt und Anfrage ohne Formular: Telefon und vorbereitete E-Mail an
+    `info@akro-sicherheit.de` (`docs/DECISIONS.md` Punkt 35).
+  - Geprüft auf zehn Seiten am Computer und auf dem Handy: keine Fehler,
+    keine fremden Server, je Seite eine H1, kein seitliches Überlaufen.
+  - **Noch nicht veröffentlichbar:** Domainvariante (www oder nicht) und
+    Weiterleitungen der alten Adressen sind offen; akro-sicherheit.de leitet
+    derzeit per 301 auf akro-group.de.
+- **Für Fire & Safety und Service ist noch nichts gebaut.**
 
 ## Assets
 
@@ -249,9 +258,9 @@ Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
 - **Alle Ordner sind inhaltlich leer.** Jeder Ordner enthält eine `README.md`,
   die Bedarf, Bestand, Regeln und Blockaden beschreibt — auch damit Git die
   Struktur überhaupt versioniert.
-- Es wurde **kein einziges Bild übernommen, kopiert oder erzeugt**. Die
-  Logokopie unter `apps/akro-sicherheit/public/design-preview/` gehört
-  ausschließlich zum Designexperiment.
+- Es wurde **kein einziges Foto übernommen, kopiert oder erzeugt**. Seit
+  13.10.2026 liegen die Wortmarke (Original und je Marke eingefärbt), das
+  Favicon und `shared/certifications/zertifikate.json` zentral hier.
 - **Die Rasterbilder des Altbestands sind unwiederbringlich zerstört.** Am
   25.08.2026 an den Dateiköpfen geprüft: Statt der PNG-Signatur steht das
   Unicode-Ersatzzeichen U+FFFD — dieser Schaden entsteht, wenn eine

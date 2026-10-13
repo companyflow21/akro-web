@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHead from '../components/SectionHead.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Zertifikate from '../components/Zertifikate.astro';
 import { marke } from '../config';
 import { leistungen } from '../data/leistungen';
 import { organisation } from '../lib/jsonld';
@@ -25,8 +26,8 @@ const ablauf = [
   },
 ];
 
-// Bewusst ohne Kennzahlen und ohne Zertifikatsnennung: beides ist
-// unbestätigt (docs/SITE-ARCHITECTURE.md §9).
+// Bewusst ohne Kennzahlen: unbestätigt (docs/SITE-ARCHITECTURE.md §9).
+// Die Zertifikate sind bestätigt und stehen im eigenen Abschnitt.
 const kompetenzen = [
   { label: 'Einsatzplanung', text: 'in eigener Verantwortung' },
   { label: 'Qualifikation', text: 'Nachweise je Einsatz geprüft' },
@@ -41,9 +42,9 @@ const kompetenzen = [
 	jsonLd={organisation()}
 >
 	{/* Hero */}
-	<section class="bg-ink text-sand">
+	<section class="leitstelle bg-ink text-sand">
 		<div
-			class="mx-auto grid max-w-6xl gap-14 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1.15fr_1fr] lg:gap-20"
+			class="mx-auto grid max-w-6xl gap-10 px-5 pb-12 pt-10 md:px-8 md:py-24 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16"
 		>
 			<div class="rail">
 				<p class="tech text-accent">{marke.traeger} · Sicherheitsdienstleistungen</p>
@@ -60,7 +61,7 @@ const kompetenzen = [
 					Abläufen und festen Ansprechpartnern.
 				</p>
 
-				<div class="mt-9 flex flex-wrap gap-3">
+				<div class="mt-9 hidden flex-wrap gap-3 lg:flex">
 					<a href="/anfrage" class="btn btn--primary">Einsatz anfragen</a>
 					<a href={marke.telefonHref} class="btn btn--ghost">
 						{marke.telefon}
@@ -70,24 +71,22 @@ const kompetenzen = [
 
 			{/* Register der Leistungen statt eines Kennzahlenblocks: nennt
 			    Belegbares statt unbestätigter Zahlen. */}
-			<div class="lg:pt-3">
-				<p class="tech text-sand/50">Leistungsregister</p>
-				<ul class="mt-4">
+			<nav class="register" aria-label="Leistungsregister">
+				<p class="register-kopf tech"><span>Leistungsregister</span><span>{String(leistungen.length).padStart(2, '0')}</span></p>
+				<ul>
 					{
 						leistungen.map((l) => (
-							<li class="index-row">
-								<span class="tech w-7 shrink-0 text-accent">{l.kuerzel}</span>
-								<a
-									href={`/leistungen/${l.slug}`}
-									class="text-klein text-sand/85 hover:text-sand"
-								>
-									{l.titel}
+							<li>
+								<a href={`/leistungen/${l.slug}`}>
+									<span class="tech text-accent">{l.kuerzel}</span>
+									<span>{l.titel}</span>
+									<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
 								</a>
 							</li>
 						))
 					}
 				</ul>
-			</div>
+			</nav>
 		</div>
 	</section>
 
@@ -104,13 +103,10 @@ const kompetenzen = [
 					))
 				}
 			</dl>
-			<p class="mt-8 border-t border-line pt-4 text-marginalie text-muted">
-				<span class="todo">TODO</span>
-				Zertifikate, Normen und Kennzahlen erscheinen erst, wenn die
-				Originalnachweise geprüft und zur Veröffentlichung freigegeben sind.
-			</p>
 		</div>
 	</section>
+
+	<Zertifikate />
 
 	{/* Leistungen */}
 	<section class="bg-sand">
@@ -120,7 +116,7 @@ const kompetenzen = [
 				titel="Sieben Leistungen, ein Ansprechpartner."
 			/>
 
-			<div class="mt-12 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+			<div class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 				{
 					leistungen.map((l, i) => (
 						<ServiceCard leistung={l} breit={i === 0} />
@@ -139,10 +135,10 @@ const kompetenzen = [
 				invers
 			/>
 
-			<ol class="mt-12 grid gap-px bg-ink-3 md:grid-cols-3">
+			<ol class="mt-12 grid gap-3 md:grid-cols-3">
 				{
 					ablauf.map((s) => (
-						<li class="bg-ink-2 p-7">
+						<li class="rounded-[14px] border border-white/10 bg-ink-3/40 p-7">
 							<span class="tech text-accent">{s.nr}</span>
 							<h3 class="mt-3">{s.titel}</h3>
 							<p class="mt-2 text-klein text-sand/70">
@@ -180,7 +176,7 @@ const kompetenzen = [
 				</SectionHead>
 			</div>
 
-			<aside class="border border-line bg-surface p-7">
+			<aside class="rounded-[14px] border border-line bg-surface p-7">
 				<p class="tech text-muted">Rechtsträger</p>
 				<p class="mt-3 text-karte">{marke.traeger}</p>
 				<dl class="mt-6 space-y-4 text-klein">
@@ -207,3 +203,63 @@ const kompetenzen = [
 
 	<CtaBand />
 </BaseLayout>
+
+<style>
+	.leitstelle {
+		background:
+			radial-gradient(1100px 520px at 78% 18%, #12407a 0%, transparent 60%),
+			linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px) 0 0 / 48px 48px,
+			linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px) 0 0 / 48px 48px,
+			var(--color-ink);
+	}
+
+	.register {
+		padding: 6px 22px 8px;
+		border: 1px solid rgb(255 255 255 / 0.12);
+		border-radius: 14px;
+		background: linear-gradient(180deg, rgb(13 42 82 / 0.8), rgb(7 29 61 / 0.8));
+	}
+
+	.register-kopf {
+		display: flex;
+		justify-content: space-between;
+		padding: 14px 0 12px;
+		border-bottom: 1px solid rgb(255 255 255 / 0.1);
+		color: #8aa3bd;
+	}
+
+	.register li + li {
+		border-top: 1px solid rgb(255 255 255 / 0.07);
+	}
+
+	.register a {
+		display: grid;
+		grid-template-columns: 44px 1fr 20px;
+		align-items: center;
+		padding: 14px 0;
+		font-size: 16px;
+		color: #e6eef7;
+		transition: color 0.2s;
+	}
+
+	.register a:hover {
+		color: #6fe3f0;
+	}
+
+	.register .ico {
+		width: 18px;
+		height: 18px;
+		color: #5f7d9c;
+	}
+
+	@media (max-width: 640px) {
+		.register {
+			padding: 2px 16px 4px;
+		}
+
+		.register a {
+			grid-template-columns: 38px 1fr 18px;
+			font-size: 15px;
+		}
+	}
+</style>
