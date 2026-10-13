@@ -1,0 +1,324 @@
+/*
+ * AKRO Design Starter
+ * Die uebertragbaren Grundlagen der Gestaltung von akro-group.de.
+ * Keine Abhaengigkeiten, kein CDN, kein JavaScript erforderlich.
+ */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./fonts/archivo-latin-var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./fonts/source-serif-4-latin-var.woff2") format("woff2");
+}
+
+:root {
+  /* Dachmarke: neutral, damit die drei Sparten die Farbe tragen. */
+  --akro-graphit: #24292c;
+  --akro-graphit-tief: #1b1f21;
+  --akro-oberflaeche: #fffdf9;
+  --akro-sand: #f5f1ea;
+  --akro-linie: #cfc6b6;
+  --akro-text: #0b1626;
+  --akro-text-hell: #fffdf9;
+  --akro-text-hell-2: rgba(255, 253, 249, 0.72);
+  --akro-text-gedaempft: #55616f;
+
+  /* Geschaeftsbereiche */
+  --akro-sicherheit: #1a365d;
+  --akro-sicherheit-marke: #1d5fa8;
+  --akro-sicherheit-akzent: #00c9e0;
+  --akro-fire: #8c1d1d;
+  --akro-fire-marke: #b02525;
+  --akro-fire-akzent: #f97316;
+  --akro-service: #065f46;
+  --akro-service-marke: #0f766e;
+  --akro-service-akzent: #2dd4bf;
+
+  /* Aktive Marke; Vorgabe ist die neutrale Dachmarke. */
+  --akro-flaeche: var(--akro-graphit);
+  --akro-marke: #455160;
+  --akro-akzent: var(--akro-sicherheit-akzent);
+  --akro-auf-akzent: #0b1626;
+
+  --akro-display: "Archivo", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --akro-textschrift: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --akro-breite: 78rem;
+  --akro-rand: clamp(1.5rem, 5vw, 4.5rem);
+  --akro-schwung: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+[data-akro-brand="sicherheit"] {
+  --akro-flaeche: var(--akro-sicherheit);
+  --akro-marke: var(--akro-sicherheit-marke);
+  --akro-akzent: var(--akro-sicherheit-akzent);
+}
+
+[data-akro-brand="fire-safety"] {
+  --akro-flaeche: var(--akro-fire);
+  --akro-marke: var(--akro-fire-marke);
+  --akro-akzent: var(--akro-fire-akzent);
+}
+
+[data-akro-brand="service"] {
+  --akro-flaeche: var(--akro-service);
+  --akro-marke: var(--akro-service-marke);
+  --akro-akzent: var(--akro-service-akzent);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--akro-sand);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--akro-sand);
+  color: var(--akro-text);
+  font-family: var(--akro-textschrift);
+  font-size: 1rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+.akro-button,
+.akro-label {
+  font-family: var(--akro-display);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.09;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.akro-logo {
+  display: block;
+  width: clamp(6.5rem, 14vw, 9rem);
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--akro-akzent);
+  outline-offset: 4px;
+}
+
+/* Zentrale Layout-Bausteine */
+.akro-container {
+  width: min(100%, var(--akro-breite));
+  margin-inline: auto;
+  padding-inline: var(--akro-rand);
+}
+
+.akro-section {
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+
+.akro-hero-label {
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 1rem;
+}
+
+.akro-label {
+  color: var(--akro-text-gedaempft);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.akro-lead {
+  max-width: 52ch;
+  margin-top: 1.5rem;
+  color: var(--akro-text-gedaempft);
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+}
+
+/* Dunkle Markenflaeche; data-akro-brand steuert die Farbe. */
+.akro-brand-surface {
+  background: var(--akro-flaeche);
+  color: var(--akro-text-hell);
+}
+
+.akro-brand-surface .akro-label {
+  color: var(--akro-akzent);
+}
+
+.akro-brand-surface .akro-lead {
+  color: var(--akro-text-hell-2);
+}
+
+/* Buttons: klare Flaechen, keine Rundung, keine Schatten. */
+.akro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.akro-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.9rem 1.6rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    transform 160ms var(--akro-schwung),
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.akro-button:active {
+  transform: scale(0.97);
+}
+
+.akro-button--primary {
+  background: var(--akro-akzent);
+  color: var(--akro-auf-akzent);
+}
+
+.akro-button--light {
+  background: var(--akro-oberflaeche);
+  color: var(--akro-graphit-tief);
+}
+
+.akro-button--outline {
+  border-color: currentColor;
+}
+
+/* Gleichrangige Darstellung der drei Geschaeftsbereiche. */
+.akro-business-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.akro-business-card {
+  --akro-kartenflaeche: var(--akro-sicherheit);
+  --akro-kartenakzent: var(--akro-sicherheit-akzent);
+  display: flex;
+  min-height: clamp(12rem, 22vw, 16rem);
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+  border-top: 3px solid var(--akro-kartenakzent);
+  background: var(--akro-kartenflaeche);
+  color: var(--akro-text-hell);
+}
+
+.akro-business-card[data-akro-brand="fire-safety"] {
+  --akro-kartenflaeche: var(--akro-fire);
+  --akro-kartenakzent: var(--akro-fire-akzent);
+}
+
+.akro-business-card[data-akro-brand="service"] {
+  --akro-kartenflaeche: var(--akro-service);
+  --akro-kartenakzent: var(--akro-service-akzent);
+}
+
+.akro-business-card .akro-label {
+  color: var(--akro-kartenakzent);
+}
+
+.akro-business-card p:last-child {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  color: var(--akro-text-hell-2);
+}
+
+@media (min-width: 48rem) {
+  .akro-business-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .akro-button--primary:hover {
+    background: color-mix(in srgb, var(--akro-akzent) 84%, white);
+  }
+
+  .akro-button--light:hover {
+    background: #ffffff;
+  }
+
+  .akro-button--outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
