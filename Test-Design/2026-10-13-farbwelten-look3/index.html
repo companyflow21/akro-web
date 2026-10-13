@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Farbwelten Look 3 – Freigabevorlage</title>
+<style>
+@font-face{font-family:Archivo;src:url('../../packages/design-system/fonts/archivo-latin-var.woff2') format('woff2');font-weight:100 900;font-display:swap}
+*{box-sizing:border-box}
+body{margin:0;font-family:Archivo,Arial,sans-serif;background:#d9dde3;color:#0b1b36;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}svg{display:block}img{display:block;max-width:100%;height:auto}
+.wrap{width:calc(100% - 96px);max-width:1344px;margin-inline:auto}
+.intro{padding:40px 0 28px}.intro h1{font-size:30px;letter-spacing:-.03em;font-weight:600}.intro p{margin-top:10px;font-size:15px;line-height:1.6;color:#354761;max-width:760px}
+.welt{background:var(--paper);color:var(--ink);padding-bottom:8px;margin-bottom:48px;border-block:1px solid var(--line)}
+.welt-etikett{padding-top:22px;font-size:13px;color:var(--muted);letter-spacing:.02em}.welt-etikett b{color:var(--brand)}
+.header{height:96px;display:flex;align-items:center;justify-content:space-between;gap:36px}
+.brand{display:flex;align-items:center;gap:20px}.brand img{width:142px}.brand>span{border-left:1px solid var(--line);padding-left:20px;font-size:15px;font-weight:600;color:var(--brand)}
+.navigation{display:flex;gap:34px;margin-left:auto;font-size:14px;font-weight:500}
+.header-contact{display:flex;align-items:center;gap:18px;background:var(--brand);color:#fff;padding:12px 18px;border-radius:8px;font-size:14px;font-weight:600}
+.header-contact svg,.button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hero{position:relative;isolation:isolate;display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden;background:linear-gradient(114deg,var(--brand) 5%,var(--mid) 53%,var(--deep) 100%);border-radius:24px;color:#fff}
+.hero-content{position:relative;z-index:2;padding:52px 0 48px 60px}
+.status{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;color:var(--heroText);border:1px solid #ffffff40;background:#ffffff0b;padding:7px 13px;border-radius:30px}
+.status>span{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px #ffffff12}
+.hero h1{font-size:clamp(52px,5.2vw,76px);font-weight:560;line-height:1.03;letter-spacing:-.058em;margin:31px 0 23px}
+.hero-intro{font-size:17px;line-height:1.7;color:var(--heroText);max-width:460px}
+.button{display:inline-flex;align-items:center;gap:25px;padding:15px 21px;border-radius:8px;font-size:14px;font-weight:600;background:#fff;color:var(--brand);margin-top:29px}
+.hero-art{position:relative;min-width:0}.hero-art>svg{position:absolute;width:112%;height:100%;top:-10px;left:-9%;overflow:visible}
+.hero-foot{grid-column:1/-1;display:flex;justify-content:space-between;margin:0 60px;padding:19px 0 21px;border-top:1px solid #ffffff30;font-size:12px;color:var(--heroSoft)}
+.karten{padding-block:52px 54px}.karten h2{font-size:25px;letter-spacing:-.03em;font-weight:560;margin-bottom:30px}
+.karten-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.karte{padding:8px 36px 4px;border-right:1px solid var(--line)}.karte:first-child{padding-left:0}.karte:last-child{padding-right:0;border:0}
+.icon{width:55px;height:55px;padding:10px;background:var(--soft);border:1px solid var(--softline);border-radius:13px;margin-bottom:19px;stroke:var(--icon);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.karte h3{font-size:20px;letter-spacing:-.025em;font-weight:600;margin-bottom:10px}.karte p{font-size:14px;line-height:1.75;color:var(--muted);max-width:340px}
+.band{background:var(--band);color:#fff;padding:46px 0 48px}
+.band-innen{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:end}
+.band-notiz{font-size:13px;font-weight:600;color:var(--bandaccent);margin-bottom:12px}.band h2{font-size:34px;letter-spacing:-.04em;line-height:1.17;font-weight:560}
+.band-raster{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.band-karte{background:var(--bandcard);border:1px solid var(--bandline);border-radius:5px;padding:22px 20px}.band-karte b{display:block;font-size:17px;font-weight:600;margin-bottom:6px}.band-karte span{font-size:13px;color:var(--bandtext)}
+.kontakt{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding-block:56px 48px;align-items:center}
+.kontakt h2{font-size:36px;line-height:1.16;letter-spacing:-.04em;font-weight:550}
+.kontakt-box{background:var(--contact);border:1px solid var(--contactline);border-radius:14px;padding:22px 24px}.kontakt-box span{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.kontakt-box strong{font-size:30px;font-weight:500;letter-spacing:-.035em}
+@media(max-width:900px){.wrap{width:calc(100% - 32px)}.navigation{display:none}.hero{display:flex;flex-direction:column}.hero-content{padding:28px 24px 0}.hero-art{height:240px;overflow:hidden}.hero-art>svg{width:340px;height:350px;left:auto;right:calc(50% - 177px);top:-66px}.hero-foot{margin:0 24px}.karten-raster,.band-innen,.band-raster,.kontakt{grid-template-columns:1fr;gap:20px}.karte,.karte:first-child,.karte:last-child{padding:16px 0;border-right:0;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="intro wrap">
+  <h1>Farbwelten im Look 3 – Freigabevorlage</h1>
+  <p>Gleicher Aufbau, vier Farbwelten: die Dachmarke AKRO Group und die drei Sparten. Texte sind Beispieltexte zur Beurteilung der Farben, keine freigegebenen Inhalte. Alle Text- und Flächenpaare erreichen mindestens WCAG AA (4,5:1).</p>
+</div>
+
+<section class="welt" style="--brand:#073ae8;--mid:#0637cb;--deep:#062488;--accent:#cad9ff;--paper:#eaf0f8;--ink:#0b1b36;--muted:#354761;--line:#becde0;--soft:#d3e0ff;--softline:#a4bdf4;--icon:#174ce1;--band:#263b56;--bandcard:#2c415c;--bandline:#50627a;--bandtext:#dce4ee;--bandaccent:#bed0e4;--contact:#dce7f8;--contactline:#adbfdb;--heroText:#f0f5ff;--heroSoft:#d4e0ff;--a1:#a6c8ff;--a2:#7297ff;--a3:#072cc2;--a4:#001664;--glow:#5598ff;--edge:#deedff;--aline:#a9caff" aria-label="Farbwelt 1: AKRO Group">
+  <p class="welt-etikett wrap"><b>Farbwelt 1</b> · AKRO Group · Elektroblau</p>
+  <header class="header wrap">
+    <span class="brand"><img src="../../platzhalter/assets/img/akro-wortmarke.svg" width="1025" height="263" alt="AKRO"><span>GmbH</span></span>
+    <nav class="navigation"><span>Leistungen</span><span>Unternehmen</span><span>Karriere</span></nav>
+    <span class="header-contact">Kontakt <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </header>
+  <div class="hero wrap">
+    <div class="hero-content">
+      <p class="status"><span></span>Unsere Website entsteht neu</p>
+      <h1>Sicherheit.<br>Brandschutz.<br>Service.</h1>
+      <p class="hero-intro">Drei Geschäftsbereiche. Ein Ansprechpartner.<br>Wir übernehmen Verantwortung für Ihre Standorte.</p>
+      <span class="button">Anfrage per E-Mail <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span>
+    </div>
+    <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 640 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ff-group" x1="188" y1="120" x2="508" y2="570" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a1)" stop-opacity=".78"/><stop offset=".5" style="stop-color:var(--a2)" stop-opacity=".26"/><stop offset="1" style="stop-color:var(--a3)" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="fs-group" x1="220" y1="280" x2="510" y2="440" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a2)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--a4)" stop-opacity=".7"/></linearGradient>
+    <linearGradient id="ed-group" x1="120" y1="80" x2="600" y2="550" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--edge)" stop-opacity=".9"/><stop offset="1" style="stop-color:var(--a1)" stop-opacity=".12"/></linearGradient>
+    <radialGradient id="gl-group"><stop style="stop-color:var(--glow)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--glow)" stop-opacity="0"/></radialGradient>
+    <filter id="sh-group" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+    <g id="po-group">
+      <path d="M182 142 327 70 498 169 498 490 353 572 182 474Z" fill="url(#fs-group)"/>
+      <path d="m182 142 171 99 0 331-171-98Zm34 63v248l103 60V265Z" fill="url(#ff-group)" fill-rule="evenodd" stroke="url(#ed-group)" stroke-width="1.3"/>
+      <path d="m182 142 145-72 171 99-145 72Z" style="fill:var(--a1)" fill-opacity=".26" stroke="url(#ed-group)" stroke-width="1.2"/>
+      <path d="m353 241 145-72v321l-145 82Z" style="fill:var(--a4)" fill-opacity=".36" stroke="url(#ed-group)" stroke-width="1.2"/>
+      <path d="m216 205 103 60v248l-103-60Z" style="fill:var(--a3)" fill-opacity=".4" stroke="url(#ed-group)"/>
+      <path d="m216 453 103-54V265M319 399l-64-37" style="stroke:var(--aline)" stroke-opacity=".4"/>
+      <path d="m183 144 169 98v328" style="stroke:var(--edge)" stroke-opacity=".66" stroke-width="1.6"/>
+    </g>
+  </defs>
+  <ellipse cx="362" cy="345" rx="300" ry="310" fill="url(#gl-group)"/>
+  <g style="stroke:var(--aline)" stroke-opacity=".13" stroke-width=".7"><path d="m18 441 350 202 283-161M1 483l278 160 361-208M68 402l414 239M114 374l446 257M164 347l448 259M216 319l428 247M270 292l360 208M91 601l469-270M37 570l469-270M4 526l448-259"/></g>
+  <ellipse cx="370" cy="557" rx="168" ry="36" style="fill:var(--a4)" fill-opacity=".6" filter="url(#sh-group)"/>
+  <g transform="translate(176 12) scale(.73)" opacity=".65"><use href="#po-group"/></g>
+  <g transform="translate(71 55) scale(.8)" opacity=".82"><use href="#po-group"/></g>
+  <g transform="translate(-44 94) scale(.87)"><use href="#po-group"/></g>
+  <g style="stroke:var(--edge)" stroke-opacity=".45"><path d="M493 118h57v57M96 498v42h43"/><path d="M546 287h10m-5-5v10M130 212h10m-5-5v10"/></g>
+</svg></div>
+    <div class="hero-foot"><p>Saarlouis / Niederlassung Bonn</p><p>0228 18456685</p></div>
+  </div>
+  <div class="karten wrap">
+    <h2>Drei Bereiche, ein Vertragspartner.</h2>
+    <div class="karten-raster"><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 4 13 5v10c0 8-5 13-13 17C12 32 7 27 7 19V9Z"/><path d="m14 19 4 4 9-10"/></svg><h3>AKRO Sicherheit</h3><p>Objekt-, Werk- und Veranstaltungsschutz.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M21 4c2 8 10 11 10 20a11 11 0 0 1-22 0c0-5 3-10 7-14 0 6 2 8 4 9 3-4 3-9 1-15Z"/><path d="M20 24c-3 3-4 5-4 7a4 4 0 0 0 8 0c0-2-2-4-4-7Z"/></svg><h3>AKRO Fire &amp; Safety</h3><p>Sicherungsposten, Brandwachen und Gasmessung.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 5 14 8v15l-14 8-14-8V13Z"/><path d="m6 13 14 8 14-8M20 21v15M13 9l14 8v7"/></svg><h3>AKRO Service</h3><p>Reinigung, Logistik und Transport.</p></article></div>
+  </div>
+  <div class="band">
+    <div class="wrap band-innen">
+      <div><p class="band-notiz">So arbeiten wir</p><h2>Eigenverantwortlich.<br>Dokumentiert. Erreichbar.</h2></div>
+      <div class="band-raster">
+        <div class="band-karte"><b>Einsatzplanung</b><span>in eigener Verantwortung</span></div>
+        <div class="band-karte"><b>Dokumentation</b><span>nachvollziehbare Protokolle</span></div>
+        <div class="band-karte"><b>Ansprechpartner</b><span>fest zugeordnet</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="kontakt wrap">
+    <h2>Sprechen wir über<br>Ihr Vorhaben.</h2>
+    <div class="kontakt-box"><span>Rufen Sie uns an</span><strong>0228 18456685</strong></div>
+  </div>
+</section>
+<section class="welt" style="--brand:#0d3b73;--mid:#0a2f5e;--deep:#071d3d;--accent:#00c9e0;--paper:#edf1f5;--ink:#0b1726;--muted:#3a4a5c;--line:#c4d0dc;--soft:#d6eef5;--softline:#9fd3e3;--icon:#0b6e8a;--band:#0f2236;--bandcard:#172f48;--bandline:#2e4a66;--bandtext:#d3e2ee;--bandaccent:#6fe3f0;--contact:#dde8f0;--contactline:#aec4d6;--heroText:#e6f4fb;--heroSoft:#b9e3ef;--a1:#9ee9f5;--a2:#3fb8d9;--a3:#0a2f5e;--a4:#020c1c;--glow:#22c4e0;--edge:#d9f8ff;--aline:#7fdcec" aria-label="Farbwelt 2: AKRO Sicherheit">
+  <p class="welt-etikett wrap"><b>Farbwelt 2</b> · AKRO Sicherheit · Nachtblau und Cyan</p>
+  <header class="header wrap">
+    <span class="brand"><img src="../../platzhalter/assets/img/akro-wortmarke.svg" width="1025" height="263" alt="AKRO"><span>Sicherheit</span></span>
+    <nav class="navigation"><span>Leistungen</span><span>Unternehmen</span><span>Karriere</span></nav>
+    <span class="header-contact">Kontakt <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </header>
+  <div class="hero wrap">
+    <div class="hero-content">
+      <p class="status"><span></span>Objekt-, Werk- und Personenschutz</p>
+      <h1>Sicherheit,<br>die sich planen<br>lässt.</h1>
+      <p class="hero-intro">Bewachung und Kontrolle für Industrie, Gewerbe<br>und öffentliche Auftraggeber.</p>
+      <span class="button">Anfrage per E-Mail <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span>
+    </div>
+    <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 640 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ff-sicherheit" x1="188" y1="120" x2="508" y2="570" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a1)" stop-opacity=".78"/><stop offset=".5" style="stop-color:var(--a2)" stop-opacity=".26"/><stop offset="1" style="stop-color:var(--a3)" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="fs-sicherheit" x1="220" y1="280" x2="510" y2="440" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a2)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--a4)" stop-opacity=".7"/></linearGradient>
+    <linearGradient id="ed-sicherheit" x1="120" y1="80" x2="600" y2="550" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--edge)" stop-opacity=".9"/><stop offset="1" style="stop-color:var(--a1)" stop-opacity=".12"/></linearGradient>
+    <radialGradient id="gl-sicherheit"><stop style="stop-color:var(--glow)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--glow)" stop-opacity="0"/></radialGradient>
+    <filter id="sh-sicherheit" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+    <g id="po-sicherheit">
+      <path d="M182 142 327 70 498 169 498 490 353 572 182 474Z" fill="url(#fs-sicherheit)"/>
+      <path d="m182 142 171 99 0 331-171-98Zm34 63v248l103 60V265Z" fill="url(#ff-sicherheit)" fill-rule="evenodd" stroke="url(#ed-sicherheit)" stroke-width="1.3"/>
+      <path d="m182 142 145-72 171 99-145 72Z" style="fill:var(--a1)" fill-opacity=".26" stroke="url(#ed-sicherheit)" stroke-width="1.2"/>
+      <path d="m353 241 145-72v321l-145 82Z" style="fill:var(--a4)" fill-opacity=".36" stroke="url(#ed-sicherheit)" stroke-width="1.2"/>
+      <path d="m216 205 103 60v248l-103-60Z" style="fill:var(--a3)" fill-opacity=".4" stroke="url(#ed-sicherheit)"/>
+      <path d="m216 453 103-54V265M319 399l-64-37" style="stroke:var(--aline)" stroke-opacity=".4"/>
+      <path d="m183 144 169 98v328" style="stroke:var(--edge)" stroke-opacity=".66" stroke-width="1.6"/>
+    </g>
+  </defs>
+  <ellipse cx="362" cy="345" rx="300" ry="310" fill="url(#gl-sicherheit)"/>
+  <g style="stroke:var(--aline)" stroke-opacity=".13" stroke-width=".7"><path d="m18 441 350 202 283-161M1 483l278 160 361-208M68 402l414 239M114 374l446 257M164 347l448 259M216 319l428 247M270 292l360 208M91 601l469-270M37 570l469-270M4 526l448-259"/></g>
+  <ellipse cx="370" cy="557" rx="168" ry="36" style="fill:var(--a4)" fill-opacity=".6" filter="url(#sh-sicherheit)"/>
+  <g transform="translate(176 12) scale(.73)" opacity=".65"><use href="#po-sicherheit"/></g>
+  <g transform="translate(71 55) scale(.8)" opacity=".82"><use href="#po-sicherheit"/></g>
+  <g transform="translate(-44 94) scale(.87)"><use href="#po-sicherheit"/></g>
+  <g style="stroke:var(--edge)" stroke-opacity=".45"><path d="M493 118h57v57M96 498v42h43"/><path d="M546 287h10m-5-5v10M130 212h10m-5-5v10"/></g>
+</svg></div>
+    <div class="hero-foot"><p>Saarlouis / Niederlassung Bonn</p><p>0228 18456685</p></div>
+  </div>
+  <div class="karten wrap">
+    <h2>Leistungen für Ihre Standorte.</h2>
+    <div class="karten-raster"><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 4 13 5v10c0 8-5 13-13 17C12 32 7 27 7 19V9Z"/><path d="m14 19 4 4 9-10"/></svg><h3>Objekt- und Werkschutz</h3><p>Dauerhafte Bewachung von Gebäuden und Werksgeländen.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20s6-10 16-10 16 10 16 10-6 10-16 10S4 20 4 20Z"/><circle cx="20" cy="20" r="5"/></svg><h3>Revier- und Kontrolldienst</h3><p>Regelmäßige Kontrollgänge mit dokumentierten Rundgängen.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="14" cy="13" r="5"/><circle cx="28" cy="15" r="4"/><path d="M5 33c0-6 4-10 9-10s9 4 9 10M24 24c5 0 11 3 11 9"/></svg><h3>Veranstaltungssicherheit</h3><p>Einlass, Ordnung und Schutz für Ihre Veranstaltung.</p></article></div>
+  </div>
+  <div class="band">
+    <div class="wrap band-innen">
+      <div><p class="band-notiz">So arbeiten wir</p><h2>Eigenverantwortlich.<br>Dokumentiert. Erreichbar.</h2></div>
+      <div class="band-raster">
+        <div class="band-karte"><b>Einsatzplanung</b><span>in eigener Verantwortung</span></div>
+        <div class="band-karte"><b>Dokumentation</b><span>nachvollziehbare Protokolle</span></div>
+        <div class="band-karte"><b>Ansprechpartner</b><span>fest zugeordnet</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="kontakt wrap">
+    <h2>Sprechen wir über<br>Ihr Vorhaben.</h2>
+    <div class="kontakt-box"><span>Rufen Sie uns an</span><strong>0228 18456685</strong></div>
+  </div>
+</section>
+<section class="welt" style="--brand:#b3290e;--mid:#96220d;--deep:#5e1509;--accent:#ffb347;--paper:#f6efea;--ink:#24140f;--muted:#5c4339;--line:#e2cfc4;--soft:#fbe0d3;--softline:#e8b49c;--icon:#b3290e;--band:#2b1712;--bandcard:#3a211a;--bandline:#5e3a2e;--bandtext:#f1dfd6;--bandaccent:#ffb37a;--contact:#f3e2d8;--contactline:#dcbcab;--heroText:#fff1e8;--heroSoft:#ffd2b8;--a1:#ffc59a;--a2:#ff7a45;--a3:#8f1f0b;--a4:#2e0802;--glow:#ff7b3a;--edge:#ffe7d4;--aline:#ffb894" aria-label="Farbwelt 3: AKRO Fire &amp; Safety">
+  <p class="welt-etikett wrap"><b>Farbwelt 3</b> · AKRO Fire &amp; Safety · Signalrot und Glut</p>
+  <header class="header wrap">
+    <span class="brand"><img src="../../platzhalter/assets/img/akro-wortmarke.svg" width="1025" height="263" alt="AKRO"><span>Fire &amp; Safety</span></span>
+    <nav class="navigation"><span>Leistungen</span><span>Unternehmen</span><span>Karriere</span></nav>
+    <span class="header-contact">Kontakt <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </header>
+  <div class="hero wrap">
+    <div class="hero-content">
+      <p class="status"><span></span>Brandschutz und HSE im Industrieumfeld</p>
+      <h1>Brandschutz,<br>der mitdenkt.</h1>
+      <p class="hero-intro">Sicherungsposten, Brandwachen und Gasmessung<br>für Industrie, Anlagen und Baustellen.</p>
+      <span class="button">Anfrage per E-Mail <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span>
+    </div>
+    <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 640 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ff-fire" x1="188" y1="120" x2="508" y2="570" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a1)" stop-opacity=".78"/><stop offset=".5" style="stop-color:var(--a2)" stop-opacity=".26"/><stop offset="1" style="stop-color:var(--a3)" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="fs-fire" x1="220" y1="280" x2="510" y2="440" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a2)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--a4)" stop-opacity=".7"/></linearGradient>
+    <linearGradient id="ed-fire" x1="120" y1="80" x2="600" y2="550" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--edge)" stop-opacity=".9"/><stop offset="1" style="stop-color:var(--a1)" stop-opacity=".12"/></linearGradient>
+    <radialGradient id="gl-fire"><stop style="stop-color:var(--glow)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--glow)" stop-opacity="0"/></radialGradient>
+    <filter id="sh-fire" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+    <g id="po-fire">
+      <path d="M182 142 327 70 498 169 498 490 353 572 182 474Z" fill="url(#fs-fire)"/>
+      <path d="m182 142 171 99 0 331-171-98Zm34 63v248l103 60V265Z" fill="url(#ff-fire)" fill-rule="evenodd" stroke="url(#ed-fire)" stroke-width="1.3"/>
+      <path d="m182 142 145-72 171 99-145 72Z" style="fill:var(--a1)" fill-opacity=".26" stroke="url(#ed-fire)" stroke-width="1.2"/>
+      <path d="m353 241 145-72v321l-145 82Z" style="fill:var(--a4)" fill-opacity=".36" stroke="url(#ed-fire)" stroke-width="1.2"/>
+      <path d="m216 205 103 60v248l-103-60Z" style="fill:var(--a3)" fill-opacity=".4" stroke="url(#ed-fire)"/>
+      <path d="m216 453 103-54V265M319 399l-64-37" style="stroke:var(--aline)" stroke-opacity=".4"/>
+      <path d="m183 144 169 98v328" style="stroke:var(--edge)" stroke-opacity=".66" stroke-width="1.6"/>
+    </g>
+  </defs>
+  <ellipse cx="362" cy="345" rx="300" ry="310" fill="url(#gl-fire)"/>
+  <g style="stroke:var(--aline)" stroke-opacity=".13" stroke-width=".7"><path d="m18 441 350 202 283-161M1 483l278 160 361-208M68 402l414 239M114 374l446 257M164 347l448 259M216 319l428 247M270 292l360 208M91 601l469-270M37 570l469-270M4 526l448-259"/></g>
+  <ellipse cx="370" cy="557" rx="168" ry="36" style="fill:var(--a4)" fill-opacity=".6" filter="url(#sh-fire)"/>
+  <g transform="translate(176 12) scale(.73)" opacity=".65"><use href="#po-fire"/></g>
+  <g transform="translate(71 55) scale(.8)" opacity=".82"><use href="#po-fire"/></g>
+  <g transform="translate(-44 94) scale(.87)"><use href="#po-fire"/></g>
+  <g style="stroke:var(--edge)" stroke-opacity=".45"><path d="M493 118h57v57M96 498v42h43"/><path d="M546 287h10m-5-5v10M130 212h10m-5-5v10"/></g>
+</svg></div>
+    <div class="hero-foot"><p>Saarlouis / Niederlassung Bonn</p><p>0228 18456685</p></div>
+  </div>
+  <div class="karten wrap">
+    <h2>Leistungen im industriellen Umfeld.</h2>
+    <div class="karten-raster"><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M21 4c2 8 10 11 10 20a11 11 0 0 1-22 0c0-5 3-10 7-14 0 6 2 8 4 9 3-4 3-9 1-15Z"/><path d="M20 24c-3 3-4 5-4 7a4 4 0 0 0 8 0c0-2-2-4-4-7Z"/></svg><h3>Brandwachen</h3><p>Brandsicherheitswache bei Heißarbeiten und Veranstaltungen.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 27v-3c0-7 5-12 11-13m4 0c6 1 11 6 11 13v3M17 18V8h6v10M5 27h30v5H5Z"/></svg><h3>Sicherungsposten</h3><p>Absicherung von Arbeiten in Anlagen und Gleisbereichen.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="5" width="18" height="30" rx="3"/><path d="M15 11h10v7H15ZM16 25h2m4 0h2m-8 4h2m4 0h2"/></svg><h3>Gasmessung</h3><p>Freimessung und Überwachung vor und während der Arbeit.</p></article></div>
+  </div>
+  <div class="band">
+    <div class="wrap band-innen">
+      <div><p class="band-notiz">So arbeiten wir</p><h2>Eigenverantwortlich.<br>Dokumentiert. Erreichbar.</h2></div>
+      <div class="band-raster">
+        <div class="band-karte"><b>Einsatzplanung</b><span>in eigener Verantwortung</span></div>
+        <div class="band-karte"><b>Dokumentation</b><span>nachvollziehbare Protokolle</span></div>
+        <div class="band-karte"><b>Ansprechpartner</b><span>fest zugeordnet</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="kontakt wrap">
+    <h2>Sprechen wir über<br>Ihr Vorhaben.</h2>
+    <div class="kontakt-box"><span>Rufen Sie uns an</span><strong>0228 18456685</strong></div>
+  </div>
+</section>
+<section class="welt" style="--brand:#11734b;--mid:#0c5f3e;--deep:#073d29;--accent:#86efac;--paper:#ebf3ee;--ink:#0f2219;--muted:#3d5a4b;--line:#c3d8cb;--soft:#d6efe0;--softline:#9fcdb1;--icon:#11734b;--band:#12291f;--bandcard:#1a382b;--bandline:#355a48;--bandtext:#d5e8dd;--bandaccent:#86efac;--contact:#d9eadf;--contactline:#a9cbb6;--heroText:#e8fbf0;--heroSoft:#bfe9d2;--a1:#b6f5cf;--a2:#4fd18b;--a3:#0a5236;--a4:#021a10;--glow:#34d399;--edge:#e3fff0;--aline:#9be8bf" aria-label="Farbwelt 4: AKRO Service">
+  <p class="welt-etikett wrap"><b>Farbwelt 4</b> · AKRO Service · Waldgrün und Mint</p>
+  <header class="header wrap">
+    <span class="brand"><img src="../../platzhalter/assets/img/akro-wortmarke.svg" width="1025" height="263" alt="AKRO"><span>Service</span></span>
+    <nav class="navigation"><span>Leistungen</span><span>Unternehmen</span><span>Karriere</span></nav>
+    <span class="header-contact">Kontakt <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+  </header>
+  <div class="hero wrap">
+    <div class="hero-content">
+      <p class="status"><span></span>Reinigung, Logistik und Transport</p>
+      <h1>Service,<br>auf den Verlass<br>ist.</h1>
+      <p class="hero-intro">Reinigung, Logistik und Transport –<br>eigenverantwortlich organisiert und durchgeführt.</p>
+      <span class="button">Anfrage per E-Mail <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span>
+    </div>
+    <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 640 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ff-service" x1="188" y1="120" x2="508" y2="570" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a1)" stop-opacity=".78"/><stop offset=".5" style="stop-color:var(--a2)" stop-opacity=".26"/><stop offset="1" style="stop-color:var(--a3)" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="fs-service" x1="220" y1="280" x2="510" y2="440" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--a2)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--a4)" stop-opacity=".7"/></linearGradient>
+    <linearGradient id="ed-service" x1="120" y1="80" x2="600" y2="550" gradientUnits="userSpaceOnUse"><stop style="stop-color:var(--edge)" stop-opacity=".9"/><stop offset="1" style="stop-color:var(--a1)" stop-opacity=".12"/></linearGradient>
+    <radialGradient id="gl-service"><stop style="stop-color:var(--glow)" stop-opacity=".36"/><stop offset="1" style="stop-color:var(--glow)" stop-opacity="0"/></radialGradient>
+    <filter id="sh-service" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+    <g id="po-service">
+      <path d="M182 142 327 70 498 169 498 490 353 572 182 474Z" fill="url(#fs-service)"/>
+      <path d="m182 142 171 99 0 331-171-98Zm34 63v248l103 60V265Z" fill="url(#ff-service)" fill-rule="evenodd" stroke="url(#ed-service)" stroke-width="1.3"/>
+      <path d="m182 142 145-72 171 99-145 72Z" style="fill:var(--a1)" fill-opacity=".26" stroke="url(#ed-service)" stroke-width="1.2"/>
+      <path d="m353 241 145-72v321l-145 82Z" style="fill:var(--a4)" fill-opacity=".36" stroke="url(#ed-service)" stroke-width="1.2"/>
+      <path d="m216 205 103 60v248l-103-60Z" style="fill:var(--a3)" fill-opacity=".4" stroke="url(#ed-service)"/>
+      <path d="m216 453 103-54V265M319 399l-64-37" style="stroke:var(--aline)" stroke-opacity=".4"/>
+      <path d="m183 144 169 98v328" style="stroke:var(--edge)" stroke-opacity=".66" stroke-width="1.6"/>
+    </g>
+  </defs>
+  <ellipse cx="362" cy="345" rx="300" ry="310" fill="url(#gl-service)"/>
+  <g style="stroke:var(--aline)" stroke-opacity=".13" stroke-width=".7"><path d="m18 441 350 202 283-161M1 483l278 160 361-208M68 402l414 239M114 374l446 257M164 347l448 259M216 319l428 247M270 292l360 208M91 601l469-270M37 570l469-270M4 526l448-259"/></g>
+  <ellipse cx="370" cy="557" rx="168" ry="36" style="fill:var(--a4)" fill-opacity=".6" filter="url(#sh-service)"/>
+  <g transform="translate(176 12) scale(.73)" opacity=".65"><use href="#po-service"/></g>
+  <g transform="translate(71 55) scale(.8)" opacity=".82"><use href="#po-service"/></g>
+  <g transform="translate(-44 94) scale(.87)"><use href="#po-service"/></g>
+  <g style="stroke:var(--edge)" stroke-opacity=".45"><path d="M493 118h57v57M96 498v42h43"/><path d="M546 287h10m-5-5v10M130 212h10m-5-5v10"/></g>
+</svg></div>
+    <div class="hero-foot"><p>Saarlouis / Niederlassung Bonn</p><p>0228 18456685</p></div>
+  </div>
+  <div class="karten wrap">
+    <h2>Leistungen für Ihren Betrieb.</h2>
+    <div class="karten-raster"><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12Z"/><path d="M31 27c.5 3 1.5 4 4 4.5-2.5.5-3.5 1.5-4 4.5-.5-3-1.5-4-4-4.5 2.5-.5 3.5-1.5 4-4.5Z"/></svg><h3>Unterhaltsreinigung</h3><p>Regelmäßige Reinigung von Büros, Hallen und Anlagen.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 5 14 8v15l-14 8-14-8V13Z"/><path d="m6 13 14 8 14-8M20 21v15M13 9l14 8v7"/></svg><h3>Logistik</h3><p>Innerbetriebliche Abläufe, Lager und Warenfluss.</p></article><article class="karte"><svg class="icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 10h20v17H4ZM24 16h7l5 6v5H24Z"/><circle cx="11" cy="30" r="3"/><circle cx="29" cy="30" r="3"/></svg><h3>Transport</h3><p>Planbare Fahrten mit festen Ansprechpartnern.</p></article></div>
+  </div>
+  <div class="band">
+    <div class="wrap band-innen">
+      <div><p class="band-notiz">So arbeiten wir</p><h2>Eigenverantwortlich.<br>Dokumentiert. Erreichbar.</h2></div>
+      <div class="band-raster">
+        <div class="band-karte"><b>Einsatzplanung</b><span>in eigener Verantwortung</span></div>
+        <div class="band-karte"><b>Dokumentation</b><span>nachvollziehbare Protokolle</span></div>
+        <div class="band-karte"><b>Ansprechpartner</b><span>fest zugeordnet</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="kontakt wrap">
+    <h2>Sprechen wir über<br>Ihr Vorhaben.</h2>
+    <div class="kontakt-box"><span>Rufen Sie uns an</span><strong>0228 18456685</strong></div>
+  </div>
+</section>
+</body>
+</html>
