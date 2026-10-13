@@ -118,15 +118,15 @@
 - Die vier Vorschauseiten unter `design-preview/` (alter Entwurf) sind am
   13.10.2026 entfernt; sie stehen in der Git-Historie.
 - **AKRO Group ist gebaut (13.10.2026)**, siehe Abschnitt Websitebau.
-- **Die Startseiten von Fire & Safety und Service sind unverändert**
-  schlichte technische Vorschauseiten mit `noindex, nofollow`.
+- **AKRO Fire & Safety und AKRO Service sind gebaut (13.10.2026)**, Texte
+  aus der Unternehmenspräsentation; siehe Abschnitt Websitebau.
 
 ## Builds
 
 - Am 13.10.2026 erneut geprüft: `npm ci` und `npm run build` für alle vier
   Workspaces laufen fehlerfrei durch, Ausgabe jeweils als statisches HTML in `apps/<app>/dist`.
-  `@akro/sicherheit` erzeugt 17 Seiten, `@akro/group` vier (Start,
-  Impressum, Datenschutz, 404), die beiden übrigen je eine.
+  `@akro/sicherheit` erzeugt 17 Seiten, `@akro/group`, `@akro/fire-safety`
+  und `@akro/service` je vier (Start, Impressum, Datenschutz, 404).
 - Im gebauten HTML steht **kein einziger externer Ladeverweis**. Im Browser
   gegengeprüft: null Netzwerkaufrufe an fremde Server.
 - Gewicht der Startseite: 15,3 KB HTML, 25,3 KB CSS, 83,7 KB Schriften —
@@ -247,7 +247,21 @@ Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
   - **Noch nicht veröffentlichbar:** Domainvariante (www oder nicht) und
     Weiterleitungen der alten Adressen sind offen; akro-sicherheit.de leitet
     derzeit per 301 auf akro-group.de.
-- **Für Fire & Safety und Service ist noch nichts gebaut.**
+- **AKRO Fire & Safety im Look 3 „Industrie-Signal“ (13.10.2026):**
+  Startseite mit drei Leistungsfeldern (Absicherung, Messtechnik, Höhe und
+  HSE), Einsatzumfeld, Zertifikaten SCC**, DIN EN ISO 9001, 45001, 14001 und
+  Kontakt; Impressum, Datenschutz, 404, Sitemap, robots.txt.
+- **AKRO Service im Look 3 „Kachelraster“ (13.10.2026):** Startseite mit
+  Reinigung, Logistik und Transport sowie Empfang und Veranstaltungsservice,
+  Ablauf und Kontakt; Impressum, Datenschutz, 404, Sitemap, robots.txt.
+- Für beide gilt: Texte aus der Unternehmenspräsentation (Folien 08 und 09),
+  bei Service ohne Formulierungen zur Personalgestellung. **Indexierung
+  abgeschaltet**, bis der Auftraggeber die Texte geprüft hat. Kontakt-E-Mail
+  vorerst `info@akro-group.de`. akro-fire-safety.de ist nicht registriert.
+- **Gemeinsame Komponenten** unter `packages/design-system/komponenten/`:
+  `Seo`, `Icon`, `Kunst` (Hero-Grafik), `Rechtstext`, `ImpressumText`,
+  `DatenschutzText`. Genutzt von Group, Fire & Safety und Service; AKRO
+  Sicherheit behält ihre bisherigen Komponenten.
 
 ## Assets
 
@@ -286,8 +300,10 @@ freigegeben (`docs/DECISIONS.md` Punkte 26 bis 33). AKRO Group ist gebaut.
 
 1. **AKRO Group veröffentlichen** — Upload in den Strato-Webspace;
    anschließend optional Sitemap in der Google Search Console einreichen.
-2. **AKRO Sicherheit im Look 3 umbauen** — Layout „Leitstelle“ aus
-   `Test-Design/2026-10-13-layouts-look3/sicherheit.html`.
+2. **Domainfragen für Sicherheit, Fire & Safety und Service** — www oder
+   nicht für akro-sicherheit.de, Weiterleitungen der alten Adressen,
+   Registrierung von akro-fire-safety.de, eigene E-Mail-Adressen.
+   Danach je Website veröffentlichen.
 3. **Inhaltsprüfung** — Referenzfreigaben, Bewacherregister-ID,
    Deckungssumme der Berufshaftpflicht sowie Rechtstexte klären;
    Inhaltsquelle für die KRITIS-Leistungsseite bestimmen.

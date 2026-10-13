@@ -1,22 +1,234 @@
 ---
+/**
+ * Grundlayout von akro-service.de im Look 3, Layout „Kachelraster“
+ * (Vorlage Test-Design/2026-10-13-layouts-look3/service.html):
+ * helle, runde Flächen, Logo in Waldgrün bis Mint.
+ */
 import '../styles/global.css';
+import Seo from '@akro/design-system/komponenten/Seo.astro';
+import Icon from '@akro/design-system/komponenten/Icon.astro';
+import logo from '@akro/assets/brand/akro-service/akro-service.svg';
+import favicon from '@akro/assets/brand/akro/favicon.svg';
+import { INDEXIERBAR, SITE_URL, firma } from '../config';
 
 interface Props {
   title: string;
+  description: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title } = Astro.props;
+const { title, description, noindex, jsonLd } = Astro.props;
+const jahr = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="de" data-brand="service">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="robots" content="noindex, nofollow" />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="de" data-marke="service">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#11734b" />
+    <link rel="icon" href={favicon.src} type="image/svg+xml" />
+    <Seo siteUrl={SITE_URL} siteName={firma.marke} indexierbar={INDEXIERBAR} title={title} description={description} noindex={noindex} jsonLd={jsonLd} />
+  </head>
+  <body>
+    <a class="skip" href="#inhalt">Zum Inhalt</a>
+
+    <header class="kopf wrap">
+      <a class="marke" href="/" aria-label="AKRO Service – Startseite">
+        <img src={logo.src} width="1025" height="263" alt="AKRO" />
+        <span>Service</span>
+      </a>
+      <nav class="menue nur-desktop" aria-label="Hauptnavigation">
+        <a href="/#leistungen">Leistungen</a>
+        <a href="/#ablauf">Ablauf</a>
+        <a href="/#kontakt">Kontakt</a>
+      </nav>
+      <a class="kopf-knopf" href="/#kontakt" aria-label="Anfrage">
+        <span>Anfrage</span>
+        <Icon name="pfeil" />
+      </a>
+    </header>
+
+    <main id="inhalt">
+      <slot />
+    </main>
+
+    <footer class="fuss wrap">
+      <p>{firma.name} · {firma.marke} · {firma.strasse}, {firma.plz} {firma.ort}</p>
+      <nav aria-label="Rechtliches">
+        <a href="/impressum/">Impressum</a>
+        <a href="/datenschutz/">Datenschutz</a>
+        <span>© {jahr}</span>
+      </nav>
+    </footer>
+
+    <nav class="aktionsleiste" aria-label="Schnellkontakt">
+      <a class="leise" href={firma.telefonHref}><Icon name="telefon" /> Anrufen</a>
+      <a class="laut" href={`mailto:${firma.email}?subject=${encodeURIComponent('Anfrage AKRO Service')}`}><Icon name="brief" /> Anfrage stellen</a>
+    </nav>
+  </body>
 </html>
+
+<style>
+  .kopf {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100px;
+  }
+
+  .marke {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .marke img {
+    width: 132px;
+    height: auto;
+  }
+
+  .marke span {
+    padding-left: 16px;
+    border-left: 1px solid var(--line);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  .menue {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    padding: 5px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .menue a {
+    padding: 9px 16px;
+    border-radius: 999px;
+    transition: background-color 0.16s;
+  }
+
+  .menue a:hover {
+    background: #d6efe0;
+  }
+
+  .kopf-knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 20px;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.16s;
+  }
+
+  .kopf-knopf:hover {
+    background: var(--mid);
+  }
+
+  .fuss {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 0 36px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .fuss nav {
+    display: flex;
+    gap: 22px;
+  }
+
+  .fuss a:hover {
+    color: var(--brand);
+  }
+
+  .aktionsleiste {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .kopf {
+      height: 74px;
+      gap: 12px;
+    }
+
+    .marke {
+      gap: 12px;
+    }
+
+    .marke img {
+      width: 100px;
+    }
+
+    .marke span {
+      padding-left: 12px;
+      font-size: 13px;
+    }
+
+    .kopf-knopf {
+      margin-left: auto;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      justify-content: center;
+    }
+
+    .kopf-knopf span {
+      display: none;
+    }
+
+    .fuss {
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 108px;
+    }
+
+    .aktionsleiste {
+      position: fixed;
+      z-index: 20;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 18px;
+      background: var(--nacht);
+      box-shadow: 0 12px 32px rgb(0 0 0 / 0.28);
+    }
+
+    .aktionsleiste a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .leise {
+      color: #e8fbf0;
+      background: rgb(255 255 255 / 0.08);
+    }
+
+    .laut {
+      background: var(--akzent);
+      color: var(--nacht);
+    }
+  }
+</style>

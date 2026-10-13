@@ -148,6 +148,11 @@ Vom Auftraggeber am 13.10.2026 freigegeben:
 36. **Datenschutzerklärung setzt Hosting bei Strato voraus.** Wird eine
     Website anderswo betrieben (etwa Vercel), muss Abschnitt „Hosting“ vor
     dem Livegang angepasst werden.
+37. **Gemeinsame Komponenten im Designsystem.** SEO-Kopf, Symbole,
+    Hero-Grafik und Rechtstexte liegen einmal in
+    `packages/design-system/komponenten/`; Zertifikatsdaten einmal in
+    `packages/assets/shared/certifications/zertifikate.json`. Die Apps
+    kopieren sie nicht.
 
 ## Offene beziehungsweise blockierte Entscheidungen
 

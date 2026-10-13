@@ -1,13 +1,584 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '@akro/design-system/komponenten/Icon.astro';
+import Kunst from '@akro/design-system/komponenten/Kunst.astro';
+import { SITE_URL, bereiche, firma, zertifikate } from '../config';
+
+const anfrage = `mailto:${firma.email}?subject=${encodeURIComponent('Anfrage AKRO Service')}`;
+const normen = zertifikate.map((z) => z.nummer).join(', ').replace(/, ([^,]*)$/, ' und $1');
+
+const ablauf = ['Bedarf schildern', 'Leistungsverzeichnis abstimmen', 'Angebot erhalten', 'Start nach Plan'];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: firma.marke,
+  url: `${SITE_URL}/`,
+  telephone: firma.telefonSchema,
+  email: firma.email,
+  parentOrganization: { '@type': 'Organization', name: firma.name, url: 'https://akro-group.de/' },
+};
 ---
 
-<BaseLayout title="akro-service — technische Vorschau">
-	<main class="akro-preview">
-		<h1>akro-service</h1>
-		<p class="akro-preview__note">
-			Technische Vorschau ohne Inhalte. Diese Seite dient nur der Pruefung der
-			Monorepo- und Build-Struktur und ist auf noindex, nofollow gesetzt.
-		</p>
-	</main>
+<BaseLayout
+  title="AKRO Service – Reinigung, Logistik und Veranstaltungsservice"
+  description="Unterhalts- und Sonderreinigung, innerbetriebliche Logistik, Transport sowie Empfang und Veranstaltungsservice – eigenverantwortlich organisiert von der AKRO GmbH."
+  jsonLd={jsonLd}
+>
+  <section class="wrap bento" id="leistungen" aria-labelledby="titel">
+    <div class="feld titel">
+      <p class="notiz">Reinigung · Logistik · Empfang</p>
+      <h1 id="titel">Service, auf den Verlass ist.</h1>
+      <p>
+        Leistungen rund um den laufenden Betrieb – als Werk- oder Dienstvertrag, mit denselben Regeln zu Planung, Dokumentation und Vertretung wie im Sicherheitsbereich.
+      </p>
+      <a class="knopf" href={anfrage}>Anfrage stellen <Icon name="pfeil" /></a>
+    </div>
+    <div class="feld kunstfeld">
+      <p>Geplant, dokumentiert, vertreten.</p>
+      <Kunst id="v" />
+    </div>
+    {
+      bereiche.map((b, i) => (
+        <a class:list={['feld', 'bereich', i > 0 && 'b']} href={`#${['reinigung', 'logistik', 'empfang'][i]}`}>
+          <Icon name={b.icon} class="bereich-icon" />
+          <h2>{b.titel}</h2>
+          <p>{b.kurz}</p>
+        </a>
+      ))
+    }
+    <div class="feld dunkel">
+      <small>Direkt anrufen</small>
+      <a href={firma.telefonHref}>{firma.telefon}</a>
+    </div>
+    <div class="feld aussage">
+      <span class="haken-kreis"><Icon name="haken" /></span>
+      <p>Eigenverantwortlich organisiert – mit einem festen Ansprechpartner für Ihren Auftrag.</p>
+    </div>
+  </section>
+
+  <section class="wrap details" aria-labelledby="d-titel">
+    <h2 id="d-titel" class="abschnitt">Was wir übernehmen.</h2>
+    <div class="details-raster">
+      {
+        bereiche.map((b, i) => (
+          <article class="detail" id={['reinigung', 'logistik', 'empfang'][i]}>
+            <Icon name={b.icon} class="bereich-icon" />
+            <h3>{b.titel}</h3>
+            <ul>
+              {b.punkte.map((p) => (
+                <li>
+                  <Icon name="haken" /> {p}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+    <p class="normen">Qualitäts-, Umwelt- und Arbeitsschutzmanagement nach DIN EN ISO {normen}.</p>
+  </section>
+
+  <section class="wrap ablauf" id="ablauf" aria-labelledby="a-titel">
+    <h2 id="a-titel" class="abschnitt">So beginnt die Zusammenarbeit.</h2>
+    <ol class="pillen">
+      {ablauf.map((schritt, i) => <li class="pille"><b>{i + 1}</b>{schritt}</li>)}
+    </ol>
+  </section>
+
+  <section class="wrap kontakt" id="kontakt" aria-labelledby="k-titel">
+    <h2 id="k-titel">Was dürfen wir<br />für Sie übernehmen?</h2>
+    <div class="kontakt-wege">
+      <a class="tel" href={firma.telefonHref}><Icon name="telefon" /> {firma.telefon}</a>
+      <a class="mail" href={anfrage}><Icon name="brief" /> {firma.email}</a>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+    gap: 14px;
+  }
+
+  .feld {
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+    border-radius: 28px;
+  }
+
+  .titel {
+    grid-column: span 2;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    padding: 44px 44px 40px;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .notiz {
+    align-self: flex-start;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: #d6efe0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  h1 {
+    margin: 26px 0 18px;
+    font-size: clamp(50px, 4.8vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
+    font-weight: 560;
+  }
+
+  .titel > p:not(.notiz) {
+    max-width: 460px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .knopf {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding: 15px 22px;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.16s;
+  }
+
+  .knopf:hover {
+    background: var(--mid);
+  }
+
+  .kunstfeld {
+    grid-column: span 2;
+    min-height: 280px;
+    background: linear-gradient(135deg, #16834f, var(--mid) 50%, var(--deep));
+  }
+
+  .kunstfeld :global(.kunst) {
+    position: absolute;
+    right: -6%;
+    top: -18%;
+    width: 76%;
+    height: 150%;
+    overflow: visible;
+  }
+
+  .kunstfeld p {
+    position: relative;
+    z-index: 1;
+    max-width: 230px;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    font-weight: 560;
+    color: #e8fbf0;
+  }
+
+  .bereich {
+    display: flex;
+    flex-direction: column;
+    background: #d6efe0;
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .bereich:hover {
+    transform: translateY(-3px);
+  }
+
+  .bereich.b {
+    background: #c4e8d3;
+  }
+
+  .feld :global(.bereich-icon),
+  .detail :global(.bereich-icon) {
+    width: 48px;
+    height: 48px;
+    padding: 11px;
+    border-radius: 14px;
+    background: #fff;
+    color: var(--brand);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .detail :global(.bereich-icon) {
+    background: #d6efe0;
+  }
+
+  .bereich h2 {
+    margin-top: auto;
+    padding-top: 22px;
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+
+  .bereich p {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .dunkel {
+    display: flex;
+    flex-direction: column;
+    background: var(--nacht);
+    color: #e8fbf0;
+  }
+
+  .dunkel small {
+    font-size: 12px;
+    color: #9fc4b1;
+  }
+
+  .dunkel a {
+    margin-top: auto;
+    font-size: 26px;
+    letter-spacing: -0.03em;
+  }
+
+  .aussage {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .haken-kreis {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--akzent);
+    color: var(--deep);
+  }
+
+  .aussage p {
+    max-width: 560px;
+    font-size: 22px;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+    font-weight: 560;
+  }
+
+  .abschnitt {
+    margin-bottom: 32px;
+    font-size: 40px;
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    font-weight: 560;
+  }
+
+  .details {
+    padding-top: 96px;
+  }
+
+  .details-raster {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .detail {
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: #fff;
+    scroll-margin-top: 24px;
+  }
+
+  .detail h3 {
+    margin: 20px 0 14px;
+    font-size: 21px;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  .detail ul {
+    display: grid;
+    gap: 10px;
+  }
+
+  .detail li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .detail li :global(.ico) {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    color: var(--brand);
+  }
+
+  .normen {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .ablauf {
+    padding: 88px 0 80px;
+    text-align: center;
+  }
+
+  .pillen {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .pille {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 22px 12px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .pille b {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .kontakt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 28px;
+    padding: 56px;
+    border-radius: 32px;
+    background: linear-gradient(120deg, var(--brand), var(--deep));
+    color: #fff;
+  }
+
+  .kontakt h2 {
+    font-size: 40px;
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    font-weight: 550;
+  }
+
+  .kontakt-wege {
+    display: grid;
+    gap: 10px;
+    justify-items: stretch;
+  }
+
+  .kontakt-wege a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 18px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .tel {
+    background: var(--akzent);
+    color: var(--nacht);
+    font-size: 22px;
+  }
+
+  .mail {
+    border: 1px solid rgb(255 255 255 / 0.4);
+    font-size: 17px;
+  }
+
+  @media (max-width: 1100px) {
+    .details-raster {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: auto;
+      gap: 10px;
+    }
+
+    .feld {
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .titel {
+      grid-row: auto;
+      padding: 26px 22px 24px;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-size: clamp(40px, 11.5vw, 52px);
+    }
+
+    .titel > p:not(.notiz) {
+      font-size: 15px;
+    }
+
+    .knopf {
+      display: none;
+    }
+
+    .kunstfeld {
+      min-height: 170px;
+    }
+
+    .kunstfeld :global(.kunst) {
+      right: -118px;
+      top: -50px;
+      width: 280px;
+      height: 290px;
+    }
+
+    .kunstfeld p {
+      max-width: 150px;
+      font-size: 19px;
+    }
+
+    .bereich {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      align-items: center;
+      gap: 2px 14px;
+      min-height: 0;
+    }
+
+    .bereich :global(.bereich-icon) {
+      grid-row: 1 / 3;
+    }
+
+    .feld :global(.bereich-icon) {
+      width: 42px;
+      height: 42px;
+      padding: 9px;
+    }
+
+    .bereich h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 17px;
+    }
+
+    .bereich p {
+      margin: 0;
+    }
+
+    .bereich p {
+      font-size: 13px;
+    }
+
+    .dunkel {
+      grid-column: span 2;
+      min-height: 0;
+    }
+
+    .dunkel a {
+      margin-top: 22px;
+      font-size: 19px;
+    }
+
+    .aussage {
+      grid-column: span 2;
+      gap: 14px;
+    }
+
+    .haken-kreis {
+      width: 46px;
+      height: 46px;
+    }
+
+    .aussage p {
+      font-size: 17px;
+    }
+
+    .abschnitt {
+      margin-bottom: 22px;
+      font-size: 28px;
+    }
+
+    .details {
+      padding-top: 56px;
+    }
+
+    .detail {
+      padding: 22px 20px;
+    }
+
+    .ablauf {
+      padding: 56px 0 44px;
+      text-align: left;
+    }
+
+    .pillen {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .kontakt {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+      padding: 30px 22px;
+      border-radius: 24px;
+    }
+
+    .kontakt h2 {
+      font-size: 28px;
+    }
+
+    .tel {
+      font-size: 19px;
+    }
+
+    .mail {
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+  }
+</style>
