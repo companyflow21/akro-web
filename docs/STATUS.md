@@ -141,9 +141,9 @@
   auf dem Branch `pc-stand`. Zusammen mit dem Bildbriefing-Branch ist er in
   `claude/modest-bohr-7fdcoa` zusammengeführt; `master` ist noch auf dem
   Stand vom 26.08.2026.
-- Auf dem PC liegen außerdem `ARBEITSSTAND.md`, `akro-design-starter/` und
-  `akro-design-starter.zip`, die Git nicht verwaltet. Inhalt noch nicht
-  geprüft.
+- `ARBEITSSTAND.md` (Notiz vom 05.09.2026) und `akro-design-starter/` sind am
+  13.10.2026 vom PC nachgereicht und übernommen. Die ZIP-Kopie des
+  Design-Starters bleibt außerhalb des Repositorys.
 - `CLAUDE.md` lag bis 13.10.2026 als symbolische Verknüpfung in Git und ließ
   sich außerhalb von Windows nicht auspacken; jetzt normale Datei.
   `package-lock.json` kennt seitdem auch `@akro/assets`, `npm ci` läuft.
@@ -164,7 +164,8 @@
 - **akro-group.de zeigt den Platzhalter** aus dem Strato-Webspace, per HTTPS
   und mit `noindex`. Die Live-Fassung ist neuer als `platzhalter/` im
   Repository (eigene CSS-Datei, Abschnitt Zertifizierungen, E-Mail
-  `info@akro-group.de`); ihre Quelle liegt nicht im Repository.
+  `info@akro-group.de`). Ihre Designgrundlagen liegen in
+  `akro-design-starter/`, die Seiten selbst nicht im Repository.
 
 ## Domains
 
