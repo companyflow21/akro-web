@@ -1,7 +1,7 @@
 # Status – Ist-Stand
 
-> Geprüft am: 26.08.2026, Abschnitte Builds, Git, Hosting und Domains
-> zuletzt am 13.10.2026
+> Geprüft am: 26.08.2026, Abschnitte Builds, Git, Hosting, Domains,
+> Inhalte, Websitebau und Nächste Phase zuletzt am 13.10.2026
 > Dieser Inhalt beschreibt einen **veränderlichen Ist-Stand** zum genannten
 > Prüfdatum, keine feste Aussage für die Zukunft. Bei jeder neuen Prüfung
 > aktualisieren.
@@ -119,14 +119,16 @@
   `robots.txt` gesperrt sind. Darunter `design-preview/marken` als
   Freigabevorlage, die alle vier Markenwelten am identischen Seitenaufbau
   zeigt.
-- **Die Startseiten von Fire & Safety, Service und Group sind unverändert**
+- **AKRO Group ist gebaut (13.10.2026)**, siehe Abschnitt Websitebau.
+- **Die Startseiten von Fire & Safety und Service sind unverändert**
   schlichte technische Vorschauseiten mit `noindex, nofollow`.
 
 ## Builds
 
 - Am 13.10.2026 erneut geprüft: `npm ci` und `npm run build` für alle vier
   Workspaces laufen fehlerfrei durch, Ausgabe jeweils als statisches HTML in `apps/<app>/dist`.
-  `@akro/sicherheit` erzeugt 21 Seiten, die drei übrigen je eine.
+  `@akro/sicherheit` erzeugt 21 Seiten, `@akro/group` vier (Start,
+  Impressum, Datenschutz, 404), die beiden übrigen je eine.
 - Im gebauten HTML steht **kein einziger externer Ladeverweis**. Im Browser
   gegengeprüft: null Netzwerkaufrufe an fremde Server.
 - Gewicht der Startseite: 15,3 KB HTML, 25,3 KB CSS, 83,7 KB Schriften —
@@ -214,7 +216,29 @@ Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
   selbstreferenzierenden Canonical.
 - **Aus dem Altbestand wurde weiterhin kein einziges Asset übernommen.** Die
   Rasterbilder des Altbestands sind unbrauchbar, siehe Abschnitt Assets.
-- **Für Fire & Safety, Service und Group ist noch nichts gebaut.**
+- **AKRO Group im Look 3 gebaut (13.10.2026)** in `apps/akro-group`:
+  Startseite im Portal-Layout (drei Sparten-Kacheln, Unternehmen,
+  Zertifikate, Kontakt), Impressum und Datenschutz mit den Texten der
+  bisherigen Live-Seite, eigene 404-Seite, Sitemap und robots.txt.
+  Kanonische Domain `https://akro-group.de`, endungslose URLs mit
+  Schrägstrich am Ende.
+  - Indexierung über `INDEXIERBAR` in `src/config.ts` abgeschaltet
+    (`noindex` wie beim Platzhalter), bis sie freigegeben ist.
+  - Die Sparten-Kacheln zeigen „Website folgt“ und verlinken erst, wenn
+    `online: true` gesetzt ist — derzeit leiten akro-sicherheit.de und
+    akro-service.de auf akro-group.de zurück, akro-fire-safety.de existiert
+    nicht.
+  - `public/.htaccess` leitet die alten Platzhalter-Adressen
+    `/impressum.html` und `/datenschutz.html` weiter und meldet die eigene
+    404-Seite an. Wirkt nur auf dem Strato-Webspace.
+  - Logo und Favicon kommen aus `packages/assets/brand/akro/`, Farbwelten
+    und Schrift aus `packages/design-system/marken.css`.
+  - Geprüft: keine externen Ladeverweise, je Seite genau eine H1, auf dem
+    Handy (390 px) kein seitliches Überlaufen. Gebaut rund 110 KB.
+  - **Noch nicht veröffentlicht.** Der bisherige Live-Stand liegt als
+    Rückfallebene unter `platzhalter/live-stand-2026-10-13/`.
+- **Für Fire & Safety und Service ist noch nichts gebaut;** AKRO Sicherheit
+  steht noch im alten, verworfenen Entwurf.
 
 ## Assets
 
@@ -248,16 +272,16 @@ Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
 
 ## Nächste Phase
 
-Die Designgrundlage ist erledigt. Was jetzt vorn liegt, hängt überwiegend
-nicht an der Technik, sondern an Angaben und Entscheidungen des
-Auftraggebers.
+Stand 13.10.2026: Look 3, Farbwelten, Layouts je Marke und Zertifikate sind
+freigegeben (`docs/DECISIONS.md` Punkte 26 bis 33). AKRO Group ist gebaut.
 
-1. **Farbfreigabe** — die Geschäftsführung bestätigt das Spartenmodell und
-   die konkreten Werte oder gleicht sie an Logo und Drucksachen an. Vorlage
-   dafür ist die Seite `/design-preview/marken`.
-2. **Inhaltsprüfung** — Referenzfreigaben, Originalzertifikate,
-   Unternehmensdaten für das Impressum sowie Rechtstexte klären; Inhaltsquelle
-   für die KRITIS-Leistungsseite bestimmen.
+1. **AKRO Group veröffentlichen** — Upload in den Strato-Webspace, danach
+   über die Indexierung entscheiden.
+2. **AKRO Sicherheit im Look 3 umbauen** — Layout „Leitstelle“ aus
+   `Test-Design/2026-10-13-layouts-look3/sicherheit.html`.
+3. **Inhaltsprüfung** — Referenzfreigaben, Bewacherregister-ID,
+   Deckungssumme der Berufshaftpflicht sowie Rechtstexte klären;
+   Inhaltsquelle für die KRITIS-Leistungsseite bestimmen.
 3. **Bildmaterial** — beschaffen oder produzieren lassen. Blockiert das
    Fertigstellen der Seiten und ist wegen des zerstörten Altbestands
    unumgänglich.

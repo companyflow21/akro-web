@@ -105,6 +105,39 @@ Altbestands auf Byte-Ebene zerstört ist und nur die SVG-Dateien nutzbar sind.
     damit der bestehenden Monorepo-Architektur aus Punkt 1 und 2. Jede App
     greift über den Paketnamen darauf zu; eine Kopie je App ist unzulässig.
 
+## Gestaltung und Reihenfolge (13.10.2026)
+
+Vom Auftraggeber am 13.10.2026 freigegeben:
+
+26. **Look 3 ist die gemeinsame Gestaltung aller vier Websites.** Gemeint ist
+    der Elektroblau-Stil des Platzhalters von akro-group.de. Der helle,
+    papierartige Entwurf (`tokens.css`, `base.css`) ist verworfen und bleibt
+    nur bis zum Umbau von AKRO Sicherheit bestehen.
+27. **Jede Marke hat eine eigene Farbwelt:** Group Elektroblau, Sicherheit
+    Nachtblau und Cyan, Fire & Safety Signalrot und Glut, Service Waldgrün und
+    Mint. Die Werte stehen in `packages/design-system/marken.css`; alle Text-
+    und Flächenpaare erreichen mindestens WCAG AA.
+28. **Jede Website bekommt ein eigenes Layout,** damit die vier Seiten nicht
+    wie Kopien wirken: Group als Portal, Sicherheit als Leitstelle, Fire &
+    Safety als Industrie-Signal, Service als Kachelraster. Vorlage:
+    `Test-Design/2026-10-13-layouts-look3`. Gemeinsam bleiben Schrift
+    (Archivo), Grundstil und die Form des Logos.
+29. **Das Logo erscheint je Marke in deren Farbe.** Form der Wortmarke
+    unverändert, nur der Farbverlauf wechselt.
+30. **Reihenfolge geändert: AKRO Group zuerst.** AKRO tritt als
+    Multiservice-Anbieter auf; die gemeinsame Seite entsteht vor den drei
+    Sparten. Ersetzt die Reihenfolge in `CLAUDE.md` §4.
+31. **Zertifizierungen bestätigt.** DIN 77200-1, SCC**, DIN EN ISO 9001,
+    DIN ISO 45001 und DIN EN ISO 14001 sind laut Auftraggeber gültig und mit
+    den Originalen abgeglichen und dürfen öffentlich dargestellt werden.
+32. **Mobile Kontaktleiste.** Auf dem Handy steht am unteren Rand dauerhaft
+    eine Leiste mit „Anrufen“ und einer Anfrage- beziehungsweise
+    E-Mail-Schaltfläche. Damit ist der offene Punkt zur mobilen Darstellung
+    von Telefonnummer und Anfrage entschieden.
+33. **Layout per Komponenten-CSS.** Die markenspezifischen Layouts werden mit
+    Astro-Komponentenstilen gebaut; Tailwind bleibt eingebunden und liefert
+    die Grundformatierung. Gemeinsames liegt in `marken.css`.
+
 ## Offene beziehungsweise blockierte Entscheidungen
 
 Diese Punkte sind bewusst noch **nicht** entschieden und blockieren die
@@ -117,11 +150,8 @@ jeweils genannten Arbeiten:
 - **Die URL der KRITIS-Leistung bleibt vorläufig.** Als Arbeitsvorschlag gilt
   `/leistungen/kritis-schutz`. Die endgültige URL wird vor dem Websitebau
   nach einer separaten SEO- und Begriffsprüfung beschlossen.
-- **Mobile Darstellung von Telefonnummer und Anfrage.** Beide müssen auf
-  Mobilgeräten leicht erreichbar sein. Ob dies über eine dauerhaft sichtbare
-  beziehungsweise sticky Darstellung gelöst wird, ist noch keine feste
-  Architekturentscheidung und wird erst im Prototyp auf Platzbedarf und
-  Bedienbarkeit geprüft.
+- ~~Mobile Darstellung von Telefonnummer und Anfrage~~ — entschieden in
+  Punkt 32.
 - **Endgültiger PDF-Pfad der AGB** und eventuell notwendige Redirects sind
   offen.
 - Die vollständige Liste weiterer offener Punkte (Referenzfreigaben,

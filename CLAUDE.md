@@ -52,13 +52,15 @@ sofern der Nutzer nicht ausdrücklich eine andere rechtliche Struktur bestätigt
 | AKRO Service | akro-service.de | Reinigung, Logistik, Transport und weitere Dienstleistungen | Grün |
 | AKRO Group | akro-group.de | Schlanke Dachmarken- und Portalseite | AKRO-Blau |
 
-Reihenfolge der Umsetzung:
+Reihenfolge der Umsetzung (geändert am 13.10.2026, `docs/DECISIONS.md` Punkt 30):
 
-1. AKRO Sicherheit vollständig fertigstellen.
-2. Gemeinsames Designsystem stabilisieren.
+1. AKRO Group als gemeinsame Portalseite fertigstellen.
+2. AKRO Sicherheit im Look 3 umbauen und fertigstellen.
 3. AKRO Fire & Safety aufbauen.
 4. AKRO Service aufbauen.
-5. AKRO Group als schlanke Portalseite aufbauen.
+
+Gestaltung: Look 3 mit eigener Farbwelt und eigenem Layout je Marke
+(`docs/DECISIONS.md` Punkte 26 bis 29).
 
 ## 5. Verbindliche Quellen
 

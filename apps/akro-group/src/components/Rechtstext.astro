@@ -1,0 +1,99 @@
+---
+/**
+ * Rahmen für Impressum und Datenschutz: ruhige Lesespalte, gleiche Schrift
+ * und Farben wie die Startseite.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  titel: string;
+}
+
+const { titel } = Astro.props;
+---
+
+<article class="rechtstext wrap">
+  <a class="zurueck" href="/"><Icon name="pfeilLinks" /> Startseite</a>
+  <h1>{titel}</h1>
+  <slot />
+</article>
+
+<style>
+  .rechtstext {
+    max-width: 760px;
+    margin-block: 24px 64px;
+    padding: 48px 56px 56px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: #f7f9fc;
+  }
+
+  .zurueck {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--brand);
+  }
+
+  h1 {
+    margin-bottom: 32px;
+    font-size: clamp(32px, 5vw, 50px);
+    line-height: 1.12;
+    letter-spacing: -0.04em;
+    font-weight: 560;
+    overflow-wrap: anywhere;
+  }
+
+  .rechtstext :global(h2) {
+    margin: 32px 0 12px;
+    font-size: 21px;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  .rechtstext :global(p),
+  .rechtstext :global(ul) {
+    margin-bottom: 14px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #394960;
+  }
+
+  .rechtstext :global(ul) {
+    padding-left: 22px;
+    list-style: disc;
+  }
+
+  .rechtstext :global(strong) {
+    color: var(--ink);
+  }
+
+  .rechtstext :global(p a) {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 720px) {
+    .rechtstext {
+      width: calc(100% - 24px);
+      margin-block: 8px 40px;
+      padding: 28px 20px 32px;
+      border-radius: 20px;
+    }
+
+    .rechtstext :global(h2) {
+      font-size: 19px;
+    }
+
+    .rechtstext :global(p),
+    .rechtstext :global(ul) {
+      font-size: 14px;
+    }
+  }
+</style>

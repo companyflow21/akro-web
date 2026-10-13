@@ -1,0 +1,35 @@
+---
+/**
+ * Eine Stelle für Title, Description, Canonical, Robots und strukturierte
+ * Daten (CLAUDE.md §9). Aufbau wie in apps/akro-sicherheit.
+ */
+import { INDEXIERBAR, SITE_URL } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  /** true setzt noindex, nofollow — z. B. für /404 */
+  noindex?: boolean;
+  /** Fertiges JSON-LD-Objekt, wird als script eingebettet */
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, noindex = false, jsonLd } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const sperren = noindex || !INDEXIERBAR;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{!noindex && <link rel="canonical" href={canonical} />}
+{sperren && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="AKRO GmbH" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

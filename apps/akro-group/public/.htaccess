@@ -1,0 +1,9 @@
+# Alte Adressen des Platzhalters (bis Oktober 2026) auf die neuen,
+# endungslosen Adressen weiterleiten. Nur auf dem Strato-Webspace wirksam.
+# /index.html bewusst nicht: der Server lädt diese Datei intern für "/",
+# eine Weiterleitung darauf würde eine Endlosschleife erzeugen.
+Redirect 301 /impressum.html /impressum/
+Redirect 301 /datenschutz.html /datenschutz/
+
+# Eigene Fehlerseite für nicht vorhandene Adressen.
+ErrorDocument 404 /404.html

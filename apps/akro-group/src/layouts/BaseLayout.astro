@@ -1,22 +1,260 @@
 ---
 import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Icon from '../components/Icon.astro';
+import { firma } from '../config';
+import logo from '@akro/assets/brand/akro/akro-wortmarke.svg';
+import favicon from '@akro/assets/brand/akro/favicon.svg';
 
 interface Props {
   title: string;
+  description: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title } = Astro.props;
+const { title, description, noindex, jsonLd } = Astro.props;
+const jahr = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="de" data-brand="group">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="robots" content="noindex, nofollow" />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="de" data-marke="group">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#073ae8" />
+    <link rel="icon" href={favicon.src} type="image/svg+xml" />
+    <Seo title={title} description={description} noindex={noindex} jsonLd={jsonLd} />
+  </head>
+  <body>
+    <a class="skip" href="#inhalt">Zum Inhalt</a>
+
+    <header class="kopf wrap">
+      <a class="marke" href="/" aria-label="AKRO GmbH – Startseite">
+        <img src={logo.src} width="1025" height="263" alt="AKRO" />
+        <span>GmbH</span>
+      </a>
+      <nav class="menue nur-desktop" aria-label="Hauptnavigation">
+        <a href="/#bereiche">Geschäftsbereiche</a>
+        <a href="/#unternehmen">Unternehmen</a>
+        <a href="/#zertifikate">Zertifikate</a>
+      </nav>
+      <a class="kopf-knopf" href="/#kontakt" aria-label="Kontakt">
+        <span>Kontakt</span>
+        <Icon name="telefon" />
+      </a>
+    </header>
+
+    <main id="inhalt">
+      <slot />
+    </main>
+
+    <footer class="fuss wrap">
+      <div>
+        <p class="fuss-firma">{firma.name}</p>
+        <p>{firma.strasse} · {firma.plz} {firma.ort} · Niederlassung {firma.niederlassung}</p>
+      </div>
+      <div class="fuss-rechts">
+        <nav aria-label="Rechtliches">
+          <a href="/impressum/">Impressum</a>
+          <a href="/datenschutz/">Datenschutz</a>
+        </nav>
+        <p>© {jahr} {firma.name}</p>
+      </div>
+    </footer>
+
+    <nav class="aktionsleiste" aria-label="Schnellkontakt">
+      <a class="leise" href={firma.telefonHref}><Icon name="telefon" /> Anrufen</a>
+      <a class="laut" href={`mailto:${firma.email}`}><Icon name="brief" /> E-Mail schreiben</a>
+    </nav>
+  </body>
 </html>
+
+<style>
+  .kopf {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 104px;
+  }
+
+  .marke {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .marke img {
+    width: 138px;
+    height: auto;
+  }
+
+  .marke span {
+    padding-left: 18px;
+    border-left: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .menue {
+    display: flex;
+    gap: 32px;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .menue a:hover {
+    color: var(--brand);
+  }
+
+  .kopf-knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.16s;
+  }
+
+  .kopf-knopf:hover {
+    background: var(--deep);
+  }
+
+  .fuss {
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 24px;
+    padding: 28px 32px;
+    border-radius: 16px;
+    background: var(--nacht);
+    color: #c9d6ee;
+    font-size: 13px;
+  }
+
+  .fuss p + p {
+    margin-top: 6px;
+  }
+
+  .fuss-firma {
+    font-size: 14px;
+    font-weight: 650;
+    color: #fff;
+  }
+
+  .fuss-rechts {
+    text-align: right;
+  }
+
+  .fuss nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+  }
+
+  .fuss a {
+    color: #fff;
+  }
+
+  .fuss a:hover {
+    text-decoration: underline;
+  }
+
+  .aktionsleiste {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .kopf {
+      height: 76px;
+      gap: 12px;
+    }
+
+    .marke {
+      gap: 12px;
+    }
+
+    .marke img {
+      width: 104px;
+    }
+
+    .marke span {
+      padding-left: 12px;
+      font-size: 12px;
+    }
+
+    .kopf-knopf {
+      margin-left: auto;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      justify-content: center;
+      border-radius: 12px;
+    }
+
+    .kopf-knopf span {
+      display: none;
+    }
+
+    .fuss {
+      display: block;
+      padding: 22px 20px 24px;
+      margin-bottom: 100px;
+      font-size: 12px;
+    }
+
+    .fuss-rechts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+      text-align: left;
+    }
+
+    .fuss-rechts p {
+      margin: 0;
+    }
+
+    .aktionsleiste {
+      position: fixed;
+      z-index: 20;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 18px;
+      background: var(--nacht);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    }
+
+    .aktionsleiste a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .aktionsleiste .leise {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .aktionsleiste .laut {
+      background: var(--brand);
+      color: #fff;
+    }
+  }
+</style>

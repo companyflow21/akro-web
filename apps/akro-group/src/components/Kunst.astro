@@ -1,0 +1,52 @@
+---
+/**
+ * Isometrische Hero-Grafik im Look 3. Die Farben kommen aus der Farbwelt
+ * (--a1 bis --aline in marken.css), dieselbe Grafik passt so zu jeder Marke.
+ */
+interface Props {
+  /** Eindeutiges Kürzel, falls die Grafik mehrfach auf einer Seite steht */
+  id?: string;
+  class?: string;
+}
+
+const { id = 'k', class: klasse = 'kunst' } = Astro.props;
+const s = (name: string) => `stop-color:var(--${name})`;
+---
+
+<svg class={klasse} viewBox="0 0 640 660" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id={`ff-${id}`} x1="188" y1="120" x2="508" y2="570" gradientUnits="userSpaceOnUse">
+      <stop style={s('a1')} stop-opacity=".78" /><stop offset=".5" style={s('a2')} stop-opacity=".26" /><stop offset="1" style={s('a3')} stop-opacity=".5" />
+    </linearGradient>
+    <linearGradient id={`fs-${id}`} x1="220" y1="280" x2="510" y2="440" gradientUnits="userSpaceOnUse">
+      <stop style={s('a2')} stop-opacity=".36" /><stop offset="1" style={s('a4')} stop-opacity=".7" />
+    </linearGradient>
+    <linearGradient id={`ed-${id}`} x1="120" y1="80" x2="600" y2="550" gradientUnits="userSpaceOnUse">
+      <stop style={s('edge')} stop-opacity=".9" /><stop offset="1" style={s('a1')} stop-opacity=".12" />
+    </linearGradient>
+    <radialGradient id={`gl-${id}`}>
+      <stop style={s('glow')} stop-opacity=".36" /><stop offset="1" style={s('glow')} stop-opacity="0" />
+    </radialGradient>
+    <filter id={`sh-${id}`} x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16" /></filter>
+    <g id={`po-${id}`}>
+      <path d="M182 142 327 70 498 169 498 490 353 572 182 474Z" fill={`url(#fs-${id})`} />
+      <path d="m182 142 171 99 0 331-171-98Zm34 63v248l103 60V265Z" fill={`url(#ff-${id})`} fill-rule="evenodd" stroke={`url(#ed-${id})`} stroke-width="1.3" />
+      <path d="m182 142 145-72 171 99-145 72Z" style="fill:var(--a1)" fill-opacity=".26" stroke={`url(#ed-${id})`} stroke-width="1.2" />
+      <path d="m353 241 145-72v321l-145 82Z" style="fill:var(--a4)" fill-opacity=".36" stroke={`url(#ed-${id})`} stroke-width="1.2" />
+      <path d="m216 205 103 60v248l-103-60Z" style="fill:var(--a3)" fill-opacity=".4" stroke={`url(#ed-${id})`} />
+      <path d="m216 453 103-54V265M319 399l-64-37" style="stroke:var(--aline)" stroke-opacity=".4" />
+      <path d="m183 144 169 98v328" style="stroke:var(--edge)" stroke-opacity=".66" stroke-width="1.6" />
+    </g>
+  </defs>
+  <ellipse cx="362" cy="345" rx="300" ry="310" fill={`url(#gl-${id})`} />
+  <g style="stroke:var(--aline)" stroke-opacity=".13" stroke-width=".7">
+    <path d="m18 441 350 202 283-161M1 483l278 160 361-208M68 402l414 239M114 374l446 257M164 347l448 259M216 319l428 247M270 292l360 208M91 601l469-270M37 570l469-270M4 526l448-259" />
+  </g>
+  <ellipse cx="370" cy="557" rx="168" ry="36" style="fill:var(--a4)" fill-opacity=".6" filter={`url(#sh-${id})`} />
+  <g transform="translate(176 12) scale(.73)" opacity=".65"><use href={`#po-${id}`} /></g>
+  <g transform="translate(71 55) scale(.8)" opacity=".82"><use href={`#po-${id}`} /></g>
+  <g transform="translate(-44 94) scale(.87)"><use href={`#po-${id}`} /></g>
+  <g style="stroke:var(--edge)" stroke-opacity=".45">
+    <path d="M493 118h57v57M96 498v42h43" /><path d="M546 287h10m-5-5v10M130 212h10m-5-5v10" />
+  </g>
+</svg>
