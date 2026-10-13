@@ -1,6 +1,7 @@
 # Status – Ist-Stand
 
-> Geprüft am: 26.08.2026
+> Geprüft am: 26.08.2026, Abschnitte Builds, Git, Hosting und Domains
+> zuletzt am 13.10.2026
 > Dieser Inhalt beschreibt einen **veränderlichen Ist-Stand** zum genannten
 > Prüfdatum, keine feste Aussage für die Zukunft. Bei jeder neuen Prüfung
 > aktualisieren.
@@ -123,8 +124,8 @@
 
 ## Builds
 
-- Am 26.08.2026 geprüft: `npm run build` für alle vier Workspaces läuft
-  fehlerfrei durch, Ausgabe jeweils als statisches HTML in `apps/<app>/dist`.
+- Am 13.10.2026 erneut geprüft: `npm ci` und `npm run build` für alle vier
+  Workspaces laufen fehlerfrei durch, Ausgabe jeweils als statisches HTML in `apps/<app>/dist`.
   `@akro/sicherheit` erzeugt 21 Seiten, die drei übrigen je eine.
 - Im gebauten HTML steht **kein einziger externer Ladeverweis**. Im Browser
   gegengeprüft: null Netzwerkaufrufe an fremde Server.
@@ -133,10 +134,19 @@
 
 ## Git
 
-- **Remote eingerichtet und Arbeitsstand gesichert.** Geprüft am 26.08.2026:
-  `origin` zeigt auf das **private** Repository `companyflow21/akro-web` bei
-  GitHub. Lokaler Stand und `origin/master` sind identisch, das
-  Arbeitsverzeichnis ist sauber.
+- **Remote eingerichtet.** `origin` zeigt auf das **private** Repository
+  `companyflow21/akro-web` bei GitHub.
+- **Stand 13.10.2026:** Der lokale Commit vom 05.09.2026 (`platzhalter/`
+  für akro-group.de und `praesentation/`) war nie hochgeladen und liegt jetzt
+  auf dem Branch `pc-stand`. Zusammen mit dem Bildbriefing-Branch ist er in
+  `claude/modest-bohr-7fdcoa` zusammengeführt; `master` ist noch auf dem
+  Stand vom 26.08.2026.
+- Auf dem PC liegen außerdem `ARBEITSSTAND.md`, `akro-design-starter/` und
+  `akro-design-starter.zip`, die Git nicht verwaltet. Inhalt noch nicht
+  geprüft.
+- `CLAUDE.md` lag bis 13.10.2026 als symbolische Verknüpfung in Git und ließ
+  sich außerhalb von Windows nicht auspacken; jetzt normale Datei.
+  `package-lock.json` kennt seitdem auch `@akro/assets`, `npm ci` läuft.
 - Der Branch heißt `master`.
 - Vor dem ersten Push wurde geprüft, dass keine Zugangsdaten mitgehen.
   `node_modules` und `dist` sind ausgeschlossen; das Repository umfasst
@@ -147,9 +157,33 @@
 
 ## Hosting
 
-- **Nicht eingerichtet.** Keine `vercel.json`, keine Vercel-Verknüpfung, kein
-  Deployment, keine DNS-Änderung. Vier getrennte Deployments sind als Ziel
-  vorgesehen, siehe `docs/DECISIONS.md`.
+- **Für die Astro-Apps nicht eingerichtet.** Keine `vercel.json`, kein
+  Deployment. Bei Vercel existiert im Team „AKRO“ ein Projekt `akro_web`,
+  angelegt um den 20.08.2026 und seitdem unverändert. Vier getrennte
+  Deployments sind als Ziel vorgesehen, siehe `docs/DECISIONS.md`.
+- **akro-group.de zeigt den Platzhalter** aus dem Strato-Webspace, per HTTPS
+  und mit `noindex`. Die Live-Fassung ist neuer als `platzhalter/` im
+  Repository (eigene CSS-Datei, Abschnitt Zertifizierungen, E-Mail
+  `info@akro-group.de`); ihre Quelle liegt nicht im Repository.
+
+## Domains
+
+Geprüft am 13.10.2026 per DNS-Abfrage und HTTP-Aufruf:
+
+| Domain | Nameserver | MX | Verhalten |
+| --- | --- | --- | --- |
+| akro-group.de | Strato | `smtpin.rzone.de` | Platzhalter, HTTP 200 |
+| akro-sicherheit.de | Strato | `smtpin.rzone.de` | **301** auf akro-group.de, Pfad bleibt erhalten |
+| akro-service.de | Strato | `smtpin.rzone.de` | 302 auf akro-group.de |
+| akro-fire-safety.de | keine | keine | existiert nicht (NXDOMAIN) |
+
+- Die Angabe in `platzhalter/LIESMICH.md` vom 05.09.2026, akro-sicherheit.de
+  und akro-service.de lägen bei landingsite.ai, ist überholt: Beide liegen
+  wieder bei Strato.
+- Die 301-Weiterleitung von akro-sicherheit.de ist **dauerhaft** und reicht
+  den Pfad weiter. Alte Adressen wie `/kontakt.html` landen dadurch auf einer
+  404-Seite von akro-group.de. Vor dem Start der neuen Website auf
+  akro-sicherheit.de muss die Weiterleitung entfernt werden.
 
 ## Planungsstand
 
