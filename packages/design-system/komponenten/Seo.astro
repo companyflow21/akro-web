@@ -1,11 +1,13 @@
 ---
 /**
  * Eine Stelle für Title, Description, Canonical, Robots und strukturierte
- * Daten (CLAUDE.md §9). Aufbau wie in apps/akro-sicherheit.
+ * Daten (CLAUDE.md §9). Gemeinsam für die Look-3-Websites; jede App gibt
+ * Domain, Namen und Indexierungsschalter mit.
  */
-import { INDEXIERBAR, SITE_URL } from '../config';
-
 interface Props {
+  siteUrl: string;
+  siteName: string;
+  indexierbar: boolean;
   title: string;
   description: string;
   /** true setzt noindex, nofollow — z. B. für /404 */
@@ -14,10 +16,10 @@ interface Props {
   jsonLd?: Record<string, unknown>;
 }
 
-const { title, description, noindex = false, jsonLd } = Astro.props;
+const { siteUrl, siteName, indexierbar, title, description, noindex = false, jsonLd } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, SITE_URL).href;
-const sperren = noindex || !INDEXIERBAR;
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const sperren = noindex || !indexierbar;
 ---
 
 <title>{title}</title>
@@ -27,7 +29,7 @@ const sperren = noindex || !INDEXIERBAR;
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="de_DE" />
-<meta property="og:site_name" content="AKRO GmbH" />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />

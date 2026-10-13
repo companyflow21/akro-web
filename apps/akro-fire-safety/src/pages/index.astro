@@ -1,13 +1,629 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '@akro/design-system/komponenten/Icon.astro';
+import Kunst from '@akro/design-system/komponenten/Kunst.astro';
+import { SITE_URL, einsatzumfeld, firma, leistungsfelder, zertifikate } from '../config';
+
+const anfrage = `mailto:${firma.email}?subject=${encodeURIComponent('Einsatzanfrage AKRO Fire & Safety')}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: firma.marke,
+  url: `${SITE_URL}/`,
+  telephone: firma.telefonSchema,
+  email: firma.email,
+  parentOrganization: { '@type': 'Organization', name: firma.name, url: 'https://akro-group.de/' },
+};
 ---
 
-<BaseLayout title="akro-fire-safety — technische Vorschau">
-	<main class="akro-preview">
-		<h1>akro-fire-safety</h1>
-		<p class="akro-preview__note">
-			Technische Vorschau ohne Inhalte. Diese Seite dient nur der Pruefung der
-			Monorepo- und Build-Struktur und ist auf noindex, nofollow gesetzt.
-		</p>
-	</main>
+<BaseLayout
+  title="AKRO Fire & Safety – Brandwachen, Sicherungsposten und Gasmessung"
+  description="Brandwachen, Sicherungsposten, Gasmessung und Höhensicherung für Anlagenbau, Instandhaltung, Revisionen und Stillstände – von der AKRO GmbH."
+  jsonLd={jsonLd}
+>
+  <section class="held" aria-labelledby="titel">
+    <div class="held-text">
+      <p class="chip"><i></i>Brandschutz und Sicherheit im Industrieumfeld</p>
+      <h1 id="titel">Brandschutz, der <em>mitdenkt.</em></h1>
+      <p class="lead">
+        Für Anlagenbau, Instandhaltung, Revisionen und Stillstände – dort, wo Heißarbeiten, enge Räume oder Arbeiten in der Höhe eine eigene Absicherung verlangen.
+      </p>
+      <div class="knoepfe">
+        <a class="knopf voll" href={anfrage}>Einsatz anfragen <Icon name="pfeil" /></a>
+        <a class="knopf rand" href={firma.telefonHref}><Icon name="telefon" /> {firma.telefon}</a>
+      </div>
+    </div>
+    <div class="held-flaeche">
+      <Kunst id="f" />
+      <ul>{leistungsfelder.map((l) => <li>{l.untertitel}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="leistungen wrap" id="leistungen" aria-labelledby="l-titel">
+    <div class="kopfzeile">
+      <h2 id="l-titel">Drei Leistungsfelder.<br />Abgestimmt auf Ihre Anlage.</h2>
+      <p>Der Umfang wird je Anlage und Arbeitsauftrag mit dem Betreiber abgestimmt und im Leistungsverzeichnis festgehalten.</p>
+    </div>
+    <ol class="kacheln">
+      {
+        leistungsfelder.map((l) => (
+          <li class="kachel">
+            <Icon name={l.icon} class="kachel-icon" />
+            <p class="kachel-etikett">{l.untertitel}</p>
+            <h3>{l.titel}</h3>
+            <ul>
+              {l.punkte.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="umfeld" id="umfeld" aria-labelledby="u-titel">
+    <div class="wrap umfeld-innen">
+      <div>
+        <p class="notiz">Einsatzumfeld</p>
+        <h2 id="u-titel">Dort, wo Arbeit eine eigene Absicherung verlangt.</h2>
+      </div>
+      <ul>{einsatzumfeld.map((e) => <li>{e}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="zertifikate wrap" id="zertifikate" aria-labelledby="z-titel">
+    <div class="kopfzeile">
+      <h2 id="z-titel">Zertifizierte Abläufe.</h2>
+      <p>Arbeitsschutz, Qualität und Umwelt nach anerkannten Standards. Zertifikate legen wir auf Anfrage vor.</p>
+    </div>
+    <ul class="zert-raster">
+      {
+        zertifikate.map((z) => (
+          <li class="zert">
+            <Icon name={z.symbol} class="zert-symbol" />
+            <p class="zert-norm">{z.norm}</p>
+            <p class="zert-nr">{z.nummer}</p>
+            <p class="zert-bereich">{z.bereich}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="kontakt wrap" id="kontakt" aria-labelledby="k-titel">
+    <h2 id="k-titel">Einsatz geplant?<br />Sprechen Sie uns an.</h2>
+    <div class="kontakt-wege">
+      <a class="tel" href={firma.telefonHref}><Icon name="telefon" /> {firma.telefon}</a>
+      <a class="mail" href={anfrage}><Icon name="brief" /> {firma.email}</a>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .held {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 0.9fr);
+    min-height: 600px;
+  }
+
+  .held-text {
+    padding: 64px 64px 72px max(48px, calc((100vw - 1344px) / 2));
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    background: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  .chip i {
+    width: 8px;
+    height: 8px;
+    background: var(--akzent);
+    transform: rotate(45deg);
+  }
+
+  h1 {
+    margin: 28px 0 26px;
+    font-size: clamp(56px, 6.4vw, 100px);
+    line-height: 0.96;
+    letter-spacing: -0.06em;
+    font-weight: 650;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--brand);
+  }
+
+  .lead {
+    max-width: 480px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .knoepfe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.16s;
+  }
+
+  .knopf.voll {
+    background: var(--brand);
+    color: #fff;
+  }
+
+  .knopf.voll:hover {
+    background: var(--mid);
+  }
+
+  .knopf.rand {
+    border: 1.5px solid var(--ink);
+  }
+
+  .held-flaeche {
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 56px;
+    background: linear-gradient(160deg, #c2410c 0%, var(--mid) 45%, var(--deep) 100%);
+    color: #fff;
+  }
+
+  .held-flaeche :global(.kunst) {
+    position: absolute;
+    left: -14%;
+    top: -6%;
+    width: 118%;
+    height: 118%;
+    overflow: visible;
+  }
+
+  .held-flaeche ul {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .held-flaeche li {
+    padding: 8px 12px;
+    border: 1px solid rgb(255 255 255 / 0.3);
+    background: rgb(43 23 18 / 0.55);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .leistungen,
+  .zertifikate {
+    padding: 96px 0 80px;
+  }
+
+  .kopfzeile {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+    font-weight: 650;
+  }
+
+  .kopfzeile p {
+    max-width: 400px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .kacheln {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    counter-reset: k;
+  }
+
+  .kachel {
+    position: relative;
+    padding: 28px 26px 30px;
+    border-top: 4px solid var(--brand);
+    background: #fff;
+    box-shadow: 0 1px 0 var(--line);
+    counter-increment: k;
+  }
+
+  .kachel::before {
+    content: counter(k, decimal-leading-zero);
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px #e2b9a8;
+  }
+
+  .kachel :global(.kachel-icon) {
+    width: 46px;
+    height: 46px;
+    padding: 9px;
+    background: #fbe0d3;
+    color: var(--brand);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .kachel-etikett {
+    margin-top: 34px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .kachel h3 {
+    margin: 6px 0 14px;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 650;
+  }
+
+  .kachel ul {
+    display: grid;
+    gap: 8px;
+  }
+
+  .kachel ul li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .kachel ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 7px;
+    height: 7px;
+    background: var(--brand);
+    transform: rotate(45deg);
+  }
+
+  .umfeld {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    background: var(--nacht);
+    color: #fff;
+  }
+
+  .umfeld::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 8px;
+    height: 100%;
+    background: repeating-linear-gradient(-45deg, var(--brand) 0 14px, var(--akzent) 14px 28px);
+  }
+
+  .umfeld-innen {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .notiz {
+    margin-bottom: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--akzent);
+  }
+
+  .umfeld ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .umfeld li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px;
+    border: 1px solid #5e3a2e;
+    background: #3a211a;
+    font-size: 16px;
+  }
+
+  .umfeld li::before {
+    content: "";
+    flex: none;
+    width: 8px;
+    height: 8px;
+    background: var(--akzent);
+    transform: rotate(45deg);
+  }
+
+  .zert-raster {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .zert {
+    padding: 24px 22px;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .zert :global(.zert-symbol) {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+    fill: none;
+    stroke: var(--brand);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .zert-norm {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .zert-nr {
+    margin: 4px 0 8px;
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+  }
+
+  .zert-bereich {
+    font-size: 14px;
+    font-weight: 600;
+    hyphens: auto;
+  }
+
+  .kontakt {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    padding: 72px 0 84px;
+    border-top: 1px solid var(--line);
+  }
+
+  .kontakt-wege {
+    display: grid;
+    gap: 10px;
+  }
+
+  .kontakt-wege a {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .tel {
+    background: var(--brand);
+    color: #fff;
+    font-size: 30px;
+  }
+
+  .tel:hover {
+    background: var(--mid);
+  }
+
+  .mail {
+    border: 1.5px solid var(--ink);
+    font-size: 18px;
+  }
+
+  @media (max-width: 1100px) {
+    .kacheln {
+      grid-template-columns: 1fr;
+    }
+
+    .zert-raster {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .held {
+      display: block;
+      min-height: 0;
+    }
+
+    .held-text {
+      padding: 28px 20px 30px;
+    }
+
+    h1 {
+      margin: 20px 0 16px;
+      font-size: clamp(46px, 13.5vw, 60px);
+    }
+
+    .lead {
+      font-size: 16px;
+    }
+
+    .knoepfe {
+      display: none;
+    }
+
+    .held-flaeche {
+      height: 250px;
+      margin-left: 20px;
+      border-bottom-left-radius: 36px;
+    }
+
+    .held-flaeche :global(.kunst) {
+      left: auto;
+      right: -40px;
+      top: -50px;
+      width: 330px;
+      height: 340px;
+    }
+
+    .held-flaeche ul {
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      gap: 6px;
+    }
+
+    .held-flaeche li {
+      padding: 6px 9px;
+      font-size: 12px;
+    }
+
+    .leistungen,
+    .zertifikate {
+      padding: 56px 0 48px;
+    }
+
+    .kopfzeile {
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .kopfzeile p {
+      margin-top: 12px;
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+
+    .kacheln {
+      gap: 12px;
+    }
+
+    .kachel {
+      padding: 20px 18px 22px;
+    }
+
+    .kachel::before {
+      top: 12px;
+      right: 14px;
+      font-size: 34px;
+    }
+
+    .kachel :global(.kachel-icon) {
+      width: 40px;
+      height: 40px;
+    }
+
+    .kachel-etikett {
+      margin-top: 18px;
+    }
+
+    .kachel h3 {
+      font-size: 19px;
+    }
+
+    .umfeld {
+      padding: 52px 0;
+    }
+
+    .umfeld-innen {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .umfeld ul {
+      grid-template-columns: 1fr;
+    }
+
+    .zert-raster {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .zert {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 0 14px;
+      padding: 16px;
+    }
+
+    .zert :global(.zert-symbol) {
+      grid-row: 1 / 4;
+      width: 34px;
+      height: 34px;
+      margin: 2px 0 0;
+    }
+
+    .zert-nr {
+      margin: 2px 0 4px;
+      font-size: 26px;
+    }
+
+    .kontakt {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 52px 0;
+    }
+
+    .kontakt-wege a {
+      justify-content: center;
+      padding: 18px 20px;
+    }
+
+    .tel {
+      font-size: 24px;
+    }
+
+    .mail {
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+  }
+</style>

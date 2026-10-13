@@ -1,22 +1,233 @@
 ---
+/**
+ * Grundlayout von akro-fire-safety.de im Look 3, Layout „Industrie-Signal“
+ * (Vorlage Test-Design/2026-10-13-layouts-look3/fire-safety.html):
+ * Warnstreifen, heller warmer Grund, Logo in Signalrot bis Glut.
+ */
 import '../styles/global.css';
+import Seo from '@akro/design-system/komponenten/Seo.astro';
+import Icon from '@akro/design-system/komponenten/Icon.astro';
+import logo from '@akro/assets/brand/akro-fire-safety/akro-fire-safety.svg';
+import favicon from '@akro/assets/brand/akro/favicon.svg';
+import { INDEXIERBAR, SITE_URL, firma } from '../config';
 
 interface Props {
   title: string;
+  description: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title } = Astro.props;
+const { title, description, noindex, jsonLd } = Astro.props;
+const jahr = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="de" data-brand="fire-safety">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="robots" content="noindex, nofollow" />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="de" data-marke="fire-safety">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#b3290e" />
+    <link rel="icon" href={favicon.src} type="image/svg+xml" />
+    <Seo siteUrl={SITE_URL} siteName={firma.marke} indexierbar={INDEXIERBAR} title={title} description={description} noindex={noindex} jsonLd={jsonLd} />
+  </head>
+  <body>
+    <a class="skip" href="#inhalt">Zum Inhalt</a>
+    <div class="signal" aria-hidden="true"></div>
+
+    <header class="kopf wrap">
+      <a class="marke" href="/" aria-label="AKRO Fire & Safety – Startseite">
+        <img src={logo.src} width="1025" height="263" alt="AKRO" />
+        <span>Fire &amp; Safety</span>
+      </a>
+      <nav class="menue nur-desktop" aria-label="Hauptnavigation">
+        <a href="/#leistungen">Leistungen</a>
+        <a href="/#umfeld">Einsatzumfeld</a>
+        <a href="/#zertifikate">Zertifikate</a>
+      </nav>
+      <a class="kopf-knopf" href="/#kontakt" aria-label="Einsatz anfragen">
+        <span>Einsatz anfragen</span>
+        <Icon name="pfeil" />
+      </a>
+    </header>
+
+    <main id="inhalt">
+      <slot />
+    </main>
+
+    <footer class="fuss wrap">
+      <p>{firma.name} · {firma.marke} · {firma.strasse}, {firma.plz} {firma.ort}</p>
+      <nav aria-label="Rechtliches">
+        <a href="/impressum/">Impressum</a>
+        <a href="/datenschutz/">Datenschutz</a>
+        <span>© {jahr}</span>
+      </nav>
+    </footer>
+
+    <nav class="aktionsleiste" aria-label="Schnellkontakt">
+      <a class="leise" href={firma.telefonHref}><Icon name="telefon" /> Anrufen</a>
+      <a class="laut" href={`mailto:${firma.email}?subject=${encodeURIComponent('Einsatzanfrage AKRO Fire & Safety')}`}><Icon name="brief" /> Einsatz anfragen</a>
+    </nav>
+  </body>
 </html>
+
+<style>
+  .signal {
+    height: 8px;
+    background: repeating-linear-gradient(-45deg, var(--brand) 0 14px, var(--akzent) 14px 28px);
+  }
+
+  .kopf {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 96px;
+  }
+
+  .marke {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .marke img {
+    width: 132px;
+    height: auto;
+  }
+
+  .marke span {
+    padding-left: 16px;
+    border-left: 1px solid var(--line);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--brand);
+  }
+
+  .menue {
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .menue a:hover {
+    color: var(--brand);
+  }
+
+  .kopf-knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+    transition: background-color 0.16s;
+  }
+
+  .kopf-knopf:hover {
+    background: var(--mid);
+  }
+
+  .fuss {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0 36px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .fuss nav {
+    display: flex;
+    gap: 22px;
+  }
+
+  .fuss a:hover {
+    color: var(--brand);
+  }
+
+  .aktionsleiste {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .kopf {
+      height: 72px;
+      gap: 12px;
+    }
+
+    .marke {
+      gap: 12px;
+    }
+
+    .marke img {
+      width: 100px;
+    }
+
+    .marke span {
+      padding-left: 12px;
+      font-size: 13px;
+    }
+
+    .kopf-knopf {
+      margin-left: auto;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      justify-content: center;
+      clip-path: none;
+    }
+
+    .kopf-knopf span {
+      display: none;
+    }
+
+    .fuss {
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 108px;
+    }
+
+    .aktionsleiste {
+      position: fixed;
+      z-index: 20;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 18px;
+      background: var(--nacht);
+      box-shadow: 0 12px 32px rgb(0 0 0 / 0.28);
+    }
+
+    .aktionsleiste a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .leise {
+      color: #fff1e8;
+      background: rgb(255 255 255 / 0.08);
+    }
+
+    .laut {
+      background: var(--brand);
+      color: #fff;
+    }
+  }
+</style>

@@ -7,7 +7,7 @@
  */
 
 import zertifikateDaten from '@akro/assets/shared/certifications/zertifikate.json';
-import type { SymbolName } from './components/Icon.astro';
+import type { SymbolName } from '@akro/design-system/komponenten/Icon.astro';
 
 /** Kanonische Domain: ohne www, wie der bisherige Platzhalter. */
 export const SITE_URL = 'https://akro-group.de';

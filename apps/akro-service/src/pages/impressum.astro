@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Rechtstext from '@akro/design-system/komponenten/Rechtstext.astro';
+import ImpressumText from '@akro/design-system/komponenten/ImpressumText.astro';
+import { firma } from '../config';
+---
+
+<BaseLayout
+  title="Impressum – AKRO Service"
+  description="Impressum der AKRO GmbH für AKRO Service: Anbieterkennzeichnung, Registereintrag und Erlaubnis nach § 34a GewO."
+>
+  <Rechtstext titel="Impressum">
+    <ImpressumText email={firma.email} />
+  </Rechtstext>
+</BaseLayout>

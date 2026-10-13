@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Rechtstext from '../components/Rechtstext.astro';
+import Rechtstext from '@akro/design-system/komponenten/Rechtstext.astro';
+import ImpressumText from '@akro/design-system/komponenten/ImpressumText.astro';
+import { firma } from '../config';
 ---
 
 <BaseLayout
@@ -8,90 +10,6 @@ import Rechtstext from '../components/Rechtstext.astro';
   description="Impressum der AKRO GmbH, Saarwellinger Straße 25, 66740 Saarlouis: Anbieterkennzeichnung, Registereintrag und Erlaubnis nach § 34a GewO."
 >
 <Rechtstext titel="Impressum">
-  <h2>Angaben gemäß § 5 DDG</h2>
-  <p>
-    AKRO GmbH<br />
-    Saarwellinger Straße 25<br />
-    66740 Saarlouis<br />
-    Deutschland
-  </p>
-  <p>Niederlassung Bonn</p>
-
-  <h2>Vertreten durch</h2>
-  <p>Geschäftsführer: Wagdee Al Muliki</p>
-
-  <h2>Kontakt</h2>
-  <p>
-    Telefon: <a href="tel:+4922818456685">0228 18456685</a><br />
-    E-Mail: <a href="mailto:info@akro-group.de">info@akro-group.de</a>
-  </p>
-
-  <h2>Registereintrag</h2>
-  <p>
-    Eintragung im Handelsregister<br />
-    Registergericht: Amtsgericht Saarbrücken<br />
-    Registernummer: HRB 112267
-  </p>
-
-  <h2>Umsatzsteuer-Identifikationsnummer</h2>
-  <p>
-    Umsatzsteuer-Identifikationsnummer gemäß § 27 a
-    Umsatzsteuergesetz:<br />
-    DE463797867
-  </p>
-
-  <h2>Erlaubnis nach § 34a Gewerbeordnung</h2>
-  <p>
-    Die AKRO GmbH übt das Bewachungsgewerbe auf Grundlage der Erlaubnis
-    nach § 34a Gewerbeordnung aus. Die Berufsbezeichnung
-    „Bewachungsgewerbe“ wurde in der Bundesrepublik Deutschland
-    verliehen.
-  </p>
-  <p>
-    Erteilende und zuständige Aufsichtsbehörde:<br />
-    Landkreis Saarlouis, Amt für öffentliche Sicherheit und Ordnung,
-    Kaiser-Wilhelm-Straße 4, 66740 Saarlouis
-  </p>
-  <p>
-    Maßgebliche berufsrechtliche Regelungen: § 34a Gewerbeordnung sowie
-    die Bewachungsverordnung (BewachV), einsehbar unter <a href="https://www.gesetze-im-internet.de">gesetze-im-internet.de</a>.
-  </p>
-
-  <h2>Berufshaftpflichtversicherung</h2>
-  <p>Allianz Versicherungs-AG<br>Königinstraße 28<br>80802 München<br>Räumlicher Geltungsbereich: Deutschland</p>
-
-  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
-  <p>
-    Wagdee Al Muliki<br />
-    Saarwellinger Straße 25<br />
-    66740 Saarlouis
-  </p>
-
-  <h2>Streitbeilegung</h2>
-  <p>
-    Wir sind nicht bereit und nicht verpflichtet, an
-    Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
-    teilzunehmen.
-  </p>
-
-  <h2>Haftung für Links</h2>
-  <p>
-    Unser Angebot enthält Links zu externen Websites Dritter, auf deren
-    Inhalte wir keinen Einfluss haben. Deshalb können wir für diese
-    fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der
-    verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
-    Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der
-    Verlinkung auf mögliche Rechtsverstöße überprüft; rechtswidrige
-    Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
-  </p>
-
-  <h2>Urheberrecht</h2>
-  <p>
-    Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen
-    Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
-    Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der
-    Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des
-    jeweiligen Autors beziehungsweise Erstellers.
-  </p>
+  <ImpressumText email={firma.email} />
 </Rechtstext>
 </BaseLayout>

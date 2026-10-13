@@ -1,8 +1,8 @@
 ---
 import '../styles/global.css';
-import Seo from '../components/Seo.astro';
-import Icon from '../components/Icon.astro';
-import { firma } from '../config';
+import Seo from '@akro/design-system/komponenten/Seo.astro';
+import Icon from '@akro/design-system/komponenten/Icon.astro';
+import { INDEXIERBAR, SITE_URL, firma } from '../config';
 import logo from '@akro/assets/brand/akro/akro-wortmarke.svg';
 import favicon from '@akro/assets/brand/akro/favicon.svg';
 
@@ -24,7 +24,7 @@ const jahr = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#073ae8" />
     <link rel="icon" href={favicon.src} type="image/svg+xml" />
-    <Seo title={title} description={description} noindex={noindex} jsonLd={jsonLd} />
+    <Seo siteUrl={SITE_URL} siteName="AKRO GmbH" indexierbar={INDEXIERBAR} title={title} description={description} noindex={noindex} jsonLd={jsonLd} />
   </head>
   <body>
     <a class="skip" href="#inhalt">Zum Inhalt</a>

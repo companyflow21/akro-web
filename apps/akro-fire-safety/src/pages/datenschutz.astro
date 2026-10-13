@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Rechtstext from '@akro/design-system/komponenten/Rechtstext.astro';
+import DatenschutzText from '@akro/design-system/komponenten/DatenschutzText.astro';
+import { firma } from '../config';
+---
+
+<BaseLayout
+  title="Datenschutzerklärung – AKRO Fire & Safety"
+  description="Datenschutzerklärung der AKRO GmbH für AKRO Fire & Safety: Server-Logfiles, Hosting, Kontaktaufnahme und Ihre Rechte nach DSGVO."
+>
+  <Rechtstext titel="Datenschutzerklärung">
+    <DatenschutzText email={firma.email} stand="13. Oktober 2026" />
+  </Rechtstext>
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Seite nicht gefunden – AKRO Fire & Safety"
+  description="Die aufgerufene Seite existiert nicht."
+  noindex
+>
+  <section class="wrap leer">
+    <p class="code">404</p>
+    <h1>Diese Seite gibt es nicht.</h1>
+    <p>Vielleicht wurde sie verschoben. Auf der Startseite finden Sie unsere Leistungen und Kontaktdaten.</p>
+    <a class="knopf" href="/">Zur Startseite</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .leer {
+    max-width: 640px;
+    padding: 72px 0 120px;
+  }
+
+  .code {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  h1 {
+    margin: 12px 0 16px;
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    font-weight: 560;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .knopf {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+  }
+</style>
