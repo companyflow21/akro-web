@@ -46,3 +46,6 @@ geteilt (Punkt 23). Was wirklich für alle gilt, gehört nach `shared/`.
 Die Struktur ist angelegt, aber **leer**. Der gesamte Rasterbestand des
 Altbestands ist zerstört (`docs/LEGACY-INVENTORY.md`); Ersatz wird beschafft
 oder neu produziert.
+
+Für die KI-geeigneten Motive der drei Spartenmarken und der Karriere gibt es
+fertige Prompts, Dateinamen und Alt-Texte in `docs/BILDBRIEFING.md`.
